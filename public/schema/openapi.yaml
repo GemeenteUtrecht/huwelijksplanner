@@ -1,0 +1,3897 @@
+openapi: 3.0.2
+info:
+  description: |
+    Welkom, dit is de documentatie van de trouwen API. Deze API stelt je in staat om digitaal met gemeentes in Nederland te communiceren op alle aspecten van het huwelijk of partnerschap.
+    
+    # Introduction                
+    De Trouwen component is ontwikkeld voor de gemeente Utrecht en heeft als doel het aansluiten [NLX](https://nlx.io/), volgens het [Common Ground](https://vng.nl/samen-organiseren/common-ground) principe, samen spelen, samen delen.
+     
+    # Code, Container en data modelen                
+    U kunt de code voor dit component (en aanvullende documentatie) op [github](https://nlx.io/) downloaden
+    U kunt een docker container voor dit component op [docker hub](https://nlx.io/) downloaden
+    U kunt het datamodel voor dit component [hier](/schema/datamodel.pdf) downloaden
+    
+    # OpenAPI Specification
+    Deze API is gedocumenteerd in het **OpenAPI format** en wordt onderhouden door [Conduction.nl](http://conduction.nl). 
+    
+    # Cross-Origin Resource Sharing
+    De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgens de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin" dit maakt ze volledig publiekelijk en toegankelijk voor iedereen. Dat geldt voor elke code op elke site.
+    
+    # Authentication
+    
+    Trouwen heeft twee vormen van authenticatie:
+      - API Key
+      - OAuth2
+    OAuth2 - is een open protocol dat veilig autorisatie regelt op een simpele en gestandaardiseerde manier voor het web, mobiele en desktop applicaties.
+    
+    <security-definitions />
+    
+  version: 0.0.1
+  title: 'Trouwen API'
+  termsOfService: 'http://www.zaakonline.nl/terms/'
+  contact:
+    name: 'API Support'
+    email: support@conduction.nl
+    url: 'https://github.com/ConductionNL/zaakonline'
+  x-logo:
+    url: /img/vng.svg
+    altText: 'VNG Realisatie'
+  license:
+    name: 'EUPL 1.2'
+    url: 'https://opensource.org/licenses/EUPL-1.2'
+paths:
+  '/huwelijk/{id}':
+    get:
+      tags:
+        - Huwelijk
+      operationId: getHuwelijkItem
+      summary: 'Retrieves a Huwelijk resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Huwelijk resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Huwelijk'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Huwelijk'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Huwelijk'
+        404:
+          description: 'Resource not found'
+    put:
+      tags:
+        - Huwelijk
+      operationId: putHuwelijkItem
+      summary: 'Replaces the Huwelijk resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Huwelijk resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Huwelijk'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Huwelijk'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Huwelijk'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk'
+        description: 'The updated Huwelijk resource'
+    delete:
+      tags:
+        - Huwelijk
+      operationId: deleteHuwelijkItem
+      summary: 'Removes the Huwelijk resource.'
+      responses:
+        204:
+          description: 'Huwelijk resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+  '/huwelijk/{id}/aanvraag':
+    post:
+      summary: 'Aanvraag huwelijk'
+      description: 'Doe een aanvraag huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Aanvraag in behandeling genomen'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of aanvraag niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: aanvraagHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-aanvraag'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-aanvraag'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-aanvraag'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/addDocument':
+    post:
+      summary: 'Voeg een document toe'
+      description: 'Voeg een document toe aan dit huwelijk, bijvoorbeeld een geboorteakte'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        201:
+          description: 'Document toegevoegd'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of document niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: add_documentHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-documentAdd'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-documentAdd'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-documentAdd'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/addPartner':
+    post:
+      summary: 'Voeg een partner toe'
+      description: 'Nodig een partner uit om dit huwelijk te bevestigen en deel te nemen, er zijn 2 partners per huwelijk'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        201:
+          description: 'Partner toegevoegd aan huwelijk en om bevestiging gevraagd'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: add_partnerHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-invite'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-invite'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-invite'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/addProduct':
+    post:
+      summary: 'Voeg een product toe'
+      description: 'Voeg een extra product (bijvoorbeeld trouwboekje) toe aan dit huwelijk'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        201:
+          description: 'Product toegevoegd'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of product niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: add_productHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-productAdd'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-productAdd'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-productAdd'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/addWitness':
+    post:
+      summary: 'Voeg een getuige toe'
+      description: 'Voeg een getuige toe die voor een van de partners getuigt, er moeten/mogen per partner minimaal 1 en maximaal 2 getuigen zijn'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        201:
+          description: 'Getuige toegevoegd en om bevestiging gevraagd'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: add_witnessHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-inviteGetuige'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-inviteGetuige'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-inviteGetuige'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/log':
+    get:
+      summary: 'Logboek inzien'
+      description: 'Geeft een array van eerdere versies en wijzigingen van dit object'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Een overzicht van versies'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of aanvraag niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: logHuwelijkItem
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+  '/huwelijk/{id}/melding':
+    post:
+      summary: 'Melding huwelijk'
+      description: 'Doe een melding voorgenomen huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Melding ontvangen'
+        400:
+          description: 'Ongeldige melding'
+        404:
+          description: 'Huwelijk of melding niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: meldingHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-melding'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-melding'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-melding'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/pay':
+    get:
+      summary: 'Haal betaallink op'
+      description: 'Geeft een betaallink terug voor huwelijk, het aanvragen van een betaallink heeft gevolgen (aanmaak factuur etc), waardoor het huwelijk hierna niet meer kan worden aangpast'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Betaallink gevonden'
+        201:
+          description: 'Betaallink aangemaakt'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: payHuwelijkItem
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+  '/huwelijk/{id}/removeDocument':
+    post:
+      summary: 'Verwijder document'
+      description: 'Verwijder een eerder toegevoegd document'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        202:
+          description: 'Document verwijderd'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of document niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: remove_documentHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/removeOfficial':
+    post:
+      summary: 'Verwijder de trouwambtenaar'
+      description: 'Verwijder de eerder aangevraagde trouwambtenaar van dit huwelijk'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        202:
+          description: 'Trouwambentenaar verwijderd uit dit huwelijk'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of trouwambtenaar niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: remove_officialHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/removeProduct':
+    post:
+      summary: 'Verwijder product'
+      description: 'Verwijder een eerder gekozen product'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        202:
+          description: 'Product verwijderd'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of product niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: remove_productHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/removeWitness':
+    post:
+      summary: 'Verwijder een getuige'
+      description: 'Verwijder een getuige van dit huwelijk'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        202:
+          description: 'Getuige verwijderd van dit huwelijk'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Getuige of Huwelijk niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: remove_witnessHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-remove'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/requestOfficial':
+    post:
+      summary: 'Vraag een trouwambtenaar aan'
+      description: 'Vraag een (specifieke) trouwambtenaar aan om dit huwelijk te voltrekken'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        201:
+          description: 'Trouwambtenaar toegevoegd en om bevestiging gevraagd'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of trouwambtenaar niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: request_officialHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-requestOfficial'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-requestOfficial'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-requestOfficial'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/requestSpecial':
+    post:
+      summary: 'Vraag een bijzonder trouwambtenaar aan'
+      description: 'Vraag een niet geregistreerde trouwambtenaar aan om dit huwelijk te voltrekken'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        201:
+          description: 'Trouwambtenaar toegevoegd en om bevestiging gevraagd'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: request_specialHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-invite'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-invite'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-invite'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/revert/{version}':
+    post:
+      summary: 'Versie terugdraaid'
+      description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        202:
+          description: 'Teruggedraaid naar eerdere versie'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of aanvraag niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: revertHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-write'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/setLocation':
+    post:
+      summary: 'Stel een locatie in voor dit huwelijk'
+      description: 'Geef de locatie op waar dit huwelijk gaat plaatsvinden'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'locatie opgegeven en om bevestiging gevraagd'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of locatie niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: set_locationHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-setLocation'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-setLocation'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-setLocation'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/setProduct':
+    post:
+      summary: 'Kies het type van dit huwelijk'
+      description: 'Kies het primaire type van dit huwelijk (bijvoorbeeld gratis). Het primaire product bepaald welke overige producten, diensten, ambtenaren en locaties kunnen worden gekozen'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Primair product ingesteld'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of type niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: set_productHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-setProduct'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-setProduct'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-setProduct'
+        description: 'The new Huwelijk resource'
+  '/huwelijk/{id}/validate':
+    post:
+      summary: 'Valideer huwelijksdossier'
+      description: 'Controleer of het huwelijksdossier juist en volledig is'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Dossier gevalideerd, eventuele afwijkingen in resultaat'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of dossier niet gevonden'
+      tags:
+        - Huwelijk
+      operationId: validateHuwelijkItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-validate'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-validate'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-validate'
+        description: 'The new Huwelijk resource'
+  /huwelijk_ambtenaars:
+    get:
+      tags:
+        - HuwelijkAmbtenaar
+      operationId: getHuwelijkAmbtenaarCollection
+      summary: 'Retrieves the collection of HuwelijkAmbtenaar resources.'
+      responses:
+        200:
+          description: 'HuwelijkAmbtenaar collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkAmbtenaar'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkAmbtenaar'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkAmbtenaar'
+      parameters: []
+    post:
+      tags:
+        - HuwelijkAmbtenaar
+      operationId: postHuwelijkAmbtenaarCollection
+      summary: 'Creates a HuwelijkAmbtenaar resource.'
+      responses:
+        201:
+          description: 'HuwelijkAmbtenaar resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkAmbtenaar'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkAmbtenaar'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkAmbtenaar'
+          links:
+            GetHuwelijkAmbtenaarItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getHuwelijkAmbtenaarItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /huwelijk_ambtenaars/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkAmbtenaar'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkAmbtenaar'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkAmbtenaar'
+        description: 'The new HuwelijkAmbtenaar resource'
+  '/huwelijk_ambtenaars/{id}':
+    get:
+      tags:
+        - HuwelijkAmbtenaar
+      operationId: getHuwelijkAmbtenaarItem
+      summary: 'Retrieves a HuwelijkAmbtenaar resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkAmbtenaar resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkAmbtenaar'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkAmbtenaar'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkAmbtenaar'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - HuwelijkAmbtenaar
+      operationId: deleteHuwelijkAmbtenaarItem
+      summary: 'Removes the HuwelijkAmbtenaar resource.'
+      responses:
+        204:
+          description: 'HuwelijkAmbtenaar resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - HuwelijkAmbtenaar
+      operationId: putHuwelijkAmbtenaarItem
+      summary: 'Replaces the HuwelijkAmbtenaar resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkAmbtenaar resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkAmbtenaar'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkAmbtenaar'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkAmbtenaar'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkAmbtenaar'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkAmbtenaar'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkAmbtenaar'
+        description: 'The updated HuwelijkAmbtenaar resource'
+  /huwelijk_bijzonder_ambtenaars:
+    get:
+      tags:
+        - HuwelijkBijzonderAmbtenaar
+      operationId: getHuwelijkBijzonderAmbtenaarCollection
+      summary: 'Retrieves the collection of HuwelijkBijzonderAmbtenaar resources.'
+      responses:
+        200:
+          description: 'HuwelijkBijzonderAmbtenaar collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+      parameters: []
+    post:
+      tags:
+        - HuwelijkBijzonderAmbtenaar
+      operationId: postHuwelijkBijzonderAmbtenaarCollection
+      summary: 'Creates a HuwelijkBijzonderAmbtenaar resource.'
+      responses:
+        201:
+          description: 'HuwelijkBijzonderAmbtenaar resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+          links:
+            GetHuwelijkBijzonderAmbtenaarItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getHuwelijkBijzonderAmbtenaarItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /huwelijk_bijzonder_ambtenaars/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+        description: 'The new HuwelijkBijzonderAmbtenaar resource'
+  '/huwelijk_bijzonder_ambtenaars/{id}':
+    get:
+      tags:
+        - HuwelijkBijzonderAmbtenaar
+      operationId: getHuwelijkBijzonderAmbtenaarItem
+      summary: 'Retrieves a HuwelijkBijzonderAmbtenaar resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkBijzonderAmbtenaar resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - HuwelijkBijzonderAmbtenaar
+      operationId: deleteHuwelijkBijzonderAmbtenaarItem
+      summary: 'Removes the HuwelijkBijzonderAmbtenaar resource.'
+      responses:
+        204:
+          description: 'HuwelijkBijzonderAmbtenaar resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - HuwelijkBijzonderAmbtenaar
+      operationId: putHuwelijkBijzonderAmbtenaarItem
+      summary: 'Replaces the HuwelijkBijzonderAmbtenaar resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkBijzonderAmbtenaar resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
+        description: 'The updated HuwelijkBijzonderAmbtenaar resource'
+  /huwelijk_bsn:
+    post:
+      summary: 'Haal huwelijk op BSN'
+      description: 'Haal een huwelijk op aan de hand van een BSN nummer, als er voor dit BSN nog geen huwelijk is, wordt er een huwelijk aangemaakt'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Huwelijk gevonden op BSN'
+        201:
+          description: 'Huwelijk aangemaakt voor BSN'
+        400:
+          description: 'Ongeldige aanvraag'
+      tags:
+        - Huwelijk
+      operationId: on_bsnHuwelijkCollection
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-BSN'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-BSN'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk-BSN'
+        description: 'The new Huwelijk resource'
+  /huwelijk_documents:
+    get:
+      tags:
+        - HuwelijkDocument
+      operationId: getHuwelijkDocumentCollection
+      summary: 'Retrieves the collection of HuwelijkDocument resources.'
+      responses:
+        200:
+          description: 'HuwelijkDocument collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkDocument'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkDocument'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkDocument'
+      parameters: []
+    post:
+      tags:
+        - HuwelijkDocument
+      operationId: postHuwelijkDocumentCollection
+      summary: 'Creates a HuwelijkDocument resource.'
+      responses:
+        201:
+          description: 'HuwelijkDocument resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkDocument'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkDocument'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkDocument'
+          links:
+            GetHuwelijkDocumentItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getHuwelijkDocumentItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /huwelijk_documents/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkDocument'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkDocument'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkDocument'
+        description: 'The new HuwelijkDocument resource'
+  '/huwelijk_documents/{id}':
+    get:
+      tags:
+        - HuwelijkDocument
+      operationId: getHuwelijkDocumentItem
+      summary: 'Retrieves a HuwelijkDocument resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkDocument resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkDocument'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkDocument'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkDocument'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - HuwelijkDocument
+      operationId: deleteHuwelijkDocumentItem
+      summary: 'Removes the HuwelijkDocument resource.'
+      responses:
+        204:
+          description: 'HuwelijkDocument resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - HuwelijkDocument
+      operationId: putHuwelijkDocumentItem
+      summary: 'Replaces the HuwelijkDocument resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkDocument resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkDocument'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkDocument'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkDocument'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkDocument'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkDocument'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkDocument'
+        description: 'The updated HuwelijkDocument resource'
+  /huwelijk_getuiges:
+    get:
+      tags:
+        - HuwelijkGetuige
+      operationId: getHuwelijkGetuigeCollection
+      summary: 'Retrieves the collection of HuwelijkGetuige resources.'
+      responses:
+        200:
+          description: 'HuwelijkGetuige collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkGetuige'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkGetuige'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkGetuige'
+      parameters: []
+    post:
+      tags:
+        - HuwelijkGetuige
+      operationId: postHuwelijkGetuigeCollection
+      summary: 'Creates a HuwelijkGetuige resource.'
+      responses:
+        201:
+          description: 'HuwelijkGetuige resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkGetuige'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkGetuige'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkGetuige'
+          links:
+            GetHuwelijkGetuigeItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getHuwelijkGetuigeItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /huwelijk_getuiges/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkGetuige'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkGetuige'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkGetuige'
+        description: 'The new HuwelijkGetuige resource'
+  '/huwelijk_getuiges/{id}':
+    get:
+      tags:
+        - HuwelijkGetuige
+      operationId: getHuwelijkGetuigeItem
+      summary: 'Retrieves a HuwelijkGetuige resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkGetuige resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkGetuige'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkGetuige'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkGetuige'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - HuwelijkGetuige
+      operationId: deleteHuwelijkGetuigeItem
+      summary: 'Removes the HuwelijkGetuige resource.'
+      responses:
+        204:
+          description: 'HuwelijkGetuige resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - HuwelijkGetuige
+      operationId: putHuwelijkGetuigeItem
+      summary: 'Replaces the HuwelijkGetuige resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkGetuige resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkGetuige'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkGetuige'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkGetuige'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkGetuige'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkGetuige'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkGetuige'
+        description: 'The updated HuwelijkGetuige resource'
+  /huwelijk_locaties:
+    get:
+      tags:
+        - HuwelijkLocatie
+      operationId: getHuwelijkLocatieCollection
+      summary: 'Retrieves the collection of HuwelijkLocatie resources.'
+      responses:
+        200:
+          description: 'HuwelijkLocatie collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkLocatie'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkLocatie'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkLocatie'
+      parameters: []
+    post:
+      tags:
+        - HuwelijkLocatie
+      operationId: postHuwelijkLocatieCollection
+      summary: 'Creates a HuwelijkLocatie resource.'
+      responses:
+        201:
+          description: 'HuwelijkLocatie resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkLocatie'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkLocatie'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkLocatie'
+          links:
+            GetHuwelijkLocatieItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getHuwelijkLocatieItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /huwelijk_locaties/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkLocatie'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkLocatie'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkLocatie'
+        description: 'The new HuwelijkLocatie resource'
+  '/huwelijk_locaties/{id}':
+    get:
+      tags:
+        - HuwelijkLocatie
+      operationId: getHuwelijkLocatieItem
+      summary: 'Retrieves a HuwelijkLocatie resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkLocatie resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkLocatie'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkLocatie'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkLocatie'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - HuwelijkLocatie
+      operationId: deleteHuwelijkLocatieItem
+      summary: 'Removes the HuwelijkLocatie resource.'
+      responses:
+        204:
+          description: 'HuwelijkLocatie resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - HuwelijkLocatie
+      operationId: putHuwelijkLocatieItem
+      summary: 'Replaces the HuwelijkLocatie resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkLocatie resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkLocatie'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkLocatie'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkLocatie'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkLocatie'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkLocatie'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkLocatie'
+        description: 'The updated HuwelijkLocatie resource'
+  /huwelijk_partners:
+    get:
+      tags:
+        - HuwelijkPartner
+      operationId: getHuwelijkPartnerCollection
+      summary: 'Retrieves the collection of HuwelijkPartner resources.'
+      responses:
+        200:
+          description: 'HuwelijkPartner collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkPartner'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkPartner'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/HuwelijkPartner'
+      parameters: []
+    post:
+      tags:
+        - HuwelijkPartner
+      operationId: postHuwelijkPartnerCollection
+      summary: 'Creates a HuwelijkPartner resource.'
+      responses:
+        201:
+          description: 'HuwelijkPartner resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkPartner'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkPartner'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkPartner'
+          links:
+            GetHuwelijkPartnerItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getHuwelijkPartnerItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /huwelijk_partners/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkPartner'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkPartner'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkPartner'
+        description: 'The new HuwelijkPartner resource'
+  '/huwelijk_partners/{id}':
+    get:
+      tags:
+        - HuwelijkPartner
+      operationId: getHuwelijkPartnerItem
+      summary: 'Retrieves a HuwelijkPartner resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkPartner resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkPartner'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkPartner'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkPartner'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - HuwelijkPartner
+      operationId: deleteHuwelijkPartnerItem
+      summary: 'Removes the HuwelijkPartner resource.'
+      responses:
+        204:
+          description: 'HuwelijkPartner resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - HuwelijkPartner
+      operationId: putHuwelijkPartnerItem
+      summary: 'Replaces the HuwelijkPartner resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'HuwelijkPartner resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkPartner'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HuwelijkPartner'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/HuwelijkPartner'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkPartner'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/HuwelijkPartner'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/HuwelijkPartner'
+        description: 'The updated HuwelijkPartner resource'
+  /huwelijken:
+    get:
+      tags:
+        - Huwelijk
+      operationId: getHuwelijkCollection
+      summary: 'Retrieves the collection of Huwelijk resources.'
+      responses:
+        200:
+          description: 'Huwelijk collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Huwelijk'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Huwelijk'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Huwelijk'
+      parameters: []
+    post:
+      tags:
+        - Huwelijk
+      operationId: postHuwelijkCollection
+      summary: 'Creates a Huwelijk resource.'
+      responses:
+        201:
+          description: 'Huwelijk resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Huwelijk'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Huwelijk'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Huwelijk'
+          links:
+            GetHuwelijkItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getHuwelijkItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /huwelijk/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Huwelijk'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Huwelijk'
+        description: 'The new Huwelijk resource'
+  /organisaties:
+    get:
+      tags:
+        - Organisatie
+      operationId: getOrganisatieCollection
+      summary: 'Retrieves the collection of Organisatie resources.'
+      responses:
+        200:
+          description: 'Organisatie collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organisatie'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organisatie'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Organisatie'
+      parameters: []
+    post:
+      tags:
+        - Organisatie
+      operationId: postOrganisatieCollection
+      summary: 'Creates a Organisatie resource.'
+      responses:
+        201:
+          description: 'Organisatie resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+          links:
+            GetOrganisatieItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getOrganisatieItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /organisaties/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Organisatie'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organisatie'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Organisatie'
+        description: 'The new Organisatie resource'
+  '/organisaties/{id}':
+    get:
+      tags:
+        - Organisatie
+      operationId: getOrganisatieItem
+      summary: 'Retrieves a Organisatie resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Organisatie resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+        404:
+          description: 'Resource not found'
+    put:
+      tags:
+        - Organisatie
+      operationId: putOrganisatieItem
+      summary: 'Replaces the Organisatie resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Organisatie resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Organisatie'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Organisatie'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organisatie'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Organisatie'
+        description: 'The updated Organisatie resource'
+    delete:
+      tags:
+        - Organisatie
+      operationId: deleteOrganisatieItem
+      summary: 'Removes the Organisatie resource.'
+      responses:
+        204:
+          description: 'Organisatie resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+  '/organisaties/{id}/log':
+    get:
+      summary: 'Logboek inzien'
+      description: 'Geeft een array van eerdere versies en wijzigingen van dit object'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Een overzicht van versies'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of aanvraag niet gevonden'
+      tags:
+        - Organisatie
+      operationId: logOrganisatieItem
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+  '/organisaties/{id}/revert/{version}':
+    post:
+      summary: 'Versie terugdraaid'
+      description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        202:
+          description: 'Teruggedraaid naar eerdere versie'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of aanvraag niet gevonden'
+      tags:
+        - Organisatie
+      operationId: revertOrganisatieItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Organisatie-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Organisatie-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Organisatie-write'
+        description: 'The new Organisatie resource'
+  /personen:
+    get:
+      tags:
+        - Persoon
+      operationId: getPersoonCollection
+      summary: 'Retrieves the collection of Persoon resources.'
+      responses:
+        200:
+          description: 'Persoon collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Persoon'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Persoon'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Persoon'
+      parameters: []
+    post:
+      tags:
+        - Soort
+      operationId: postSoortCollection
+      summary: 'Creates a Soort resource.'
+      responses:
+        201:
+          description: 'Soort resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Soort'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Soort'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Soort'
+          links:
+            GetSoortItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getSoortItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /types/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Soort'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Soort'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Soort'
+        description: 'The new Soort resource'
+  '/personen/{id}':
+    get:
+      tags:
+        - Persoon
+      operationId: getPersoonItem
+      summary: 'Retrieves a Persoon resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Persoon resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Persoon'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Persoon'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Persoon'
+        404:
+          description: 'Resource not found'
+    put:
+      tags:
+        - Persoon
+      operationId: putPersoonItem
+      summary: 'Replaces the Persoon resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Persoon resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Persoon'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Persoon'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Persoon'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Persoon'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Persoon'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Persoon'
+        description: 'The updated Persoon resource'
+    delete:
+      tags:
+        - Persoon
+      operationId: deletePersoonItem
+      summary: 'Removes the Persoon resource.'
+      responses:
+        204:
+          description: 'Persoon resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+  '/personen/{id}/log':
+    get:
+      summary: 'Logboek inzien'
+      description: 'Geeft een array van eerdere versies en wijzigingen van dit object'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Een overzicht van versies'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of aanvraag niet gevonden'
+      tags:
+        - Persoon
+      operationId: logPersoonItem
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+  '/personen/{id}/revert/{version}':
+    post:
+      summary: 'Versie terugdraaid'
+      description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        202:
+          description: 'Teruggedraaid naar eerdere versie'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of aanvraag niet gevonden'
+      tags:
+        - Persoon
+      operationId: revertPersoonItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Persoon-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Persoon-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Persoon-write'
+        description: 'The new Persoon resource'
+  /type:
+    get:
+      tags:
+        - Soort
+      operationId: getSoortCollection
+      summary: 'Retrieves the collection of Soort resources.'
+      responses:
+        200:
+          description: 'Soort collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Soort'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Soort'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Soort'
+      parameters: []
+  '/types/{id}':
+    get:
+      tags:
+        - Soort
+      operationId: getSoortItem
+      summary: 'Retrieves a Soort resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Soort resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Soort'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Soort'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Soort'
+        404:
+          description: 'Resource not found'
+    put:
+      tags:
+        - Soort
+      operationId: putSoortItem
+      summary: 'Replaces the Soort resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Soort resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Soort'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Soort'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Soort'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Soort'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Soort'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Soort'
+        description: 'The updated Soort resource'
+    delete:
+      tags:
+        - Soort
+      operationId: deleteSoortItem
+      summary: 'Removes the Soort resource.'
+      responses:
+        204:
+          description: 'Soort resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+  '/types/{id}/log':
+    get:
+      summary: 'Logboek inzien'
+      description: 'Geeft een array van eerdere versies en wijzigingen van dit object'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Een overzicht van versies'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of aanvraag niet gevonden'
+      tags:
+        - Soort
+      operationId: logSoortItem
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+  '/types/{id}/revert/{version}':
+    post:
+      summary: 'Versie terugdraaid'
+      description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        202:
+          description: 'Teruggedraaid naar eerdere versie'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Huwelijk of aanvraag niet gevonden'
+      tags:
+        - Soort
+      operationId: revertSoortItem
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Soort-write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Soort-write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Soort-write'
+        description: 'The new Soort resource'
+  /users:
+    get:
+      tags:
+        - User
+      operationId: getUserCollection
+      summary: 'Retrieves the collection of User resources.'
+      responses:
+        200:
+          description: 'User collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User-user_user:read'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User-user_user:read'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User-user_user:read'
+      parameters: []
+    post:
+      tags:
+        - User
+      operationId: postUserCollection
+      summary: 'Creates a User resource.'
+      responses:
+        201:
+          description: 'User resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User-user_user:read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User-user_user:read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/User-user_user:read'
+          links:
+            GetUserItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getUserItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /users/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/User-user_user:write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User-user_user:write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/User-user_user:write'
+        description: 'The new User resource'
+  '/users/{id}':
+    get:
+      tags:
+        - User
+      operationId: getUserItem
+      summary: 'Retrieves a User resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'User resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User-user_user:read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User-user_user:read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/User-user_user:read'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - User
+      operationId: deleteUserItem
+      summary: 'Removes the User resource.'
+      responses:
+        204:
+          description: 'User resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - User
+      operationId: putUserItem
+      summary: 'Replaces the User resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'User resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/User-user_user:read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User-user_user:read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/User-user_user:read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/User-user_user:write'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User-user_user:write'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/User-user_user:write'
+        description: 'The updated User resource'
+security:
+  -
+    apiKey: []
+components:
+  schemas:
+    Huwelijk:
+      type: object
+      description: Huwelijk
+      properties:
+        identificatie:
+          type: string
+          example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft aangemaakt. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          maxLength: 40
+        bronOrganisatie:
+          description: 'Het Huwelijk waartoe deze partner behoort'
+          type: string
+        melding:
+          title: ZAAK
+          type: string
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 200
+          format: uri
+          description: 'URL-referentie naar de melding "ZAAK" van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+        aanvraag:
+          title: ZAAK
+          type: string
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 200
+          format: uri
+          description: 'URL-referentie naar de aanvraag "ZAAK" van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+        type:
+          type: string
+          enum:
+            - huwelijk
+            - partnerschap
+          example: huwelijk
+          default: huwelijk
+          description: 'Het type van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
+        datum:
+          description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden'
+          type: string
+          format: date-time
+        tijd:
+          description: 'Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden'
+          type: string
+        mogelijkeDatums:
+          description: 'Datums die mogelijk zijn, binnen de door de gebruiker opgeven criteria'
+          type: array
+          items:
+            type: string
+        mogelijkeTijden:
+          description: 'Tijdstippen die mogelijk zijn, binnen de door de gebruiker opgeven criteria'
+          type: array
+          items:
+            type: string
+        locaties:
+          description: 'De gekozen locatie voor dit huwelijk'
+          type: array
+          items:
+            type: string
+        partners:
+          description: 'De partners die in dit huwelijk treden'
+          type: array
+          items:
+            type: string
+        getuigen:
+          description: 'De personen die voor dit huwelijk gaan getuigen'
+          type: array
+          items:
+            type: string
+        ambtenaren:
+          description: 'De trouwambtenaren die betrokken zijn bij deze huwelijksvoltrekking'
+          type: array
+          items:
+            type: string
+        documenten:
+          description: 'De bij dit huwelijk behorende/benodigde documenten'
+          type: array
+          items:
+            type: string
+        issues:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Aan dit huwelijk verbonden issues,'
+          items:
+            type: string
+        soort:
+          description: 'Het soort huwelijk wat is gekozen, bijvoorbeeld gratis'
+          type: string
+        producten:
+          title: Instellingen
+          type: array
+          example: '[]'
+          description: 'De instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen.'
+          items:
+            type: string
+        registratiedatum:
+          description: 'Het tijdstip waarop deze entiteit is aangemaakt.'
+          type: string
+          format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop deze entiteit voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        taal:
+          type: string
+          example: nl
+          maxLength: 5
+          format: Language
+          readOnly: false
+          description: 'De taal waarin dit object is opgesteld <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>'
+        exclAmount:
+          description: 'The non decimal value for the price of this product (excluding tax)'
+          type: integer
+        taxPercentage:
+          description: 'The the percentage of the on this product, in percentage so 1% = 1, and not 0,01'
+          type: integer
+        taxAmount:
+          description: 'The non decimal value for the tax of this huwelijk'
+          type: integer
+        inclAmount:
+          description: 'The non decimal value for the price of this v (including tax)'
+          type: integer
+        currency:
+          description: 'The base currency of this huwelijk'
+          type: string
+        emailadres:
+          type: string
+          example: john@do.com
+          required: 'true'
+          maxLength: 250
+          format: email
+          readOnly: false
+          description: 'Het emailadres van de persoon die je probeert te uit te nodigen <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        telefoonnummer:
+          type: string
+          example: 06-12345678
+          maxLength: 15
+          format: phone
+          readOnly: false
+          description: 'Het telefoonnummer van de persoon die je probeert te uit te nodigen, als je deze meegeeft zal er tevens een sms worden verzonden <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        voornamen:
+          type: string
+          example: John
+          required: 'true'
+          maxLength: 250
+          readOnly: false
+          description: 'Het emailadres van de persoon die je wil uitnodigen. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+        geslachtsnaam:
+          type: string
+          example: Do
+          required: 'true'
+          maxLength: 250
+          readOnly: false
+          description: 'De familienaam van de persoon die je wil uitnodigen. <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>'
+        partner:
+          description: 'Het id van de partner dat gekoppeld moet worden aan bijvoorbeeld zijn/haar getuige of document. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+        removeId:
+          description: 'Het id van het object dat moet worden verwijderd <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: string
+        document:
+          type: 'url or base64'
+          required: 'true'
+          readOnly: false
+          description: 'Een link naar het te uploaden document of een base64 representatie van dat document  <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a> or <b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+        documentType:
+          type: string
+          enum:
+            - 'geboorte akte'
+            - paspoort
+          example: 'geboorte akte'
+          readOnly: false
+          description: 'Een beschrijving van het type document dat je probeert te uploaden <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
+        setLocation:
+          type: string
+          format: UUID
+          required: 'true'
+          readOnly: false
+          description: 'Het ID van de locatie waar het huwelijk plaatsvindt. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+        setProduct:
+          type: string
+          format: UUID
+          required: 'true'
+          readOnly: false
+          description: 'Het ID van het primaire product van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+        setOfficial:
+          type: string
+          format: UUID
+          required: 'true'
+          readOnly: false
+          description: 'Het ID van de ambtenaaar die je wilt verzoeken dit huwelijk te voltrekken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+        bsn:
+          type: string
+          format: UUID
+          required: 'true'
+          readOnly: false
+          description: 'Het BSN nummer van een partner om een huwelijk op te vinden/checken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+        url:
+          type: url
+          required: 'true'
+          readOnly: true
+          description: 'Een link, naar bijvoorbeeld een betaal scherm. <b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+        zaakRepresentation:
+          readOnly: true
+          description: 'De zaakrepresentatie maakt een array aan conform ZTC specs, die we kunnen gebruiken om een zaak in te schieten.'
+        id:
+          readOnly: true
+          description: 'Het identificatie nummer van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a><br /><br /><b>Note</b> This is for devolopment purposes, the INT ID wil be replaced by BLOB UUID on production'
+          type: integer
+        trouwdatum:
+          readOnly: true
+      required:
+        - tijd
+    Huwelijk-BSN:
+      type: object
+      description: Huwelijk
+      properties:
+        bsn:
+          type: string
+          format: UUID
+          required: 'true'
+          readOnly: false
+          description: 'Het BSN nummer van een partner om een huwelijk op te vinden/checken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+    Huwelijk-aanvraag:
+      type: object
+      description: Huwelijk
+    Huwelijk-documentAdd:
+      type: object
+      description: Huwelijk
+      properties:
+        partner:
+          description: 'Het id van de partner dat gekoppeld moet worden aan bijvoorbeeld zijn/haar getuige of document. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+        document:
+          type: 'url or base64'
+          required: 'true'
+          readOnly: false
+          description: 'Een link naar het te uploaden document of een base64 representatie van dat document  <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a> or <b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+        documentType:
+          type: string
+          enum:
+            - 'geboorte akte'
+            - paspoort
+          example: 'geboorte akte'
+          readOnly: false
+          description: 'Een beschrijving van het type document dat je probeert te uploaden <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
+    Huwelijk-invite:
+      type: object
+      description: Huwelijk
+      properties:
+        emailadres:
+          type: string
+          example: john@do.com
+          required: 'true'
+          maxLength: 250
+          format: email
+          readOnly: false
+          description: 'Het emailadres van de persoon die je probeert te uit te nodigen <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        telefoonnummer:
+          type: string
+          example: 06-12345678
+          maxLength: 15
+          format: phone
+          readOnly: false
+          description: 'Het telefoonnummer van de persoon die je probeert te uit te nodigen, als je deze meegeeft zal er tevens een sms worden verzonden <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        voornamen:
+          type: string
+          example: John
+          required: 'true'
+          maxLength: 250
+          readOnly: false
+          description: 'Het emailadres van de persoon die je wil uitnodigen. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+        geslachtsnaam:
+          type: string
+          example: Do
+          required: 'true'
+          maxLength: 250
+          readOnly: false
+          description: 'De familienaam van de persoon die je wil uitnodigen. <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>'
+    Huwelijk-inviteGetuige:
+      type: object
+      description: Huwelijk
+      properties:
+        emailadres:
+          type: string
+          example: john@do.com
+          required: 'true'
+          maxLength: 250
+          format: email
+          readOnly: false
+          description: 'Het emailadres van de persoon die je probeert te uit te nodigen <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        telefoonnummer:
+          type: string
+          example: 06-12345678
+          maxLength: 15
+          format: phone
+          readOnly: false
+          description: 'Het telefoonnummer van de persoon die je probeert te uit te nodigen, als je deze meegeeft zal er tevens een sms worden verzonden <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        voornamen:
+          type: string
+          example: John
+          required: 'true'
+          maxLength: 250
+          readOnly: false
+          description: 'Het emailadres van de persoon die je wil uitnodigen. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+        geslachtsnaam:
+          type: string
+          example: Do
+          required: 'true'
+          maxLength: 250
+          readOnly: false
+          description: 'De familienaam van de persoon die je wil uitnodigen. <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>'
+        partner:
+          description: 'Het id van de partner dat gekoppeld moet worden aan bijvoorbeeld zijn/haar getuige of document. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+    Huwelijk-melding:
+      type: object
+      description: Huwelijk
+    Huwelijk-payment:
+      type: object
+      description: Huwelijk
+      properties:
+        url:
+          type: url
+          required: 'true'
+          readOnly: true
+          description: 'Een link, naar bijvoorbeeld een betaal scherm. <b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+    Huwelijk-productAdd:
+      type: object
+      description: Huwelijk
+    Huwelijk-read:
+      type: object
+      description: Huwelijk
+      properties:
+        id:
+          readOnly: true
+          description: 'Het identificatie nummer van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a><br /><br /><b>Note</b> This is for devolopment purposes, the INT ID wil be replaced by BLOB UUID on production'
+          type: integer
+        identificatie:
+          type: string
+          example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft aangemaakt. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          maxLength: 40
+        melding:
+          title: ZAAK
+          type: string
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 200
+          format: uri
+          description: 'URL-referentie naar de melding "ZAAK" van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+        aanvraag:
+          title: ZAAK
+          type: string
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 200
+          format: uri
+          description: 'URL-referentie naar de aanvraag "ZAAK" van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+        type:
+          type: string
+          enum:
+            - huwelijk
+            - partnerschap
+          example: huwelijk
+          default: huwelijk
+          description: 'Het type van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
+        datum:
+          description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden'
+          type: string
+          format: date-time
+        tijd:
+          description: 'Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden'
+          type: string
+        mogelijkeDatums:
+          description: 'Datums die mogelijk zijn, binnen de door de gebruiker opgeven criteria'
+          type: array
+          items:
+            type: string
+        mogelijkeTijden:
+          description: 'Tijdstippen die mogelijk zijn, binnen de door de gebruiker opgeven criteria'
+          type: array
+          items:
+            type: string
+        locaties:
+          description: 'De gekozen locatie voor dit huwelijk'
+          type: array
+          items:
+            type: string
+        partners:
+          description: 'De partners die in dit huwelijk treden'
+          type: array
+          items:
+            type: string
+        getuigen:
+          description: 'De personen die voor dit huwelijk gaan getuigen'
+          type: array
+          items:
+            type: string
+        ambtenaren:
+          description: 'De trouwambtenaren die betrokken zijn bij deze huwelijksvoltrekking'
+          type: array
+          items:
+            type: string
+        documenten:
+          description: 'De bij dit huwelijk behorende/benodigde documenten'
+          type: array
+          items:
+            type: string
+        issues:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Aan dit huwelijk verbonden issues,'
+          items:
+            type: string
+        soort:
+          description: 'Het soort huwelijk wat is gekozen, bijvoorbeeld gratis'
+          type: string
+        producten:
+          title: Instellingen
+          type: array
+          example: '[]'
+          description: 'De instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen.'
+          items:
+            type: string
+        registratiedatum:
+          description: 'Het tijdstip waarop deze entiteit is aangemaakt.'
+          type: string
+          format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop deze entiteit voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        taal:
+          type: string
+          example: nl
+          maxLength: 5
+          format: Language
+          readOnly: false
+          description: 'De taal waarin dit object is opgesteld <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>'
+        exclAmount:
+          description: 'The non decimal value for the price of this product (excluding tax)'
+          type: integer
+        taxPercentage:
+          description: 'The the percentage of the on this product, in percentage so 1% = 1, and not 0,01'
+          type: integer
+        taxAmount:
+          description: 'The non decimal value for the tax of this huwelijk'
+          type: integer
+        inclAmount:
+          description: 'The non decimal value for the price of this v (including tax)'
+          type: integer
+        currency:
+          description: 'The base currency of this huwelijk'
+          type: string
+      required:
+        - tijd
+    Huwelijk-remove:
+      type: object
+      description: Huwelijk
+      properties:
+        removeId:
+          description: 'Het id van het object dat moet worden verwijderd <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: string
+    Huwelijk-requestOfficial:
+      type: object
+      description: Huwelijk
+      properties:
+        setOfficial:
+          type: string
+          format: UUID
+          required: 'true'
+          readOnly: false
+          description: 'Het ID van de ambtenaaar die je wilt verzoeken dit huwelijk te voltrekken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+    Huwelijk-setLocation:
+      type: object
+      description: Huwelijk
+      properties:
+        setLocation:
+          type: string
+          format: UUID
+          required: 'true'
+          readOnly: false
+          description: 'Het ID van de locatie waar het huwelijk plaatsvindt. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+    Huwelijk-setProduct:
+      type: object
+      description: Huwelijk
+      properties:
+        setProduct:
+          type: string
+          format: UUID
+          required: 'true'
+          readOnly: false
+          description: 'Het ID van het primaire product van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+    Huwelijk-validate:
+      type: object
+      description: Huwelijk
+    Huwelijk-write:
+      type: object
+      description: Huwelijk
+      properties:
+        identificatie:
+          type: string
+          example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft aangemaakt. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          maxLength: 40
+        type:
+          type: string
+          enum:
+            - huwelijk
+            - partnerschap
+          example: huwelijk
+          default: huwelijk
+          description: 'Het type van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
+        datum:
+          description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden'
+          type: string
+          format: date-time
+        tijd:
+          description: 'Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden'
+          type: string
+        issues:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Aan dit huwelijk verbonden issues,'
+          items:
+            type: string
+        producten:
+          title: Instellingen
+          type: array
+          example: '[]'
+          description: 'De instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen.'
+          items:
+            type: string
+        taal:
+          type: string
+          example: nl
+          maxLength: 5
+          format: Language
+          readOnly: false
+          description: 'De taal waarin dit object is opgesteld <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>'
+      required:
+        - tijd
+    HuwelijkAmbtenaar:
+      type: object
+      description: ''
+      properties:
+        primair:
+          title: primair
+          type: boolean
+          example: 'true'
+          description: Primair
+        instemming:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: Instemming
+        status:
+          description: 'A reprecentation for the status ofthis object'
+          type: string
+        huwelijk:
+          description: 'Het Huwelijk waartoe deze partner behoort'
+          type: string
+        ambtenaar:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: ambtenaar
+        rol:
+          description: 'Het type van dit huwelijk'
+          type: string
+        registratieDatum:
+          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+          type: string
+          format: date-time
+        id:
+          readOnly: true
+          type: integer
+    HuwelijkBijzonderAmbtenaar:
+      type: object
+      description: ''
+      properties:
+        primair:
+          title: primair
+          type: boolean
+          example: 'true'
+          description: Primair
+        instemming:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: Instemming
+        status:
+          description: 'A representation for the status of this object'
+          type: string
+        huwelijk:
+          description: 'Het Huwelijk waartoe deze partner behoort'
+          type: string
+        type:
+          type: string
+          enum:
+            - 'voor een dag'
+            - zelfstandig
+          example: 'voor een dag'
+          default: 'voor een dag'
+          description: 'Het type van dit issue <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
+        persoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: Persoon
+        registratieDatum:
+          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+          type: string
+          format: date-time
+        id:
+          readOnly: true
+          type: integer
+    HuwelijkDocument:
+      type: object
+      description: Document
+      properties:
+        instemming:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: Instemming
+        status:
+          description: 'A representation for the status of this object'
+          type: string
+        huwelijk:
+          description: 'Het Huwelijk waarop dit document betrekking heeft'
+          type: string
+        partner:
+          description: 'De partner waarop dit document betrekking heeft'
+          type: string
+        document:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: Document
+        registratieDatum:
+          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+          type: string
+          format: date-time
+        id:
+          readOnly: true
+          type: integer
+    HuwelijkGetuige:
+      type: object
+      description: Getuigen
+      properties:
+        instemming:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: Instemming
+        status:
+          description: 'A representation for the status of this object'
+          type: string
+        huwelijk:
+          description: 'Het Huwelijk waartoe deze partner behoort'
+          type: string
+        partner:
+          description: 'De partner waarvoor de getuigen getuigt'
+          type: string
+        persoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: Persoon
+        registratieDatum:
+          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+          type: string
+          format: date-time
+        id:
+          readOnly: true
+          type: integer
+    HuwelijkLocatie:
+      type: object
+      description: ''
+      properties:
+        primair:
+          title: primair
+          type: boolean
+          example: 'true'
+          description: Primair
+        instemming:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: Instemming
+        status:
+          description: 'A reprecentation for the status ofthis object'
+          type: string
+        huwelijk:
+          description: 'Het Huwelijk waartoe deze partner behoort.'
+          type: string
+        locatie:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: Locatie
+        registratieDatum:
+          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+          type: string
+          format: date-time
+        id:
+          readOnly: true
+          type: integer
+    HuwelijkPartner:
+      type: object
+      description: Partner
+      properties:
+        instemming:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: Instemming
+        status:
+          description: 'A reprecentation for the status ofthis object'
+          type: string
+        huwelijk:
+          description: 'Het Huwelijk waartoe deze partner behoort'
+          type: string
+        getuigen:
+          description: 'The tasks that belong to this agenda'
+          type: array
+          items:
+            type: string
+        persoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'De partner, ofwel een persoon die als partner aan dit huwelijk is verbonden'
+        registratieDatum:
+          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+          type: string
+          format: date-time
+        id:
+          readOnly: true
+          type: integer
+        partner: {  }
+    Organisatie:
+      type: object
+      description: Organisatie
+      properties:
+        id:
+          description: 'Het unieke identificatie nummer van deze organisatie binnen deze api <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+        rsin:
+          title: Organisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van deze organisatie. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef'
+        kvk:
+          title: kvk
+          type: string
+          example: '12345678'
+          required: 'true'
+          maxLength: 8
+          minLength: 9
+          description: 'Het KVK nummer van deze organisatie'
+        btw:
+          title: btw
+          type: string
+          example: NL123456789B01
+          required: 'true'
+          maxLength: 14
+          minLength: 14
+          description: 'Het BTW nummer van deze organisatie https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/btw_nummers_controleren/uw_btw_nummer, het btw nummer moet het RSIN nummer bevatten.'
+        eori:
+          title: eori
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 14
+          minLength: 5
+          description: 'Het EORI (Europese Douane NR) van deze organisatie, zie ook https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/douane_voor_bedrijven/naslagwerken_en_overige_informatie/eori_nummer/'
+        naam:
+          type: string
+          maxLength: 255
+          minLength: 5
+          example: 'Gemeente Zuiddrecht'
+          description: 'De naam van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
+        beschrijving:
+          type: string
+          maxLength: 2000
+          minLength: 25
+          example: 'Deze prachtige organisatie staat voor de hoogste normen en waarden'
+          description: 'Een beschrijvende tekst over deze organisatie  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+        emailadres:
+          type: email
+          maxLength: 255
+          minLength: 8
+          example: john@do.nl
+          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        telefoonnummer:
+          type: string
+          maxLength: 255
+          minLength: 10
+          example: +31(0)6-12345678
+          description: 'Het telefoonnummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+        huwelijken:
+          description: 'De huwelijken verbonden aan deze organisatie'
+          type: array
+          items:
+            type: string
+        personen:
+          description: 'De personen verbonden aan deze organisatie'
+          type: array
+          items:
+            type: string
+        soorten:
+          description: 'De soorten huwelijken verbonden aan deze organisatie'
+          type: array
+          items:
+            type: string
+        users:
+          description: 'De bij deze organisatie horende gebruikers'
+          type: array
+          items:
+            type: string
+        instellingen:
+          title: Instellingen
+          type: array
+          example: '[]'
+          description: 'De instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen.'
+          items:
+            type: string
+      required:
+        - naam
+        - beschrijving
+    Organisatie-read:
+      type: object
+      description: Organisatie
+      properties:
+        id:
+          description: 'Het unieke identificatie nummer van deze organisatie binnen deze api <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+        rsin:
+          title: Organisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van deze organisatie. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef'
+        kvk:
+          title: kvk
+          type: string
+          example: '12345678'
+          required: 'true'
+          maxLength: 8
+          minLength: 9
+          description: 'Het KVK nummer van deze organisatie'
+        btw:
+          title: btw
+          type: string
+          example: NL123456789B01
+          required: 'true'
+          maxLength: 14
+          minLength: 14
+          description: 'Het BTW nummer van deze organisatie https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/btw_nummers_controleren/uw_btw_nummer, het btw nummer moet het RSIN nummer bevatten.'
+        eori:
+          title: eori
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 14
+          minLength: 5
+          description: 'Het EORI (Europese Douane NR) van deze organisatie, zie ook https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/douane_voor_bedrijven/naslagwerken_en_overige_informatie/eori_nummer/'
+        naam:
+          type: string
+          maxLength: 255
+          minLength: 5
+          example: 'Gemeente Zuiddrecht'
+          description: 'De naam van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
+        beschrijving:
+          type: string
+          maxLength: 2000
+          minLength: 25
+          example: 'Deze prachtige organisatie staat voor de hoogste normen en waarden'
+          description: 'Een beschrijvende tekst over deze organisatie  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+        emailadres:
+          type: email
+          maxLength: 255
+          minLength: 8
+          example: john@do.nl
+          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        telefoonnummer:
+          type: string
+          maxLength: 255
+          minLength: 10
+          example: +31(0)6-12345678
+          description: 'Het telefoonnummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+        instellingen:
+          title: Instellingen
+          type: array
+          example: '[]'
+          description: 'De instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen.'
+          items:
+            type: string
+      required:
+        - naam
+        - beschrijving
+    Organisatie-write:
+      type: object
+      description: Organisatie
+      properties:
+        id:
+          description: 'Het unieke identificatie nummer van deze organisatie binnen deze api <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+        rsin:
+          title: Organisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van deze organisatie. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef'
+        kvk:
+          title: kvk
+          type: string
+          example: '12345678'
+          required: 'true'
+          maxLength: 8
+          minLength: 9
+          description: 'Het KVK nummer van deze organisatie'
+        btw:
+          title: btw
+          type: string
+          example: NL123456789B01
+          required: 'true'
+          maxLength: 14
+          minLength: 14
+          description: 'Het BTW nummer van deze organisatie https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/btw_nummers_controleren/uw_btw_nummer, het btw nummer moet het RSIN nummer bevatten.'
+        eori:
+          title: eori
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 14
+          minLength: 5
+          description: 'Het EORI (Europese Douane NR) van deze organisatie, zie ook https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/douane_voor_bedrijven/naslagwerken_en_overige_informatie/eori_nummer/'
+        naam:
+          type: string
+          maxLength: 255
+          minLength: 5
+          example: 'Gemeente Zuiddrecht'
+          description: 'De naam van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
+        beschrijving:
+          type: string
+          maxLength: 2000
+          minLength: 25
+          example: 'Deze prachtige organisatie staat voor de hoogste normen en waarden'
+          description: 'Een beschrijvende tekst over deze organisatie  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+        emailadres:
+          type: email
+          maxLength: 255
+          minLength: 8
+          example: john@do.nl
+          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        telefoonnummer:
+          type: string
+          maxLength: 255
+          minLength: 10
+          example: +31(0)6-12345678
+          description: 'Het telefoonnummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+        instellingen:
+          title: Instellingen
+          type: array
+          example: '[]'
+          description: 'De instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen.'
+          items:
+            type: string
+      required:
+        - naam
+        - beschrijving
+    Persoon:
+      type: object
+      description: Persoon
+      properties:
+        id:
+          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+        identificatie:
+          type: string
+          example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          maxLength: 40
+        bronOrganisatie:
+          description: 'Het huwelijk waartoe deze partner behoort'
+          type: string
+        voornamen:
+          type: string
+          maxLength: 255
+          minLength: 2
+          example: John
+          description: 'De naam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+        voorvoegselGeslachtsnaam:
+          type: string
+          maxLength: 255
+          minLength: 2
+          example: 'van der'
+          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+        geslachtsnaam:
+          type: string
+          maxLength: 255
+          minLength: 2
+          example: Do
+          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>'
+        emailadres:
+          type: email
+          maxLength: 255
+          minLength: 8
+          example: john@do.nl
+          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        telefoonnummer:
+          type: string
+          maxLength: 255
+          minLength: 10
+          example: +31(0)6-12345678
+          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+        agenda:
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'URL-referentie naar de agenda van dit persoon'
+        registratiedatum:
+          description: 'Het tijdstip waarop dit object is aangemaakt.'
+          type: string
+          format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        taal:
+          type: string
+          maxLength: 17
+          minLength: 2
+          example: NL
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+        huwelijkspartner: {  }
+    Persoon-read:
+      type: object
+      description: Persoon
+      properties:
+        id:
+          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+        identificatie:
+          type: string
+          example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          maxLength: 40
+        voornamen:
+          type: string
+          maxLength: 255
+          minLength: 2
+          example: John
+          description: 'De naam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+        voorvoegselGeslachtsnaam:
+          type: string
+          maxLength: 255
+          minLength: 2
+          example: 'van der'
+          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+        geslachtsnaam:
+          type: string
+          maxLength: 255
+          minLength: 2
+          example: Do
+          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>'
+        emailadres:
+          type: email
+          maxLength: 255
+          minLength: 8
+          example: john@do.nl
+          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        telefoonnummer:
+          type: string
+          maxLength: 255
+          minLength: 10
+          example: +31(0)6-12345678
+          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+        agenda:
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'URL-referentie naar de agenda van dit persoon'
+        registratiedatum:
+          description: 'Het tijdstip waarop dit object is aangemaakt.'
+          type: string
+          format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        taal:
+          type: string
+          maxLength: 17
+          minLength: 2
+          example: NL
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+    Persoon-write:
+      type: object
+      description: Persoon
+      properties:
+        id:
+          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+        identificatie:
+          type: string
+          example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          maxLength: 40
+        voornamen:
+          type: string
+          maxLength: 255
+          minLength: 2
+          example: John
+          description: 'De naam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+        voorvoegselGeslachtsnaam:
+          type: string
+          maxLength: 255
+          minLength: 2
+          example: 'van der'
+          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+        geslachtsnaam:
+          type: string
+          maxLength: 255
+          minLength: 2
+          example: Do
+          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>'
+        emailadres:
+          type: email
+          maxLength: 255
+          minLength: 8
+          example: john@do.nl
+          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+        telefoonnummer:
+          type: string
+          maxLength: 255
+          minLength: 10
+          example: +31(0)6-12345678
+          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+        agenda:
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'URL-referentie naar de agenda van dit persoon'
+        taal:
+          type: string
+          maxLength: 17
+          minLength: 2
+          example: NL
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+    Soort:
+      type: object
+      description: Soort
+      properties:
+        id:
+          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+        identificatie:
+          type: string
+          example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          maxLength: 40
+        bronOrganisatie:
+          description: 'Het huwelijk waartoe deze partner behoort'
+          type: string
+        naam:
+          description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
+          type: string
+        samenvatting:
+          description: 'Een samenvattende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          type: string
+        beschrijving:
+          description: 'Een beschrijvende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          type: string
+        product:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen'
+        extraProducten:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen'
+          items:
+            type: string
+        locaties:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Beschikbare locaties voor dit soort huwelijk'
+          items:
+            type: string
+        ambtenaren:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Beschikbare ambtenaren voor dit soort huwelijk'
+          items:
+            type: string
+        huwelijken:
+          description: 'De huwelijken die gebruik maken van deze huwelijks soort'
+          type: array
+          items:
+            type: string
+        registratiedatum:
+          description: 'Het tijdstip waarop dit object is aangemaakt.'
+          type: string
+          format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        taal:
+          type: string
+          maxLength: 17
+          minLength: 2
+          example: NL
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+        huwelijkspartner: {  }
+        emailadres: {  }
+        telefoonnummer: {  }
+      required:
+        - naam
+        - samenvatting
+        - beschrijving
+    Soort-read:
+      type: object
+      description: Soort
+      properties:
+        id:
+          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+        identificatie:
+          type: string
+          example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          maxLength: 40
+        naam:
+          description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
+          type: string
+        samenvatting:
+          description: 'Een samenvattende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          type: string
+        beschrijving:
+          description: 'Een beschrijvende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          type: string
+        product:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen'
+        extraProducten:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen'
+          items:
+            type: string
+        locaties:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Beschikbare locaties voor dit soort huwelijk'
+          items:
+            type: string
+        ambtenaren:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Beschikbare ambtenaren voor dit soort huwelijk'
+          items:
+            type: string
+        registratiedatum:
+          description: 'Het tijdstip waarop dit object is aangemaakt.'
+          type: string
+          format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        taal:
+          type: string
+          maxLength: 17
+          minLength: 2
+          example: NL
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+      required:
+        - naam
+        - samenvatting
+        - beschrijving
+    Soort-write:
+      type: object
+      description: Soort
+      properties:
+        id:
+          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          type: integer
+        identificatie:
+          type: string
+          example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          maxLength: 40
+        naam:
+          description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
+          type: string
+        samenvatting:
+          description: 'Een samenvattende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          type: string
+        beschrijving:
+          description: 'Een beschrijvende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          type: string
+        product:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen'
+        extraProducten:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen'
+          items:
+            type: string
+        locaties:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Beschikbare locaties voor dit soort huwelijk'
+          items:
+            type: string
+        ambtenaren:
+          title: issues
+          type: array
+          example: '[]'
+          description: 'Beschikbare ambtenaren voor dit soort huwelijk'
+          items:
+            type: string
+        taal:
+          type: string
+          maxLength: 17
+          minLength: 2
+          example: NL
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+      required:
+        - naam
+        - samenvatting
+        - beschrijving
+    'User-user_user:read':
+      type: object
+      description: 'A user, as unique signed in individual who might be a member of an organisation.'
+      properties:
+        fullname:
+          type: string
+    'User-user_user:write':
+      type: object
+      description: 'A user, as unique signed in individual who might be a member of an organisation.'
+      properties:
+        fullname:
+          type: string
+        plainPassword: {  }
+  securitySchemes:
+    apiKey:
+      type: apiKey
+      in: header
+      description: 'Value for the Authorization header'
+      name: Authorization
+servers:
+  -
+    url: //trouwen.zaakonline.nl/
+    description: 'Sandbox server'
+externalDocs:
+  description: 'Find out more in depth information on the working of the zaakonline code base.'
+  url: 'https://github.com/ConductionNL/zaakonline'
+tags:
+  -
+    name: Agenda
+    description: 'De agenda wordt gebruikt om een moment in de tijd of een tijdspanne weer te geven'
+  -
+    name: Soort
+    description: 'Huwelijks soort, bepaald beschikbare locaties, ambtenaren en aditionele producten '
+  -
+    name: Persoon
+    description: 'Een NIET BRP persoon'
+  -
+    name: Organisatie
+    description: 'De Organisatie wordt gebruikt om standaard configuraties in te regelen'
+  -
+    name: User
+    description: 'Een gebruiker, of in dit geval een applicatie gebonden aan een JWT token behorende tot een organisatie'
+x-tagGroups:
+  -
+    name: Trouwen
+    tags:
+      - Huwelijk
+      - Soort
+      - Persoon
+  -
+    name: Organisatie
+    tags:
+      - Organisatie
+      - User

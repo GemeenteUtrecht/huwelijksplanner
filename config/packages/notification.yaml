@@ -1,0 +1,6 @@
+# This package contains the paramaters for the conduction notification bundle
+
+parameters:
+    # The default way of sending notifications
+    notification_default_type: 'email'
+    notification_default_from_adress: 'info@zaakonline.nl'

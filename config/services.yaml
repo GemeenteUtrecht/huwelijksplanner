@@ -1,0 +1,112 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+    locale: 'en'
+
+    api_documentation:
+        servers:
+        -   url: //trouwen.zaakonline.nl/
+            description: Sandbox server
+        info:
+            description: |
+                Welkom, dit is de documentatie van de trouwen API. Deze API stelt je in staat om digitaal met gemeentes in Nederland te communiceren op alle aspecten van het huwelijk of partnerschap.
+
+                # Introduction                
+                De Trouwen component is ontwikkeld voor de gemeente Utrecht en heeft als doel het aansluiten [NLX](https://nlx.io/), volgens het [Common Ground](https://vng.nl/samen-organiseren/common-ground) principe, samen spelen, samen delen.
+                 
+                # Code, Container en data modelen                
+                U kunt de code voor dit component (en aanvullende documentatie) op [github](https://nlx.io/) downloaden
+                U kunt een docker container voor dit component op [docker hub](https://nlx.io/) downloaden
+                U kunt het datamodel voor dit component [hier](/schema/datamodel.pdf) downloaden
+                
+                # OpenAPI Specification
+                Deze API is gedocumenteerd in het **OpenAPI format** en wordt onderhouden door [Conduction.nl](http://conduction.nl). 
+
+                # Cross-Origin Resource Sharing
+                De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgens de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin" dit maakt ze volledig publiekelijk en toegankelijk voor iedereen. Dat geldt voor elke code op elke site.
+
+                # Authentication
+
+                Trouwen heeft twee vormen van authenticatie:
+                  - API Key
+                  - OAuth2
+                OAuth2 - is een open protocol dat veilig autorisatie regelt op een simpele en gestandaardiseerde manier voor het web, mobiele en desktop applicaties.
+
+                <security-definitions />
+
+            version: 0.0.1
+            title: 'Trouwen API'
+            termsOfService: 'http://www.zaakonline.nl/terms/'
+            contact:
+                name: API Support
+                email: support@conduction.nl
+                url: https://github.com/ConductionNL/zaakonline
+            x-logo:
+                url: '/img/vng.svg'
+                altText: VNG Realisatie
+            license:
+                name: EUPL 1.2
+                url: 'https://opensource.org/licenses/EUPL-1.2'
+        externalDocs:
+            description: Find out more in depth information on the working of the zaakonline code base.
+            url: 'https://github.com/ConductionNL/zaakonline'
+        tags:
+              # The general endpoints  
+            - name: Agenda
+              description: "De agenda wordt gebruikt om een moment in de tijd of een tijdspanne weer te geven"
+            - name: Soort
+              description: "Huwelijks soort, bepaald beschikbare locaties, ambtenaren en aditionele producten "
+            - name: Persoon
+              description: "Een NIET BRP persoon"
+            - name: Organisatie
+              description: "De Organisatie wordt gebruikt om standaard configuraties in te regelen"  
+            - name: User
+              description: "Een gebruiker, of in dit geval een applicatie gebonden aan een JWT token behorende tot een organisatie"
+              # Grouping the endopoint  
+        x-tagGroups:
+            - name: Trouwen
+              tags:
+              - Huwelijk
+              - Soort
+              - Persoon
+            - name: Organisatie
+              tags:
+              - Organisatie
+              - User
+        
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php, Client}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    App\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+    
+    App\Swagger\SwaggerDecorator:
+        #decorates: 'api_platform.swagger.normalizer.documentation'
+        decorates: 'api_platform.swagger.normalizer.api_gateway'
+        arguments:
+            - '@App\Swagger\SwaggerDecorator.inner'
+            - '%api_documentation%'
+        autoconfigure: false     
+    
+    # please note that last definitions always *replace* previous ones
+    App\Subscriber\TablePrefixSubscriber:
+        class: App\Subscriber\TablePrefixSubscriber
+        arguments:
+            - '%table_prefix%'
+        tags: 
+            - { name: doctrine.event_subscriber }

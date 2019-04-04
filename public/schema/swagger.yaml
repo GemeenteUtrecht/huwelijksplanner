@@ -1,0 +1,1745 @@
+swagger: '2.0'
+basePath: /
+info:
+  description: |
+    Welcome traveler, to the Larping API documentation
+    
+    # Introduction
+    
+    Larping.eu is an open available api provided by Conduction.nl aimed at supporting and developing the online larp community, it offers larp specific solutions for problem like .....
+    
+    # OpenAPI Specification
+    This API is documented in **OpenAPI format** and is based on the 
+    [Larping API](http://larping.eu/api) build and maintained by [Conduction.nl](http://conduction.nl). 
+    
+    # Cross-Origin Resource Sharing
+    This API features Cross-Origin Resource Sharing (CORS) implemented in compliance with  [W3C spec](https://www.w3.org/TR/cors/).
+    And that allows cross-domain communication from the browser.
+    All responses have a wildcard same-origin which makes them completely public and accessible to everyone, including any code on any site.
+    
+    # GDPR
+    We are and always have been fully GDPR compliant
+    
+    # Authentication
+    
+    Larping offers two forms of authentication:
+      - API Key
+      - OAuth2
+    OAuth2 - an open protocol to allow secure authorization in a simple
+    and standard method from web, mobile and desktop applications.
+    
+    <security-definitions />
+    
+  version: 0.0.1
+  title: 'Larping API'
+  termsOfService: 'http://larping.eu/terms/'
+  contact:
+    name: 'API Support'
+    email: support@larping.eu
+    url: 'https://github.com/ConductionNL/larping-vortex'
+  x-logo:
+    url: 'https://github.com/ConductionNL/larping-vortex/raw/master/docs/logo.gif'
+    altText: 'Larping logo'
+  license:
+    name: 'Apache 2.0'
+    url: 'http://www.apache.org/licenses/LICENSE-2.0.html'
+paths:
+  /characters:
+    get:
+      tags:
+        - Character
+      operationId: getCharacterCollection
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of Character resources.'
+      responses:
+        200:
+          description: 'Character collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Character'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          type: integer
+    post:
+      tags:
+        - Character
+      operationId: postCharacterCollection
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Creates a Character resource.'
+      responses:
+        201:
+          description: 'Character resource created'
+          schema:
+            $ref: '#/definitions/Character'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: character
+          in: body
+          description: 'The new Character resource'
+          schema:
+            $ref: '#/definitions/Character'
+  '/characters/{id}':
+    get:
+      tags:
+        - Character
+      operationId: getCharacterItem
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves a Character resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: 'Character resource response'
+          schema:
+            $ref: '#/definitions/Character'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Character
+      operationId: deleteCharacterItem
+      summary: 'Removes the Character resource.'
+      responses:
+        204:
+          description: 'Character resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+    put:
+      tags:
+        - Character
+      operationId: putCharacterItem
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Replaces the Character resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+        -
+          name: character
+          in: body
+          description: 'The updated Character resource'
+          schema:
+            $ref: '#/definitions/Character'
+      responses:
+        200:
+          description: 'Character resource updated'
+          schema:
+            $ref: '#/definitions/Character'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+  /events:
+    get:
+      tags:
+        - Event
+      operationId: getEventCollection
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of Event resources.'
+      responses:
+        200:
+          description: 'Event collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Event'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          type: integer
+    post:
+      tags:
+        - Event
+      operationId: postEventCollection
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Creates a Event resource.'
+      responses:
+        201:
+          description: 'Event resource created'
+          schema:
+            $ref: '#/definitions/Event'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: event
+          in: body
+          description: 'The new Event resource'
+          schema:
+            $ref: '#/definitions/Event'
+  '/events/{id}':
+    get:
+      tags:
+        - Event
+      operationId: getEventItem
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves a Event resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: 'Event resource response'
+          schema:
+            $ref: '#/definitions/Event'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Event
+      operationId: deleteEventItem
+      summary: 'Removes the Event resource.'
+      responses:
+        204:
+          description: 'Event resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+    put:
+      tags:
+        - Event
+      operationId: putEventItem
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Replaces the Event resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+        -
+          name: event
+          in: body
+          description: 'The updated Event resource'
+          schema:
+            $ref: '#/definitions/Event'
+      responses:
+        200:
+          description: 'Event resource updated'
+          schema:
+            $ref: '#/definitions/Event'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+  /files:
+    get:
+      tags:
+        - File
+      operationId: getFileCollection
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of File resources.'
+      responses:
+        200:
+          description: 'File collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/File'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          type: integer
+    post:
+      tags:
+        - File
+      operationId: postFileCollection
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Creates a File resource.'
+      responses:
+        201:
+          description: 'File resource created'
+          schema:
+            $ref: '#/definitions/File'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: file
+          in: body
+          description: 'The new File resource'
+          schema:
+            $ref: '#/definitions/File'
+  '/files/{id}':
+    get:
+      tags:
+        - File
+      operationId: getFileItem
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves a File resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: 'File resource response'
+          schema:
+            $ref: '#/definitions/File'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - File
+      operationId: deleteFileItem
+      summary: 'Removes the File resource.'
+      responses:
+        204:
+          description: 'File resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+    put:
+      tags:
+        - File
+      operationId: putFileItem
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Replaces the File resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+        -
+          name: file
+          in: body
+          description: 'The updated File resource'
+          schema:
+            $ref: '#/definitions/File'
+      responses:
+        200:
+          description: 'File resource updated'
+          schema:
+            $ref: '#/definitions/File'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+  /members:
+    get:
+      tags:
+        - Member
+      operationId: getMemberCollection
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of Member resources.'
+      responses:
+        200:
+          description: 'Member collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Member'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          type: integer
+    post:
+      tags:
+        - Member
+      operationId: postMemberCollection
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Creates a Member resource.'
+      responses:
+        201:
+          description: 'Member resource created'
+          schema:
+            $ref: '#/definitions/Member'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: member
+          in: body
+          description: 'The new Member resource'
+          schema:
+            $ref: '#/definitions/Member'
+  '/members/{id}':
+    get:
+      tags:
+        - Member
+      operationId: getMemberItem
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves a Member resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: 'Member resource response'
+          schema:
+            $ref: '#/definitions/Member'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Member
+      operationId: deleteMemberItem
+      summary: 'Removes the Member resource.'
+      responses:
+        204:
+          description: 'Member resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+    put:
+      tags:
+        - Member
+      operationId: putMemberItem
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Replaces the Member resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+        -
+          name: member
+          in: body
+          description: 'The updated Member resource'
+          schema:
+            $ref: '#/definitions/Member'
+      responses:
+        200:
+          description: 'Member resource updated'
+          schema:
+            $ref: '#/definitions/Member'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+  '/order/{id}/refund':
+    post:
+      summary: 'Do a partial or total refund for this order'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      tags:
+        - Order
+      operationId: post_publicationOrderItem
+      responses:
+        201:
+          description: 'Order resource created'
+          schema:
+            $ref: '#/definitions/Order'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: order
+          in: body
+          description: 'The new Order resource'
+          schema:
+            $ref: '#/definitions/Order'
+  /orders:
+    get:
+      tags:
+        - Order
+      operationId: getOrderCollection
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of Order resources.'
+      responses:
+        200:
+          description: 'Order collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Order'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          type: integer
+    post:
+      tags:
+        - Order
+      operationId: postOrderCollection
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Creates a Order resource.'
+      responses:
+        201:
+          description: 'Order resource created'
+          schema:
+            $ref: '#/definitions/Order'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: order
+          in: body
+          description: 'The new Order resource'
+          schema:
+            $ref: '#/definitions/Order'
+  '/orders/{id}':
+    get:
+      tags:
+        - Order
+      operationId: getOrderItem
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves a Order resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: 'Order resource response'
+          schema:
+            $ref: '#/definitions/Order'
+        404:
+          description: 'Resource not found'
+  /organisations:
+    get:
+      tags:
+        - Organisation
+      operationId: getOrganisationCollection
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of Organisation resources.'
+      responses:
+        200:
+          description: 'Organisation collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Organisation'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          type: integer
+    post:
+      tags:
+        - Organisation
+      operationId: postOrganisationCollection
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Creates a Organisation resource.'
+      responses:
+        201:
+          description: 'Organisation resource created'
+          schema:
+            $ref: '#/definitions/Organisation'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: organisation
+          in: body
+          description: 'The new Organisation resource'
+          schema:
+            $ref: '#/definitions/Organisation'
+  '/organisations/{id}':
+    get:
+      tags:
+        - Organisation
+      operationId: getOrganisationItem
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves a Organisation resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: 'Organisation resource response'
+          schema:
+            $ref: '#/definitions/Organisation'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Organisation
+      operationId: deleteOrganisationItem
+      summary: 'Removes the Organisation resource.'
+      responses:
+        204:
+          description: 'Organisation resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+    put:
+      tags:
+        - Organisation
+      operationId: putOrganisationItem
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Replaces the Organisation resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+        -
+          name: organisation
+          in: body
+          description: 'The updated Organisation resource'
+          schema:
+            $ref: '#/definitions/Organisation'
+      responses:
+        200:
+          description: 'Organisation resource updated'
+          schema:
+            $ref: '#/definitions/Organisation'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+  '/organisations/{id}/events':
+    get:
+      tags:
+        - Event
+        - Organisation
+      operationId: api_organisations_events_get_subresource
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of Event resources.'
+      responses:
+        200:
+          description: 'Event collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Event'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+  '/organisations/{id}/members':
+    get:
+      tags:
+        - Member
+        - Organisation
+      operationId: api_organisations_members_get_subresource
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of Member resources.'
+      responses:
+        200:
+          description: 'Member collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Member'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+  '/organisations/{id}/orders':
+    get:
+      tags:
+        - Order
+        - Organisation
+      operationId: api_organisations_orders_get_subresource
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of Order resources.'
+      responses:
+        200:
+          description: 'Order collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Order'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+  '/organisations/{id}/products':
+    get:
+      tags:
+        - Product
+        - Organisation
+      operationId: api_organisations_products_get_subresource
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of Product resources.'
+      responses:
+        200:
+          description: 'Product collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+  /products:
+    get:
+      tags:
+        - Product
+      operationId: getProductCollection
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of Product resources.'
+      responses:
+        200:
+          description: 'Product collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Product'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          type: integer
+    post:
+      tags:
+        - Product
+      operationId: postProductCollection
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Creates a Product resource.'
+      responses:
+        201:
+          description: 'Product resource created'
+          schema:
+            $ref: '#/definitions/Product'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: product
+          in: body
+          description: 'The new Product resource'
+          schema:
+            $ref: '#/definitions/Product'
+  '/products/{id}':
+    get:
+      tags:
+        - Product
+      operationId: getProductItem
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves a Product resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: 'Product resource response'
+          schema:
+            $ref: '#/definitions/Product'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Product
+      operationId: deleteProductItem
+      summary: 'Removes the Product resource.'
+      responses:
+        204:
+          description: 'Product resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+    put:
+      tags:
+        - Product
+      operationId: putProductItem
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Replaces the Product resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+        -
+          name: product
+          in: body
+          description: 'The updated Product resource'
+          schema:
+            $ref: '#/definitions/Product'
+      responses:
+        200:
+          description: 'Product resource updated'
+          schema:
+            $ref: '#/definitions/Product'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+  /ticket_types:
+    get:
+      tags:
+        - TicketType
+      operationId: getTicketTypeCollection
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of TicketType resources.'
+      responses:
+        200:
+          description: 'TicketType collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/TicketType'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          type: integer
+    post:
+      tags:
+        - TicketType
+      operationId: postTicketTypeCollection
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Creates a TicketType resource.'
+      responses:
+        201:
+          description: 'TicketType resource created'
+          schema:
+            $ref: '#/definitions/TicketType'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: ticketType
+          in: body
+          description: 'The new TicketType resource'
+          schema:
+            $ref: '#/definitions/TicketType'
+  '/ticket_types/{id}':
+    get:
+      tags:
+        - TicketType
+      operationId: getTicketTypeItem
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves a TicketType resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: 'TicketType resource response'
+          schema:
+            $ref: '#/definitions/TicketType'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - TicketType
+      operationId: deleteTicketTypeItem
+      summary: 'Removes the TicketType resource.'
+      responses:
+        204:
+          description: 'TicketType resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+    put:
+      tags:
+        - TicketType
+      operationId: putTicketTypeItem
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Replaces the TicketType resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+        -
+          name: ticketType
+          in: body
+          description: 'The updated TicketType resource'
+          schema:
+            $ref: '#/definitions/TicketType'
+      responses:
+        200:
+          description: 'TicketType resource updated'
+          schema:
+            $ref: '#/definitions/TicketType'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+  /tickets:
+    get:
+      tags:
+        - Ticket
+      operationId: getTicketCollection
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of Ticket resources.'
+      responses:
+        200:
+          description: 'Ticket collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Ticket'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          type: integer
+    post:
+      tags:
+        - Ticket
+      operationId: postTicketCollection
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Creates a Ticket resource.'
+      responses:
+        201:
+          description: 'Ticket resource created'
+          schema:
+            $ref: '#/definitions/Ticket'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: ticket
+          in: body
+          description: 'The new Ticket resource'
+          schema:
+            $ref: '#/definitions/Ticket'
+  '/tickets/{id}':
+    get:
+      tags:
+        - Ticket
+      operationId: getTicketItem
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves a Ticket resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: 'Ticket resource response'
+          schema:
+            $ref: '#/definitions/Ticket'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Ticket
+      operationId: deleteTicketItem
+      summary: 'Removes the Ticket resource.'
+      responses:
+        204:
+          description: 'Ticket resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+    put:
+      tags:
+        - Ticket
+      operationId: putTicketItem
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Replaces the Ticket resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+        -
+          name: ticket
+          in: body
+          description: 'The updated Ticket resource'
+          schema:
+            $ref: '#/definitions/Ticket'
+      responses:
+        200:
+          description: 'Ticket resource updated'
+          schema:
+            $ref: '#/definitions/Ticket'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+  /users:
+    get:
+      tags:
+        - User
+      operationId: getUserCollection
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves the collection of User resources.'
+      responses:
+        200:
+          description: 'User collection response'
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User-user_user:read'
+      parameters:
+        -
+          name: page
+          in: query
+          required: false
+          description: 'The collection page number'
+          type: integer
+    post:
+      tags:
+        - User
+      operationId: postUserCollection
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Creates a User resource.'
+      responses:
+        201:
+          description: 'User resource created'
+          schema:
+            $ref: '#/definitions/User-user_user:read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: user
+          in: body
+          description: 'The new User resource'
+          schema:
+            $ref: '#/definitions/User-user_user:write'
+  '/users/{id}':
+    get:
+      tags:
+        - User
+      operationId: getUserItem
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Retrieves a User resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+      responses:
+        200:
+          description: 'User resource response'
+          schema:
+            $ref: '#/definitions/User-user_user:read'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - User
+      operationId: deleteUserItem
+      summary: 'Removes the User resource.'
+      responses:
+        204:
+          description: 'User resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+    put:
+      tags:
+        - User
+      operationId: putUserItem
+      consumes:
+        - application/ld+json
+        - application/json
+        - text/html
+      produces:
+        - application/ld+json
+        - application/json
+        - text/html
+      summary: 'Replaces the User resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          type: string
+        -
+          name: user
+          in: body
+          description: 'The updated User resource'
+          schema:
+            $ref: '#/definitions/User-user_user:write'
+      responses:
+        200:
+          description: 'User resource updated'
+          schema:
+            $ref: '#/definitions/User-user_user:read'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+securityDefinitions:
+  apiKey:
+    type: apiKey
+    in: header
+    description: 'Value for the Authorization header'
+    name: Authorization
+security:
+  -
+    apiKey: []
+definitions:
+  Character:
+    type: object
+    description: ''
+    required:
+      - name
+    properties:
+      name:
+        type: string
+        example: 'John Doe'
+        description: 'The name of this character.'
+      description:
+        type: string
+        example: 'John as en excelent fighter, but not much of an mage. That mainly becouse he can''t actually read doh'
+        description: 'The description of this character, intended for public use.'
+      background:
+        type: string
+        example: !!binary Sm9obiBjYW6SdCByZWFkIGFuZCB3b24ndCBldmVyIGxlYXJuIHRvIHJlYWQuIFRoYXSScyBiZWNhdXNlIHdoZW4gSm9obiB3YXMgeW91bmcgaGlzIHBhcmVudCBnb3Qga2lsbGVkIGJ5IHRoZSBsb2NhbCBkdWtlIGZvciBlcnJvcnMgaW4gdGhlaXIgdGF4IHJlcG9ydHMuIEpvaG4gbm93IHNlZXMgYWwgZm9ybXMgYW5kIGxldHRlcnMgYXMgYSBwb3RlbnRpYWwgZGVhdGggdHJhcC4g
+      avatar:
+        description: 'An image depicting this character'
+        type: string
+      member:
+        description: 'The member that owns this character, should be set to null for npc''s.'
+        type: string
+      id:
+        readOnly: true
+        description: 'The entity Id'
+        type: integer
+      events:
+        readOnly: true
+        description: 'The events that this character has participated in'
+        type: array
+        items:
+          type: string
+  Event:
+    type: object
+    description: 'This is a dummy entity. Remove it!'
+    required:
+      - organisation
+      - name
+      - description
+      - publicationDate
+      - startDate
+      - endDate
+    properties:
+      organisation:
+        description: 'The Organisation that hosts this event.'
+        type: string
+      name:
+        description: 'The name of this event'
+        type: string
+      description:
+        description: 'The description fo this event.'
+        type: string
+      publicationDate:
+        description: 'The date of publication of this review.'
+        type: string
+        format: date-time
+      startDate:
+        description: 'The moment this events start.'
+        type: string
+        format: date-time
+      endDate:
+        description: 'The moment that this event ends.'
+        type: string
+        format: date-time
+      ticketTypes:
+        description: 'Available reviews for this book.'
+        type: array
+        items:
+          type: string
+      id:
+        readOnly: true
+        description: 'The entity Id'
+        type: integer
+  File:
+    type: object
+    description: ''
+    required:
+      - name
+      - size
+      - extention
+      - mimeType
+      - url
+    properties:
+      name:
+        description: 'The original name of this file.'
+        type: string
+      size:
+        type: integer
+        example: '1024'
+        description: 'The extention of this file in bytes, where 1024 reprecent 1KB and 1048576 1MB'
+      extention:
+        type: string
+        example: png
+        description: 'The extention of this file.'
+      mimeType:
+        type: string
+        example: image/png
+        description: 'The type of the file acording to https://www.iana.org/assignments/media-types/media-types.xhtml.'
+      url:
+        description: 'The location of this file.'
+        type: string
+      id:
+        readOnly: true
+        description: 'The entity Id'
+        type: integer
+  Member:
+    type: object
+    description: 'This is a dummy entity. Remove it!'
+    required:
+      - name
+      - description
+      - author
+      - publicationDate
+      - organisation
+    properties:
+      name:
+        description: 'The title of this Event.'
+        type: string
+      description:
+        description: 'the body of the review.'
+        type: string
+      author:
+        description: 'The author of the review.'
+        type: string
+      publicationDate:
+        description: 'The date of publication of this review.'
+        type: string
+        format: date-time
+      organisation:
+        description: 'The Organsiation that this memmber belongs to.'
+        type: string
+      characters:
+        description: 'Available reviews for this book.'
+        type: array
+        items:
+          type: string
+      tickets:
+        description: 'Available reviews for this book.'
+        type: array
+        items:
+          type: string
+      orders:
+        description: 'Available reviews for this book.'
+        type: array
+        items:
+          type: string
+      id:
+        readOnly: true
+        description: 'The entity Id'
+        type: integer
+  Order:
+    type: object
+    description: 'This is a dummy entity. Remove it!'
+    required:
+      - organisation
+      - member
+      - invoice
+    properties:
+      organisation:
+        description: 'The Organisation that this order was placed with.'
+        type: string
+      member:
+        description: 'The organisation member that placed this order'
+        type: string
+      invoice:
+        description: 'The invoice that was used to bil this order.'
+        type: string
+      exclAmount:
+        type: integer
+        example: '100'
+        description: 'The non decimal value for the total of this order (excluding tax)'
+      taxAmount:
+        type: integer
+        example: '100'
+        description: 'The non decimal value for the total tax of this order'
+      inclAmount:
+        type: integer
+        example: '100'
+        description: 'The non decimal value for the total of this order (including tax)'
+      currency:
+        type: string
+        example: EUR
+        description: 'The currency of this order'
+      orderLines:
+        description: 'The products and goods contained in this orders.'
+        type: array
+        items:
+          type: string
+      id:
+        readOnly: true
+        description: 'The entity Id'
+        type: integer
+  Organisation:
+    type: object
+    description: 'This is a dummy entity. Remove it!'
+    required:
+      - title
+      - description
+    properties:
+      title:
+        description: 'The name of thi organisation.'
+        type: string
+      description:
+        description: 'The description of this book.'
+        type: string
+      logo:
+        description: 'An logo reprecenting this organisation'
+        type: string
+      type:
+        description: 'The type of this organisatin.'
+        type: string
+      events:
+        description: 'The events hosted by this organisation.'
+        type: array
+        items:
+          type: string
+      members:
+        description: 'The members that are part of this organisation.'
+        type: array
+        items:
+          type: string
+      products:
+        description: 'The products sold by this organisation.'
+        type: array
+        items:
+          type: string
+      orders:
+        description: 'Orders sold by this organisation.'
+        type: array
+        items:
+          type: string
+      id:
+        readOnly: true
+        description: 'The entity Id'
+        type: integer
+  Product:
+    type: object
+    description: 'This is a dummy entity. Remove it!'
+    required:
+      - organisation
+    properties:
+      organisation:
+        description: 'The Organisation that sells this product.'
+        type: string
+      exclAmount:
+        description: 'The non decimal value for the price of this product (excluding tax)'
+        type: integer
+      taxAmount:
+        description: 'The non decimal value for the tax o this product'
+        type: integer
+      inclAmount:
+        description: 'The non decimal value for the price of this product (including tax)'
+        type: integer
+      currency:
+        description: 'The currency of this order'
+        type: string
+      orderLines:
+        description: 'The order lines containing this product.'
+        type: array
+        items:
+          type: string
+      id:
+        readOnly: true
+        description: 'The entity Id'
+        type: integer
+  Ticket:
+    type: object
+    description: 'This is a dummy entity. Remove it!'
+    required:
+      - ticketType
+      - member
+      - character
+    properties:
+      ticketType:
+        description: 'The Organisation that sells this ticket.'
+        type: string
+      member:
+        description: 'The organisation member that owns this ticket'
+        type: string
+      character:
+        description: 'The character that will be played by member using this ticket'
+        type: string
+      id:
+        readOnly: true
+        description: 'The entity Id'
+        type: integer
+  TicketType:
+    type: object
+    description: 'This is a dummy entity. Remove it!'
+    required:
+      - name
+      - description
+      - event
+    properties:
+      name:
+        type: string
+        example: 'Player Ticket. '
+        description: 'The name of this ticket type.'
+      description:
+        type: string
+        example: 'This ticket is mend for player who want to join us on this event en play a character. '
+        description: 'The description of this ticket type.'
+      event:
+        description: 'The Event that this ticket types is for'
+        type: string
+      tickets:
+        type: array
+        example: !!binary Sm9obiBjYW6SdCByZWFkIGFuZCB3b24ndCBldmVyIGxlYXJuIHRvIHJlYWQuIFRoYXSScyBiZWNhdXNlIHdoZW4gSm9obiB3YXMgeW91bmcgaGlzIHBhcmVudCBnb3Qga2lsbGVkIGJ5IHRoZSBsb2NhbCBkdWtlIGZvciBlcnJvcnMgaW4gdGhlaXIgdGF4IHJlcG9ydHMuIEpvaG4gbm93IHNlZXMgYWwgZm9ybXMgYW5kIGxldHRlcnMgYXMgYSBwb3RlbnRpYWwgZGVhdGggdHJhcC4g
+        items:
+          type: string
+      id:
+        readOnly: true
+        description: 'The entity Id'
+        type: integer
+  'User-user_user:read':
+    type: object
+    description: ''
+    properties:
+      email:
+        description: 'var String Email adress of this user'
+        type: string
+      fullname:
+        type: string
+      username:
+        type: string
+  'User-user_user:write':
+    type: object
+    description: ''
+    properties:
+      email:
+        description: 'var String Email adress of this user'
+        type: string
+      fullname:
+        type: string
+      plainPassword: {  }
+      username:
+        type: string
+servers:
+  -
+    url: //larping.conduction.nl/api
+    description: 'Default server'
+  -
+    url: //larping.conduction.nl/sandbox
+    description: 'Sandbox server'
+externalDocs:
+  description: 'Find out more in depth information on the working of the larping code base.'
+  url: 'https://github.com/ConductionNL/larping-vortex'

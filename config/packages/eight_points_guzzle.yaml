@@ -1,0 +1,70 @@
+eight_points_guzzle:
+    # (de)activate logging/profiler; default: %kernel.debug%
+    logging: true
+
+    # configure when a response is considered to be slow (in ms); default 0 (disabled)
+    slow_response_time: 1000
+
+    clients:
+        ztc_api:
+            class: \App\Client\ZTCClient
+            base_url: '%ztc_base_url%'
+            options:            
+                headers:
+                    Authorization: '%ztc_authorization%'
+                    Content-Type: "application/json"
+                    Accept: "application/json"
+                    Accept-Crs: "EPSG:4326"
+                    Content-Crs: "EPSG:4326" 
+        zrc_api:
+            class: \App\Client\ZRCClient
+            base_url: '%zrc_base_url%'
+            options:            
+                headers:
+                    Authorization: '%zrc_authorization%'
+                    Content-Type: "application/json"
+                    Accept: "application/json"
+                    Accept-Crs: "EPSG:4326"
+                    Content-Crs: "EPSG:4326" 
+        drc_api:
+            class: \App\Client\DRCClient
+            base_url: '%drc_base_url%'
+            options:            
+                headers:
+                    Authorization: '%drc_authorization%'
+                    Content-Type: "application/json"
+                    Accept: "application/json"
+                    Accept-Crs: "EPSG:4326"
+                    Content-Crs: "EPSG:4326" 
+        bag_api:
+            class: \App\Client\BAGClient
+            base_url: '%bag_base_url%'
+            options:            
+                headers:
+                    X-Api-Key: '%bag_authorization%'
+                    Content-Type: "application/json"
+                    Accept: "application/hal+json"
+        brp_api:
+            class: \App\Client\BRPClient
+            base_url: '%brp_base_url%'
+            options:            
+                headers:
+                    X-Api-Key: '%brp_authorization%'
+                    Content-Type: "application/json"
+                    Accept: "application/hal+json"
+
+## Then we are going to allias these services for easy use
+services:
+   ztc.client:
+       alias: eight_points_guzzle.client.ztc_api      
+   zrc.client:
+       alias: eight_points_guzzle.client.zrc_api        
+   drc.client:
+       alias: eight_points_guzzle.client.drc_api        
+   bag.client:
+       alias: eight_points_guzzle.client.bag_api                      
+                    
+                    
+                    
+                    
+                    

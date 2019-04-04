@@ -1,0 +1,78 @@
+parameters:
+    # Adds a fallback DATABASE_URL if the env var is not set.
+    # This allows you to run cache:warmup even if your
+    # environment variables are not available yet.
+    # You should not need to change this value.
+    env(DATABASE_URL): ''
+    table_prefix: '%env(DOCTRINE_DATABASE_PREFIX)%'
+doctrine:
+    dbal:
+        # Production Mysql database
+        driver: 'pdo_mysql'
+        dbname: '%env(MYSQL_DATABASE)%'
+        host: '%env(MYSQL_HOST)%'
+        port: '%env(MYSQL_PORT)%'
+        user: '%env(MYSQL_USER)%'
+        password: '%env(MYSQL_PASSWORD)%'
+        server_version: '%env(MYSQL_VERSION)%'
+        charset: utf8mb4
+        default_table_options:
+            charset: utf8mb4
+            collate: utf8mb4_unicode_ci
+        # Production Mysql database
+        #driver: 'pdo_mysql'
+        #dbname: 'zaakonline'
+        #host: '188.166.96.78'
+        #port: '3306'
+        #user: 'zaakonline'
+        #password: 'a6dc2d217e75726c2b1d5a5aa90ce80d'
+        #server_version: '5.7'
+        #charset: utf8mb4
+        #default_table_options:
+        #    charset: utf8mb4
+        #    collate: utf8mb4_unicode_ci
+        
+        # old pdo database
+        #driver: 'pdo_pgsql'
+        # host: 'zaakonline-db-postgresql-ams1-58453-do-user-4716261-0.db.ondigitalocean.com'
+        # port: '25060'
+        #dbname: 'defaultdb'
+        #user: 'doadmin'
+        # password: 'keh9aiqsr7lrfwfc'
+        #sslmode: 'require'
+        #server_version: '10'
+        # url: '%env(resolve:DATABASE_URL)%'
+        types:
+            # Ramsey\Uuid
+            uuid:  Ramsey\Uuid\Doctrine\UuidType
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore
+        auto_mapping: true
+        resolve_target_entities:
+            Symfony\Component\Security\Core\User\UserInterface: \App\Entity\User
+        mappings:
+            gedmo_loggable:
+                type: annotation
+                prefix: Gedmo\Loggable\Entity
+                dir: "%kernel.root_dir%/../src/Entity/"
+                alias: GedmoLoggable
+                is_bundle: false
+            gedmo_translatable:
+                type: annotation
+                prefix: Gedmo\Translatable\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translatable/Entity"
+                alias: GedmoTranslatable # (optional) it will default to the name set for the mapping
+                is_bundle: false
+            gedmo_translator:
+                type: annotation
+                prefix: Gedmo\Translator\Entity
+                dir: "%kernel.root_dir%/../vendor/gedmo/doctrine-extensions/lib/Gedmo/Translator/Entity"
+                alias: GedmoTranslator # (optional) it will default to the name set for the mapping
+                is_bundle: false
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App

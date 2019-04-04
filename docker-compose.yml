@@ -1,0 +1,62 @@
+##
+# Conduction style docker compose file
+#
+# We want to spin our single code base into serval containers, there are a couple of reasons why we want to do that:
+# - We want a local MYSQL database for testing purposes without all of the hustle (and dependency dangers) of setting up MYSQL locally
+# - We want a PHP only image, this optimizes our php for calculations
+# - We want a server only  NGINX image, that takes the hustle of server operations away from the php image. And will also serve static content without bothering the PHP image 
+# - This way when we deploy our component to a Kubernetes cluster we can differentiate our pods between serving content and calculation. 
+#   For example in a calculation heavy application we can have either more php pods, or higher class nodes serving our pods
+#
+##
+
+version: '3.4'
+
+services:
+  # The database
+  db:
+    # In production, you may want to use a managed database service
+    image: mysql:${MYSQL_VERSION} 
+    environment:
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER} 
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+      - mysql-data:/var/lib/mysql:rw
+    ports:
+      - "3306:3306"
+      
+  # The PHP container
+  trouwen_php:
+    image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-php:latest
+    build:
+      context: ./ 
+      dockerfile: docker/php/Dockerfile
+      cache_from:
+        - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}_php
+        - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}_api  
+    depends_on:
+      - db
+    volumes:
+      - ./:/srv/api:rw,cached
+      
+  # The NGINX container
+  trouwen_api:
+    image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-nginx:latest
+    build: 
+      context: ./ 
+      dockerfile: docker/nginx/Dockerfile
+      cache_from:
+        - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}_php
+        - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}_api  
+    depends_on:
+      - php
+    volumes:
+      - ./public:/srv/api/public:ro
+    ports:
+      - "80:80"  
+
+## We use volumes to achieve db (semi) persistancy for developtment purposes, but do not use this in production! volumes are by nature not persistent       
+volumes:
+  mysql-data: {}
