@@ -87,6 +87,7 @@ class User extends BaseUser implements StringableInterface
 	 */
 	public $bronOrganisatie;
 	
+	
 	/**
 	 * @return string
 	 */

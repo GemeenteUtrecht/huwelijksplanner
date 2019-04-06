@@ -25,15 +25,21 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 	until bin/console doctrine:query:sql "SELECT 1" > /dev/null 2>&1; do
 		sleep 1
 	done
-
-	bin/console cache:clear --no-warmup 
-	#if [ "$APP_ENV" != 'prod' ]; then
+	
+	if [ "$APP_ENV" != 'prod' ]; then
+		# Let clear the cash
+		bin/console cache:clear --no-warmup 
 		bin/console doctrine:cache:clear-metadata 
 		bin/console doctrine:cache:clear-query
 		bin/console doctrine:cache:clear-result
+		# Lets make sure the database is in order
 		bin/console doctrine:schema:update --force --no-interaction
-		bin/console api:swagger:export --output=/srv/api/public/schema/openapi.yaml --yaml --spec-version=3
-	#fi
+		# Lets reset the database and load example data
+		bin/console doctrine:fixtures:load --no-interaction 
+	fi
+	
+	# Let update the docs to show the latest chages
+	bin/console api:swagger:export --output=/srv/api/public/schema/openapi.yaml --yaml --spec-version=3
 fi
 
 exec docker-php-entrypoint "$@"

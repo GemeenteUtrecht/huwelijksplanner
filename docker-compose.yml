@@ -23,13 +23,13 @@ services:
       - MYSQL_USER=${MYSQL_USER} 
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     volumes:
-      - mysql-data:/var/lib/mysql:rw
+      - trouwen-mysql-data:/var/lib/mysql:rw
     ports:
       - "3306:3306"
       
   # The PHP container
-  trouwen_php:
-    image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-php:latest
+  trouwen_component:
+    image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-component:latest
     build:
       context: ./ 
       dockerfile: docker/php/Dockerfile
@@ -51,7 +51,7 @@ services:
         - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}_php
         - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}_api  
     depends_on:
-      - php
+      - trouwen_component
     volumes:
       - ./public:/srv/api/public:ro
     ports:
@@ -59,4 +59,4 @@ services:
 
 ## We use volumes to achieve db (semi) persistancy for developtment purposes, but do not use this in production! volumes are by nature not persistent       
 volumes:
-  mysql-data: {}
+  trouwen-mysql-data: {}

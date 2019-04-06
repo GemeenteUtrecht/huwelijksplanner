@@ -14,7 +14,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
 /**
  * Organisatie
  * 
- * Een orginisatie of deeld daarvan dat deelneemt aan Common Grounds, organisatie objecten worden gebruikt voor het opslaan van configuratie instellingen.
+ * Een orginisatie of deeld daarvan dat deelneemt aan Commen Grounds, organisatie objecten worden gebruikt voor het opslaan van configuratie instellingen
  * 
  * @category   	Entity
  *
@@ -23,7 +23,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  * @version    	1.0
  *
  * @link   		http//:www.conduction.nl
- * @package		Common Ground
+ * @package		Commen Ground
  * 
  *  @ApiResource( 
  *  collectionOperations={
@@ -111,7 +111,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *            	},
  *             	"responses" = {
  *         			"202" = {
- *         				"description" = "Teruggedraaid naar eerdere versie"
+ *         				"description" = "Terug gedraaid naar eerdere versie"
  *         			},	
  *         			"400" = {
  *         				"description" = "Ongeldige aanvraag"
@@ -197,8 +197,8 @@ class Organisatie implements StringableInterface
 	 *             "type"="string",
 	 *             "example"="12345678",
 	 *             "required"="true",
-	 *             "maxLength"=8,
-	 *             "minLength"=9,
+	 *             "minLength"=8,
+	 *             "maxLength"=9,
 	 *             "description"="Het KVK nummer van deze organisatie"
 	 *         }
 	 *     }
@@ -213,14 +213,14 @@ class Organisatie implements StringableInterface
 	 * @var string
 	 * @ORM\Column(
 	 *     type     = "string",
-	 *     length   = 14
+	 *     length   = 18
 	 * )
 	 * @Groups({"read", "write"})
 	 * @Assert\Length(
 	 *      min = 14,
-	 *      max = 14,
+	 *      max = 18,
 	 *      minMessage = "Het BTW nummer moet ten minste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "Het BTW nummer kan niet langer dan {{ limit }} karakters zijn"
+	 *      maxMessage = "Het BTW nummer  kan niet langer dan {{ limit }} karakters zijn"
 	 * )
 	 * @ApiProperty(
 	 *     attributes={
@@ -229,8 +229,8 @@ class Organisatie implements StringableInterface
 	 *             "type"="string",
 	 *             "example"="NL123456789B01",
 	 *             "required"="true",
-	 *             "maxLength"=14,
 	 *             "minLength"=14,
+	 *             "maxLength"=18,
 	 *             "description"="Het BTW nummer van deze organisatie https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/btw_nummers_controleren/uw_btw_nummer"
 	 *         }
 	 *     }
@@ -261,8 +261,8 @@ class Organisatie implements StringableInterface
 	 *             "type"="string",
 	 *             "example"="123456789",
 	 *             "required"="true",
-	 *             "maxLength"=14,
 	 *             "minLength"=5,
+	 *             "maxLength"=14,
 	 *             "description"="Het EORI (Europese Douane NR) van deze organisatie, zie ook https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/douane_voor_bedrijven/naslagwerken_en_overige_informatie/eori_nummer/"
 	 *         }
 	 *     }
@@ -283,7 +283,7 @@ class Organisatie implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 5,
 	 *      max = 255,
-	 *      minMessage = "De naam moet tenminste {{ limit }} karakters lang zijn",
+	 *      minMessage = "De naam moet ten minste {{ limit }} karakters lang zijn",
 	 *      maxMessage = "De naam kan niet langer dan {{ limit }} karakters zijn"
 	 * )
 	 * @Groups({"read", "write"})
@@ -332,7 +332,7 @@ class Organisatie implements StringableInterface
 	
 	
 	/**
-	 * Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>
+	 * Het email addres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>
 	 *
 	 * @var string
 	 *
@@ -345,11 +345,11 @@ class Organisatie implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 8,
 	 *      max = 255,
-	 *      minMessage = "Het emailadres moet minimaal  {{ limit }} tekens lang zijn",
-	 *      maxMessage = "Het emailadres mag maximaal {{ limit }} tekens lang zijn"
+	 *      minMessage = "Het email addres moet minimaal  {{ limit }} tekens lang zijn",
+	 *      maxMessage = "Het email addresm mag maximaal {{ limit }} tekens lang zijn"
 	 * )
 	 * @Assert\Email(
-     *     message = "Het email addres '{{ value }}' is geen geldig emailadres.",
+     *     message = "Het email addres '{{ value }}' is geen geldig email addres.",
      *     checkMX = true
      * )
 	 * @Groups({"read", "write"})
@@ -368,7 +368,7 @@ class Organisatie implements StringableInterface
 	public $emailadres;
 	
 	/**
-	 * Het telefoonnummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>
+	 * Het telefoon nummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>
 	 *
 	 * @var string
 	 *
@@ -400,49 +400,43 @@ class Organisatie implements StringableInterface
 	public $telefoonnummer;
 	
 	/**
-	 * De huwelijken verbonden aan deze organisatie
+	 * HUwelijken die bij deze organisatie horen
 	 *
 	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk[]|null
 	 *
 	 * @ORM\OneToMany(
 	 * 		targetEntity="\App\Entity\Huwelijk",
-	 * 		mappedBy="bronOrganisatie", 
-	 * 		fetch="EXTRA_LAZY"
-	 * )
+	 * 		mappedBy="bronOrganisatie")
 	 *
 	 */
 	public $huwelijken;
 	
 	/**
-	 * De personen verbonden aan deze organisatie
-	 *
-	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk[]|null
-	 *
-	 * @ORM\OneToMany(
-	 * 		targetEntity="\App\Entity\Persoon",
-	 * 		mappedBy="bronOrganisatie", 
-	 * 		fetch="EXTRA_LAZY"
-	 * )
-	 *
-	 */
-	public $personen;
-	
-	/**
-	 * De soorten huwelijken verbonden aan deze organisatie
+	 * Soorten huwelijken die bij deze organisatie horen
 	 *
 	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Soort[]|null
 	 *
 	 * @ORM\OneToMany(
 	 * 		targetEntity="\App\Entity\Soort",
-	 * 		mappedBy="bronOrganisatie", 
-	 * 		fetch="EXTRA_LAZY"
-	 * )
+	 * 		mappedBy="bronOrganisatie")
 	 *
 	 */
-	public $soorten;
+	public $soortenHuwelijken;
 	
 	/**
-	 * De bij deze organisatie horende gebruikers
+	 * Personen die bij deze organisatie horen
+	 *
+	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Persoon[]|null
+	 *
+	 * @ORM\OneToMany(
+	 * 		targetEntity="\App\Entity\Persoon",
+	 * 		mappedBy="bronOrganisatie")
+	 *
+	 */
+	public $personen;
+	
+	/**
+	 * Gebruikers die bij deze organisatie horen
 	 *
 	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\User[]|null
 	 *
@@ -454,7 +448,7 @@ class Organisatie implements StringableInterface
 	public $users;
 	
 	/**
-	 * De instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen.
+	 * HDe instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen
 	 *
 	 * @var array
 	 * @ORM\Column(
@@ -483,7 +477,7 @@ class Organisatie implements StringableInterface
 	}
 	
 	/**
-	 * Vanuit rendering perspectief (voor bijvoorbeeld logging of berichten) is het belangrijk dat we een entiteit altijd naar string kunnen omzetten.
+	 * Vanuit rendering perspectief (voor bijvoorbeeld loging of berichten) is het belangrijk dat we een entiteit altijd naar string kunnen omzetten
 	 */
 	public function __toString()
 	{
