@@ -181,7 +181,7 @@ class Soort implements StringableInterface
 	 * Het huwelijk waartoe deze partner behoort
 	 *
 	 * @var \App\Entity\Organisatie
-	 * @ORM\ManyToOne(targetEntity="\App\Entity\Organisatie", cascade={"persist", "remove"}, inversedBy="soorten")
+	 * @ORM\ManyToOne(targetEntity="\App\Entity\Organisatie", cascade={"persist", "remove"}, inversedBy="soortenHuwelijken")
 	 * @ORM\JoinColumn(referencedColumnName="id")
 	 *
 	 */

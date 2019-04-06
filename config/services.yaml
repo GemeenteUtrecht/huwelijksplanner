@@ -12,21 +12,24 @@ parameters:
             description: Sandbox server
         info:
             description: |
-                Welkom, dit is de documentatie van de trouwen API. Deze API stelt je in staat om digitaal met gemeentes in Nederland te communiceren op alle aspecten van het huwelijk of partnerschap.
-
+                Welkom inovator!, 
+                Fijn dat je de tijd en moeite hebt genomen om je te verdiepen in dit component 
+                
                 # Introduction                
                 De Trouwen component is ontwikkeld voor de gemeente Utrecht en heeft als doel het aansluiten [NLX](https://nlx.io/), volgens het [Common Ground](https://vng.nl/samen-organiseren/common-ground) principe, samen spelen, samen delen.
-                 
-                # Code, Container en data modelen                
-                U kunt de code voor dit component (en aanvullende documentatie) op [github](https://nlx.io/) downloaden
-                U kunt een docker container voor dit component op [docker hub](https://nlx.io/) downloaden
-                U kunt het datamodel voor dit component [hier](/schema/datamodel.pdf) downloaden
-                
-                # OpenAPI Specification
-                Deze API is gedocumenteerd in het **OpenAPI format** en wordt onderhouden door [Conduction.nl](http://conduction.nl). 
+              
+                # Common ground en open source
+                Om het voor andere partijen zo makkelijk mogenlijk te maken dit component bieden we zo veel mogenlijk informatie openbaar aan.  
+                - [datamodel als pdf](/schema/datamodel.pdf)
+                - [datamodel als mwb](/schema/datamodel.mwb)
+                - [codebase op github](https://github.com/GemeenteUtrecht/trouwen)
+                - [codebase als zip](https://github.com/GemeenteUtrecht/trouwen/archive/conduction.zip)
+                - [docker container](https://cloud.docker.com/u/huwelijksplanner/repository/docker/huwelijksplanner/trouwen-php)
+                - [online demo](http://trouwen.demo.zaakonline.nl/)
 
-                # Cross-Origin Resource Sharing
-                De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgens de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin" dit maakt ze volledig publiekelijk en toegankelijk voor iedereen. Dat geldt voor elke code op elke site.
+                # OpenAPI Specification, Cross-Origin Resource Sharing en linked Data
+                Deze API is gedocumenteerd in het **OpenAPI format** 
+                De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgen de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin" dit maakt ze volledig publiekelijk en toegankelijk voor iedereen. Dat geld voor elke code op elke site.
 
                 # Authentication
 
@@ -55,8 +58,8 @@ parameters:
             url: 'https://github.com/ConductionNL/zaakonline'
         tags:
               # The general endpoints  
-            - name: Agenda
-              description: "De agenda wordt gebruikt om een moment in de tijd of een tijdspanne weer te geven"
+            - name: Huwelijk
+              description: "Representeerd een huwelijk"
             - name: Soort
               description: "Huwelijks soort, bepaald beschikbare locaties, ambtenaren en aditionele producten "
             - name: Persoon

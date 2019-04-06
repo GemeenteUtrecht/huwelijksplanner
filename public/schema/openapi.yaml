@@ -1,21 +1,24 @@
 openapi: 3.0.2
 info:
   description: |
-    Welkom, dit is de documentatie van de trouwen API. Deze API stelt je in staat om digitaal met gemeentes in Nederland te communiceren op alle aspecten van het huwelijk of partnerschap.
+    Welkom inovator!, 
+    Fijn dat je de tijd en moeite hebt genomen om je te verdiepen in dit component 
     
     # Introduction                
     De Trouwen component is ontwikkeld voor de gemeente Utrecht en heeft als doel het aansluiten [NLX](https://nlx.io/), volgens het [Common Ground](https://vng.nl/samen-organiseren/common-ground) principe, samen spelen, samen delen.
-     
-    # Code, Container en data modelen                
-    U kunt de code voor dit component (en aanvullende documentatie) op [github](https://nlx.io/) downloaden
-    U kunt een docker container voor dit component op [docker hub](https://nlx.io/) downloaden
-    U kunt het datamodel voor dit component [hier](/schema/datamodel.pdf) downloaden
     
-    # OpenAPI Specification
-    Deze API is gedocumenteerd in het **OpenAPI format** en wordt onderhouden door [Conduction.nl](http://conduction.nl). 
+    # Common ground en open source
+    Om het voor andere partijen zo makkelijk mogenlijk te maken dit component bieden we zo veel mogenlijk informatie openbaar aan.  
+    - [datamodel als pdf](/schema/datamodel.pdf)
+    - [datamodel als mwb](/schema/datamodel.mwb)
+    - [codebase op github](https://github.com/GemeenteUtrecht/trouwen)
+    - [codebase als zip](https://github.com/GemeenteUtrecht/trouwen/archive/conduction.zip)
+    - [docker container](https://cloud.docker.com/u/huwelijksplanner/repository/docker/huwelijksplanner/trouwen-php)
+    - [online demo](http://trouwen.demo.zaakonline.nl/)
     
-    # Cross-Origin Resource Sharing
-    De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgens de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin" dit maakt ze volledig publiekelijk en toegankelijk voor iedereen. Dat geldt voor elke code op elke site.
+    # OpenAPI Specification, Cross-Origin Resource Sharing en linked Data
+    Deze API is gedocumenteerd in het **OpenAPI format** 
+    De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgen de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin" dit maakt ze volledig publiekelijk en toegankelijk voor iedereen. Dat geld voor elke code op elke site.
     
     # Authentication
     
@@ -1874,7 +1877,7 @@ paths:
         - application/json
       responses:
         202:
-          description: 'Teruggedraaid naar eerdere versie'
+          description: 'Terug gedraaid naar eerdere versie'
         400:
           description: 'Ongeldige aanvraag'
         404:
@@ -3230,24 +3233,24 @@ components:
           type: string
           example: '12345678'
           required: 'true'
-          maxLength: 8
-          minLength: 9
+          minLength: 8
+          maxLength: 9
           description: 'Het KVK nummer van deze organisatie'
         btw:
           title: btw
           type: string
           example: NL123456789B01
           required: 'true'
-          maxLength: 14
           minLength: 14
+          maxLength: 18
           description: 'Het BTW nummer van deze organisatie https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/btw_nummers_controleren/uw_btw_nummer, het btw nummer moet het RSIN nummer bevatten.'
         eori:
           title: eori
           type: string
           example: '123456789'
           required: 'true'
-          maxLength: 14
           minLength: 5
+          maxLength: 14
           description: 'Het EORI (Europese Douane NR) van deze organisatie, zie ook https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/douane_voor_bedrijven/naslagwerken_en_overige_informatie/eori_nummer/'
         naam:
           type: string
@@ -3266,30 +3269,30 @@ components:
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het email addres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         telefoonnummer:
           type: string
           maxLength: 255
           minLength: 10
           example: +31(0)6-12345678
-          description: 'Het telefoonnummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+          description: 'Het telefoon nummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
         huwelijken:
-          description: 'De huwelijken verbonden aan deze organisatie'
+          description: 'HUwelijken die bij deze organisatie horen'
+          type: array
+          items:
+            type: string
+        soortenHuwelijken:
+          description: 'Soorten huwelijken die bij deze organisatie horen'
           type: array
           items:
             type: string
         personen:
-          description: 'De personen verbonden aan deze organisatie'
-          type: array
-          items:
-            type: string
-        soorten:
-          description: 'De soorten huwelijken verbonden aan deze organisatie'
+          description: 'Personen die bij deze organisatie horen'
           type: array
           items:
             type: string
         users:
-          description: 'De bij deze organisatie horende gebruikers'
+          description: 'Gebruikers die bij deze organisatie horen'
           type: array
           items:
             type: string
@@ -3297,7 +3300,7 @@ components:
           title: Instellingen
           type: array
           example: '[]'
-          description: 'De instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen.'
+          description: 'HDe instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen'
           items:
             type: string
       required:
@@ -3323,24 +3326,24 @@ components:
           type: string
           example: '12345678'
           required: 'true'
-          maxLength: 8
-          minLength: 9
+          minLength: 8
+          maxLength: 9
           description: 'Het KVK nummer van deze organisatie'
         btw:
           title: btw
           type: string
           example: NL123456789B01
           required: 'true'
-          maxLength: 14
           minLength: 14
+          maxLength: 18
           description: 'Het BTW nummer van deze organisatie https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/btw_nummers_controleren/uw_btw_nummer, het btw nummer moet het RSIN nummer bevatten.'
         eori:
           title: eori
           type: string
           example: '123456789'
           required: 'true'
-          maxLength: 14
           minLength: 5
+          maxLength: 14
           description: 'Het EORI (Europese Douane NR) van deze organisatie, zie ook https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/douane_voor_bedrijven/naslagwerken_en_overige_informatie/eori_nummer/'
         naam:
           type: string
@@ -3359,18 +3362,18 @@ components:
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het email addres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         telefoonnummer:
           type: string
           maxLength: 255
           minLength: 10
           example: +31(0)6-12345678
-          description: 'Het telefoonnummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+          description: 'Het telefoon nummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
         instellingen:
           title: Instellingen
           type: array
           example: '[]'
-          description: 'De instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen.'
+          description: 'HDe instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen'
           items:
             type: string
       required:
@@ -3396,24 +3399,24 @@ components:
           type: string
           example: '12345678'
           required: 'true'
-          maxLength: 8
-          minLength: 9
+          minLength: 8
+          maxLength: 9
           description: 'Het KVK nummer van deze organisatie'
         btw:
           title: btw
           type: string
           example: NL123456789B01
           required: 'true'
-          maxLength: 14
           minLength: 14
+          maxLength: 18
           description: 'Het BTW nummer van deze organisatie https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/btw_nummers_controleren/uw_btw_nummer, het btw nummer moet het RSIN nummer bevatten.'
         eori:
           title: eori
           type: string
           example: '123456789'
           required: 'true'
-          maxLength: 14
           minLength: 5
+          maxLength: 14
           description: 'Het EORI (Europese Douane NR) van deze organisatie, zie ook https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/douane_voor_bedrijven/naslagwerken_en_overige_informatie/eori_nummer/'
         naam:
           type: string
@@ -3432,18 +3435,18 @@ components:
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het email addres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         telefoonnummer:
           type: string
           maxLength: 255
           minLength: 10
           example: +31(0)6-12345678
-          description: 'Het telefoonnummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+          description: 'Het telefoon nummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
         instellingen:
           title: Instellingen
           type: array
           example: '[]'
-          description: 'De instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen.'
+          description: 'HDe instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen'
           items:
             type: string
       required:
@@ -3869,8 +3872,8 @@ externalDocs:
   url: 'https://github.com/ConductionNL/zaakonline'
 tags:
   -
-    name: Agenda
-    description: 'De agenda wordt gebruikt om een moment in de tijd of een tijdspanne weer te geven'
+    name: Huwelijk
+    description: 'Representeerd een huwelijk'
   -
     name: Soort
     description: 'Huwelijks soort, bepaald beschikbare locaties, ambtenaren en aditionele producten '
