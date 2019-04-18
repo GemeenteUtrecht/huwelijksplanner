@@ -28,7 +28,7 @@ services:
       - "3306:3306"
       
   # The PHP container
-  trouwen_component:
+  trouwen-component:
     image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-component:latest
     build:
       context: ./ 
@@ -42,7 +42,7 @@ services:
       - ./:/srv/api:rw,cached
       
   # The NGINX container
-  trouwen_api:
+  trouwen-api:
     image: ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}-nginx:latest
     build: 
       context: ./ 
@@ -51,7 +51,7 @@ services:
         - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}_php
         - ${CONTAINER_REGISTRY_BASE}/${CONTAINER_PROJECT_NAME}_api  
     depends_on:
-      - trouwen_component
+      - trouwen-component
     volumes:
       - ./public:/srv/api/public:ro
     ports:
