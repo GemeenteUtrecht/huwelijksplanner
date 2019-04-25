@@ -40,6 +40,7 @@ use App\Controller\HuwelijkController;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/huwelijken",
  *  		"openapi_context" = {
+ * 				"summary" = "Haalt een verzameling van huwelijken op"
  *  		}
  *  	},
  *  	"post"={
@@ -47,6 +48,7 @@ use App\Controller\HuwelijkController;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/huwelijken",
  *  		"openapi_context" = {
+ * 					"summary" = "Maak een huwelijk aan"
  *  		}
  *  	},   
  *     "on_bsn"={
@@ -89,6 +91,7 @@ use App\Controller\HuwelijkController;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/huwelijk/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Haal een specifiek huwelijk op"
  *  		}
  *  	},
  *     "put"={
@@ -96,6 +99,7 @@ use App\Controller\HuwelijkController;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/huwelijk/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Vervang een specifiek huwelijk"
  *  		}
  *  	},
  *     "delete"={
@@ -103,6 +107,7 @@ use App\Controller\HuwelijkController;
  *  		"denormalizationContext"={},
  *      	"path"="/huwelijk/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Verwijder een specifiek huwelijk"
  *  		}
  *  	},
  *     "add_partner"={
@@ -271,7 +276,7 @@ use App\Controller\HuwelijkController;
  *            	},
  *             	"responses" = {
  *         			"200" = {
- *         				"description" = "Primair product ingesteld"
+ *         				"description" = "Primair type huwelijk ingesteld"
  *         			},	
  *         			"400" = {
  *         				"description" = "Ongeldige aanvraag"
