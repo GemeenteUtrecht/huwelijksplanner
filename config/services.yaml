@@ -12,11 +12,11 @@ parameters:
             description: Sandbox server
         info:
             description: |
-                Welkom inovator!, 
-                Fijn dat je de tijd en moeite hebt genomen om je te verdiepen in dit component 
+                Welkom inovator! <br>
+                Fijn dat je de tijd en moeite hebt genomen om je te verdiepen in dit component. 
                 
-                # Introduction                
-                De Trouwen component is ontwikkeld voor de gemeente Utrecht en heeft als doel het aansluiten [NLX](https://nlx.io/), volgens het [Common Ground](https://vng.nl/samen-organiseren/common-ground) principe, samen spelen, samen delen.
+                # Introductie                
+                Het trouwen component bevat alle functionaliteit die nodig is om een huwelijk of partnerschap te kunnen sluiten en is ontwikkeld voor de gemeente utrecht. Het component kan bijvoorbeeld zaken aanmaken voor zaakgericht werken maar ook de voortgang binnen het trouwproces bijhouden en tonen.
               
                 # Common ground en open source
                 Om het voor andere partijen zo makkelijk mogenlijk te maken dit component bieden we zo veel mogenlijk informatie openbaar aan.  
@@ -31,7 +31,7 @@ parameters:
                 Deze API is gedocumenteerd in het **OpenAPI format** 
                 De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgen de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin" dit maakt ze volledig publiekelijk en toegankelijk voor iedereen. Dat geld voor elke code op elke site.
 
-                # Authentication
+                # Authenticatie
 
                 Trouwen heeft twee vormen van authenticatie:
                   - API Key
@@ -61,13 +61,13 @@ parameters:
             - name: Huwelijk
               description: "Representeerd een huwelijk"
             - name: Soort
-              description: "Huwelijks soort, bepaald beschikbare locaties, ambtenaren en aditionele producten "
+              description: "Huwelijks type, bepaald beschikbare locaties, ambtenaren en aditionele producten "
             - name: Persoon
-              description: "Een NIET BRP persoon"
+              description: "Een 'NIET' BRP persoon"
             - name: Organisatie
-              description: "De Organisatie wordt gebruikt om standaard configuraties in te regelen"  
-            - name: User
-              description: "Een gebruiker, of in dit geval een applicatie gebonden aan een JWT token behorende tot een organisatie"
+              description: "De organisatie wordt gebruikt om standaard configuraties in te regelen"  
+            # - name: User
+            #   description: "Een gebruiker, of in dit geval een applicatie gebonden aan een JWT token behorende tot een organisatie"
               # Grouping the endopoint  
         x-tagGroups:
             - name: Trouwen
@@ -78,7 +78,7 @@ parameters:
             - name: Organisatie
               tags:
               - Organisatie
-              - User
+              # - User
         
 services:
     # default configuration for services in *this* file

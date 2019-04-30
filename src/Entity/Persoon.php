@@ -34,6 +34,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/personen",
  *  		"openapi_context" = {
+ * 				"summary" = "Haalt een verzameling van personen op"
  *  		}
  *  	},
  *  	"post"={
@@ -41,6 +42,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"personen"={"groups"={"write"}},
  *      	"path"="/personen",
  *  		"openapi_context" = {
+ * 					"summary" = "Maak een persoon aan"
  *  		}
  *  	}
  *  },
@@ -50,6 +52,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/personen/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Haal een specifiek persoon op"
  *  		}
  *  	},
  *     "put"={
@@ -57,6 +60,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/personen/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Vervang een specifiek persoon"
  *  		}
  *  	},
  *     "delete"={
@@ -64,6 +68,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/personen/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Verwijder een specifiek issue"
  *  		}
  *  	},
  *     "log"={
@@ -90,7 +95,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *         				"description" = "Ongeldige aanvraag"
  *         			},
  *         			"404" = {
- *         				"description" = "Huwelijk of aanvraag niet gevonden"
+ *         				"description" = "persoon niet gevonden"
  *         			}
  *            	}            
  *         }
@@ -102,7 +107,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *     		"normalization_context"={"groups"={"read"}},
  *     		"denormalization_context"={"groups"={"write"}},
  *         	"openapi_context" = {
- *         		"summary" = "Versie terugdraaid",
+ *         		"summary" = "Versie terugdraaien",
  *         		"description" = "Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt",
  *          	"consumes" = {
  *              	"application/json",
@@ -119,7 +124,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *         				"description" = "Ongeldige aanvraag"
  *         			},
  *         			"404" = {
- *         				"description" = "Huwelijk of aanvraag niet gevonden"
+ *         				"description" = "Persoon niet gevonden"
  *         			}
  *            	}            
  *         }

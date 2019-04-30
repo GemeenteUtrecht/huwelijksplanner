@@ -1,11 +1,11 @@
 openapi: 3.0.2
 info:
   description: |
-    Welkom inovator!, 
-    Fijn dat je de tijd en moeite hebt genomen om je te verdiepen in dit component 
+    Welkom inovator! <br>
+    Fijn dat je de tijd en moeite hebt genomen om je te verdiepen in dit component. 
     
-    # Introduction                
-    De Trouwen component is ontwikkeld voor de gemeente Utrecht en heeft als doel het aansluiten [NLX](https://nlx.io/), volgens het [Common Ground](https://vng.nl/samen-organiseren/common-ground) principe, samen spelen, samen delen.
+    # Introductie                
+    Het trouwen component bevat alle functionaliteit die nodig is om een huwelijk of partnerschap te kunnen sluiten en is ontwikkeld voor de gemeente utrecht. Het component kan bijvoorbeeld zaken aanmaken voor zaakgericht werken maar ook de voortgang binnen het trouwproces bijhouden en tonen.
     
     # Common ground en open source
     Om het voor andere partijen zo makkelijk mogenlijk te maken dit component bieden we zo veel mogenlijk informatie openbaar aan.  
@@ -20,7 +20,7 @@ info:
     Deze API is gedocumenteerd in het **OpenAPI format** 
     De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgen de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin" dit maakt ze volledig publiekelijk en toegankelijk voor iedereen. Dat geld voor elke code op elke site.
     
-    # Authentication
+    # Authenticatie
     
     Trouwen heeft twee vormen van authenticatie:
       - API Key
@@ -45,10 +45,10 @@ info:
 paths:
   '/huwelijk/{id}':
     get:
+      summary: 'Haal een specifiek huwelijk op'
       tags:
         - Huwelijk
       operationId: getHuwelijkItem
-      summary: 'Retrieves a Huwelijk resource.'
       parameters:
         -
           name: id
@@ -72,10 +72,10 @@ paths:
         404:
           description: 'Resource not found'
     put:
+      summary: 'Vervang een specifiek huwelijk'
       tags:
         - Huwelijk
       operationId: putHuwelijkItem
-      summary: 'Replaces the Huwelijk resource.'
       parameters:
         -
           name: id
@@ -113,10 +113,10 @@ paths:
               $ref: '#/components/schemas/Huwelijk'
         description: 'The updated Huwelijk resource'
     delete:
+      summary: 'Verwijder een specifiek huwelijk'
       tags:
         - Huwelijk
       operationId: deleteHuwelijkItem
-      summary: 'Removes the Huwelijk resource.'
       responses:
         204:
           description: 'Huwelijk resource deleted'
@@ -628,7 +628,7 @@ paths:
         - application/json
       responses:
         200:
-          description: 'Primair product ingesteld'
+          description: 'Primair type huwelijk ingesteld'
         400:
           description: 'Ongeldige aanvraag'
         404:
@@ -1624,10 +1624,10 @@ paths:
         description: 'The updated HuwelijkPartner resource'
   /huwelijken:
     get:
+      summary: 'Haalt een verzameling van huwelijken op'
       tags:
         - Huwelijk
       operationId: getHuwelijkCollection
-      summary: 'Retrieves the collection of Huwelijk resources.'
       responses:
         200:
           description: 'Huwelijk collection response'
@@ -1649,10 +1649,10 @@ paths:
                   $ref: '#/components/schemas/Huwelijk'
       parameters: []
     post:
+      summary: 'Maak een huwelijk aan'
       tags:
         - Huwelijk
       operationId: postHuwelijkCollection
-      summary: 'Creates a Huwelijk resource.'
       responses:
         201:
           description: 'Huwelijk resource created'
@@ -1690,10 +1690,10 @@ paths:
         description: 'The new Huwelijk resource'
   /organisaties:
     get:
+      summary: 'Haal een verzameling van organisatie resources op'
       tags:
         - Organisatie
       operationId: getOrganisatieCollection
-      summary: 'Retrieves the collection of Organisatie resources.'
       responses:
         200:
           description: 'Organisatie collection response'
@@ -1715,10 +1715,10 @@ paths:
                   $ref: '#/components/schemas/Organisatie'
       parameters: []
     post:
+      summary: 'Maak een organisatie resource aan'
       tags:
         - Organisatie
       operationId: postOrganisatieCollection
-      summary: 'Creates a Organisatie resource.'
       responses:
         201:
           description: 'Organisatie resource created'
@@ -1756,10 +1756,10 @@ paths:
         description: 'The new Organisatie resource'
   '/organisaties/{id}':
     get:
+      summary: 'Haal een specifieke organisatie resource op'
       tags:
         - Organisatie
       operationId: getOrganisatieItem
-      summary: 'Retrieves a Organisatie resource.'
       parameters:
         -
           name: id
@@ -1783,10 +1783,10 @@ paths:
         404:
           description: 'Resource not found'
     put:
+      summary: 'Vervang een specifieke organisatie resource'
       tags:
         - Organisatie
       operationId: putOrganisatieItem
-      summary: 'Replaces the Organisatie resource.'
       parameters:
         -
           name: id
@@ -1824,10 +1824,10 @@ paths:
               $ref: '#/components/schemas/Organisatie'
         description: 'The updated Organisatie resource'
     delete:
+      summary: 'Verwijder een specifieke organisatie resource'
       tags:
         - Organisatie
       operationId: deleteOrganisatieItem
-      summary: 'Removes the Organisatie resource.'
       responses:
         204:
           description: 'Organisatie resource deleted'
@@ -1868,7 +1868,7 @@ paths:
             type: string
   '/organisaties/{id}/revert/{version}':
     post:
-      summary: 'Versie terugdraaid'
+      summary: 'Versie terugdraaien'
       description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt'
       consumes:
         - application/json
@@ -1899,10 +1899,10 @@ paths:
         description: 'The new Organisatie resource'
   /personen:
     get:
+      summary: 'Haalt een verzameling van personen op'
       tags:
         - Persoon
       operationId: getPersoonCollection
-      summary: 'Retrieves the collection of Persoon resources.'
       responses:
         200:
           description: 'Persoon collection response'
@@ -1924,10 +1924,10 @@ paths:
                   $ref: '#/components/schemas/Persoon'
       parameters: []
     post:
+      summary: 'Voeg een persoon toe aan een huwelijk'
       tags:
         - Soort
       operationId: postSoortCollection
-      summary: 'Creates a Soort resource.'
       responses:
         201:
           description: 'Soort resource created'
@@ -1965,10 +1965,10 @@ paths:
         description: 'The new Soort resource'
   '/personen/{id}':
     get:
+      summary: 'Haal een specifiek persoon op'
       tags:
         - Persoon
       operationId: getPersoonItem
-      summary: 'Retrieves a Persoon resource.'
       parameters:
         -
           name: id
@@ -1992,10 +1992,10 @@ paths:
         404:
           description: 'Resource not found'
     put:
+      summary: 'Vervang een specifiek persoon'
       tags:
         - Persoon
       operationId: putPersoonItem
-      summary: 'Replaces the Persoon resource.'
       parameters:
         -
           name: id
@@ -2033,10 +2033,10 @@ paths:
               $ref: '#/components/schemas/Persoon'
         description: 'The updated Persoon resource'
     delete:
+      summary: 'Verwijder een specifiek issue'
       tags:
         - Persoon
       operationId: deletePersoonItem
-      summary: 'Removes the Persoon resource.'
       responses:
         204:
           description: 'Persoon resource deleted'
@@ -2064,7 +2064,7 @@ paths:
         400:
           description: 'Ongeldige aanvraag'
         404:
-          description: 'Huwelijk of aanvraag niet gevonden'
+          description: 'persoon niet gevonden'
       tags:
         - Persoon
       operationId: logPersoonItem
@@ -2090,7 +2090,7 @@ paths:
         400:
           description: 'Ongeldige aanvraag'
         404:
-          description: 'Huwelijk of aanvraag niet gevonden'
+          description: 'Persoon niet gevonden'
       tags:
         - Persoon
       operationId: revertPersoonItem
@@ -2108,10 +2108,10 @@ paths:
         description: 'The new Persoon resource'
   /type:
     get:
+      summary: 'Haalt een verzameling van huwelijks types op'
       tags:
         - Soort
       operationId: getSoortCollection
-      summary: 'Retrieves the collection of Soort resources.'
       responses:
         200:
           description: 'Soort collection response'
@@ -2134,10 +2134,10 @@ paths:
       parameters: []
   '/types/{id}':
     get:
+      summary: 'Haalt een specifiek huwelijks type op'
       tags:
         - Soort
       operationId: getSoortItem
-      summary: 'Retrieves a Soort resource.'
       parameters:
         -
           name: id
@@ -2161,10 +2161,10 @@ paths:
         404:
           description: 'Resource not found'
     put:
+      summary: 'Vervang een specifiek issue huwelijks type'
       tags:
         - Soort
       operationId: putSoortItem
-      summary: 'Replaces the Soort resource.'
       parameters:
         -
           name: id
@@ -2202,10 +2202,10 @@ paths:
               $ref: '#/components/schemas/Soort'
         description: 'The updated Soort resource'
     delete:
+      summary: 'Verwijder een specifiek huwelijks type'
       tags:
         - Soort
       operationId: deleteSoortItem
-      summary: 'Removes the Soort resource.'
       responses:
         204:
           description: 'Soort resource deleted'
@@ -3269,7 +3269,7 @@ components:
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het email addres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         telefoonnummer:
           type: string
           maxLength: 255
@@ -3362,7 +3362,7 @@ components:
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het email addres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         telefoonnummer:
           type: string
           maxLength: 255
@@ -3435,7 +3435,7 @@ components:
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het email addres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         telefoonnummer:
           type: string
           maxLength: 255
@@ -3846,13 +3846,13 @@ components:
         - beschrijving
     'User-user_user:read':
       type: object
-      description: 'A user, as unique signed in individual who might be a member of an organisation.'
+      description: 'Een user of applicatie is een unique geidentificeerde entiteit wat een onderdeel van een organisatie kan zijn.'
       properties:
         fullname:
           type: string
     'User-user_user:write':
       type: object
-      description: 'A user, as unique signed in individual who might be a member of an organisation.'
+      description: 'Een user of applicatie is een unique geidentificeerde entiteit wat een onderdeel van een organisatie kan zijn.'
       properties:
         fullname:
           type: string
@@ -3876,16 +3876,13 @@ tags:
     description: 'Representeerd een huwelijk'
   -
     name: Soort
-    description: 'Huwelijks soort, bepaald beschikbare locaties, ambtenaren en aditionele producten '
+    description: 'Huwelijks type, bepaald beschikbare locaties, ambtenaren en aditionele producten '
   -
     name: Persoon
-    description: 'Een NIET BRP persoon'
+    description: 'Een ''NIET'' BRP persoon'
   -
     name: Organisatie
-    description: 'De Organisatie wordt gebruikt om standaard configuraties in te regelen'
-  -
-    name: User
-    description: 'Een gebruiker, of in dit geval een applicatie gebonden aan een JWT token behorende tot een organisatie'
+    description: 'De organisatie wordt gebruikt om standaard configuraties in te regelen'
 x-tagGroups:
   -
     name: Trouwen
@@ -3897,4 +3894,3 @@ x-tagGroups:
     name: Organisatie
     tags:
       - Organisatie
-      - User

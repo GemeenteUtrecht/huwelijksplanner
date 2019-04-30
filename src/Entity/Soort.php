@@ -34,6 +34,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/type",
  *  		"openapi_context" = {
+ * 				"summary" = "Haalt een verzameling van huwelijks types op"
  *  		}
  *  	},
  *  	"post"={
@@ -41,6 +42,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"personen"={"groups"={"write"}},
  *      	"path"="/personen",
  *  		"openapi_context" = {
+ * 				"summary" = "Voeg een persoon toe aan een huwelijk"
  *  		}
  *  	}
  *  },
@@ -50,6 +52,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/types/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Haalt een specifiek huwelijks type op"
  *  		}
  *  	},
  *     "put"={
@@ -57,6 +60,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/types/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Vervang een specifiek issue huwelijks type"
  *  		}
  *  	},
  *     "delete"={
@@ -64,6 +68,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/types/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Verwijder een specifiek huwelijks type"
  *  		}
  *  	},
  *     "log"={

@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use ActivityLogBundle\Entity\Interfaces\StringableInterface;
 
 /**
- * A user, as unique signed in individual who might be a member of an organisation.
+ * Een user of applicatie is een unique geidentificeerde entiteit wat een onderdeel van een organisatie kan zijn.
  * 
  * @ORM\Entity
  * @ORM\Table(name="fos_user")
@@ -61,8 +61,8 @@ class User extends BaseUser implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 2,
 	 *      max = 17,
-	 *      minMessage = "De taal moet tenminste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "De taal kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "De taal moet tenminste {{ limit }} tekens lang zijn",
+	 *      maxMessage = "De taal kan niet langer dan {{ limit }} tekens zijn"
 	 * )
 	 * @ApiProperty(
 	 *     attributes={
@@ -74,11 +74,11 @@ class User extends BaseUser implements StringableInterface
 	 *         }
 	 *     }
 	 * )
-	 **/
+	 */
 	public $taal = 'nl';
 	
 	/**
-	 * De Organisatie waartoe deze gerbuiker behoord
+	 * De Organisatie waar aan deze gebruiker behoord
 	 *
 	 * @var \App\Entity\Organisatie
 	 * @ORM\ManyToOne(targetEntity="\App\Entity\Organisatie", cascade={"persist", "remove"}, inversedBy="users")
@@ -86,7 +86,6 @@ class User extends BaseUser implements StringableInterface
 	 *
 	 */
 	public $bronOrganisatie;
-	
 	
 	/**
 	 * @return string

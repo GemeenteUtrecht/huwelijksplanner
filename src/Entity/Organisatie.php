@@ -14,7 +14,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
 /**
  * Organisatie
  * 
- * Een orginisatie of deeld daarvan dat deelneemt aan Commen Grounds, organisatie objecten worden gebruikt voor het opslaan van configuratie instellingen
+ * Een orginisatie of deel daarvan dat deelneemt aan Common Ground, organisatie objecten worden gebruikt voor het opslaan van configuratie instellingen
  * 
  * @category   	Entity
  *
@@ -23,7 +23,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  * @version    	1.0
  *
  * @link   		http//:www.conduction.nl
- * @package		Commen Ground
+ * @package		Common Ground
  * 
  *  @ApiResource( 
  *  collectionOperations={
@@ -32,6 +32,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/organisaties",
  *  		"openapi_context" = {
+ * 				"summary" = "Haal een verzameling van organisatie resources op"
  *  		}
  *  	},
  *  	"post"={
@@ -39,6 +40,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/organisaties",
  *  		"openapi_context" = {
+ * 				"summary" = "Maak een organisatie resource aan"
  *  		}
  *  	}
  *  },
@@ -48,6 +50,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/organisaties/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Haal een specifieke organisatie resource op"
  *  		}
  *  	},
  *     "put"={
@@ -55,6 +58,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/organisaties/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Vervang een specifieke organisatie resource"
  *  		}
  *  	},
  *     "delete"={
@@ -62,6 +66,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/organisaties/{id}",
  *  		"openapi_context" = {
+ * 				"summary" = "Verwijder een specifieke organisatie resource"
  *  		}
  *  	},
  *     "log"={
@@ -100,7 +105,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *     		"normalization_context"={"groups"={"read"}},
  *     		"denormalization_context"={"groups"={"write"}},
  *         	"openapi_context" = {
- *         		"summary" = "Versie terugdraaid",
+ *         		"summary" = "Versie terugdraaien",
  *         		"description" = "Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt",
  *          	"consumes" = {
  *              	"application/json",
@@ -206,7 +211,6 @@ class Organisatie implements StringableInterface
 	 */
 	public $kvk;
 	
-	
 	/**
 	 * Het BTW nummer van deze organisatie https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/btw_nummers_controleren/uw_btw_nummer, het btw nummer moet het RSIN nummer bevatten.
 	 *
@@ -236,8 +240,7 @@ class Organisatie implements StringableInterface
 	 *     }
 	 * )
 	 */
-	public $btw;
-	
+	public $btw;	
 	
 	/**
 	 * Het EORI (Europese Douane NR) van deze organisatie, zie ook https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/douane_voor_bedrijven/naslagwerken_en_overige_informatie/eori_nummer/
@@ -332,7 +335,7 @@ class Organisatie implements StringableInterface
 	
 	
 	/**
-	 * Het email addres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>
+	 * Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>
 	 *
 	 * @var string
 	 *
@@ -345,11 +348,11 @@ class Organisatie implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 8,
 	 *      max = 255,
-	 *      minMessage = "Het email addres moet minimaal  {{ limit }} tekens lang zijn",
-	 *      maxMessage = "Het email addresm mag maximaal {{ limit }} tekens lang zijn"
+	 *      minMessage = "Het emailadres moet minimaal  {{ limit }} tekens lang zijn",
+	 *      maxMessage = "Het emailadres mag maximaal {{ limit }} tekens lang zijn"
 	 * )
 	 * @Assert\Email(
-     *     message = "Het email addres '{{ value }}' is geen geldig email addres.",
+     *     message = "Het emailadres '{{ value }}' is geen geldig emailadres.",
      *     checkMX = true
      * )
 	 * @Groups({"read", "write"})
