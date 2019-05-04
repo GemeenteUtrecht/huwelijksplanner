@@ -27,18 +27,50 @@ parameters:
                 - [docker container](https://cloud.docker.com/u/huwelijksplanner/repository/docker/huwelijksplanner/trouwen-php)
                 - [online demo](http://trouwen.demo.zaakonline.nl/)
 
-                # OpenAPI Specification, Cross-Origin Resource Sharing en linked Data
+                # OpenAPI Specification
                 Deze API is gedocumenteerd in het **OpenAPI format** 
-                De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgen de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin" dit maakt ze volledig publiekelijk en toegankelijk voor iedereen. Dat geld voor elke code op elke site.
-
-                # Authenticatie
-
-                Trouwen heeft twee vormen van authenticatie:
-                  - API Key
-                  - OAuth2
-                OAuth2 - is een open protocol dat veilig autorisatie regelt op een simpele en gestandaardiseerde manier voor het web, mobiele en desktop applicaties.
-
-                <security-definitions />
+                De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgens de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin", dit maakt ze publiekelijk en toegankelijk voor iedereen. Dat geldt voor elke code, op elke site.
+                
+                # Filteren en Sorteren
+                Het is mogelijk om resulten van deze API te filteren aan de hand van query parameters, deze worden meegegeven in de url tijdens het aanroepen van een endpoint, door extra waarden toe te voegen na een vraagteken. Toevoegen ?bronOrganisatie=12345689 (volledige endpoint  /huwelijk?bronOrganisatie=12345689), zorgt er bijvoorbeeld voor dat alleen huwelijken met bronOrganisatie (ofwel rsin/organisatie) 123456789 worden weergegeven.
+                
+                Voor het filteren op datum geldt dat er een weegmethode moet worden meegegeven, voor de waardes geldt dat elke door [PHP datetime](https://php.net/manual/en/datetime.construct.php) ondersteunde waarde kan worden gebruikt. Verschillende methoden kunnen worden gebruikt om een spreiding te selecteren (bijvoorbeeld /huwelijk?wijzigingsdatum[after]=2019-01-01&wijzigingsdatum[before]=2019-02-01 om alle huwelijken gewijzigd in Januari 2019 te selecteren.
+                
+                De mogelijke weegmethoden voor datum vergelijking zijn:
+                 - after -> Data groter en gelijk aan
+                 - before -> Data kleiner en gelijk aan
+                 - strictly_after -> Data groter dan
+                 - strictly_before -> Data kleiner dan                                               
+                
+                Daarnaast kunnen de resultaten ook worden gesorteerd, dit gaat aan de hand van de order parameter, gevolgd door desc (aflopend) of asc (oplopend). Er kunnen meerdere order parameters op volgorde van toepassing worden meegegeven (bijvoorbeeld https://trouwen.demo.zaakonline.nl/huwelijk?order[bronOrganisatie]=desc&order[identificatie]=asc)
+                
+                Kijk voor meer details over de mogelijkheden voor filteren en sorteren bij de GET (verzamel) endpoint van de entiteit die je wilt ophalen.
+                
+                # Scopes
+                Applicaties kunnen op deze API alleen wijzigingen uitvoeren waarvoor zij over de juiste rechten(scopes) beschikken. De op deze api verschikbare scopes zijn:
+                 - huwelijk:schrijven
+                 - huwelijk:lezen
+                 - huwelijk:maken
+                 - huwelijk:verwijderen
+                 - persoon:schrijven
+                 - persoon:lezen
+                 - persoon:maken
+                 - persoon:verwijderen
+                 - soort:schrijven
+                 - soort:lezen
+                 - soort:maken
+                 - soort:verwijderen
+                 - applicatie:schrijven
+                 - applicatie:lezen
+                 - applicatie:maken
+                 - applicatie:inloggen        
+                         
+                # Authentication
+                Voor het gebruik van deze applicatie is een JWT Token nodig, deze hangt altijd vast aan een applicatie (ofwel user). Geldige JWT Tokens worden aangemaakt bij het registreren van een applicatie en kennen een beperkte houdbaarheid. 
+                
+                JWT Tokens kunnen zowel worden verlengd, als opnieuw worden aangevraagd, dit aan de hand van de applicatie id en sleutel.
+                
+                Let er bij het meegeven van JWT tokens op dat deze vooraf gedaan moeten worden door een Bearer en een spatie, onder de header Authorization. De volledig naam wordt daarmee: 'Authorization: Bearer [TOKEN]'
 
             version: 0.0.1
             title: 'Trouwen API'
@@ -66,8 +98,6 @@ parameters:
               description: "Een 'NIET' BRP persoon"
             - name: Applicatie
               description: "De organisatie wordt gebruikt om standaard configuraties in te regelen"  
-            # - name: User
-            #   description: "Een gebruiker, of in dit geval een applicatie gebonden aan een JWT token behorende tot een organisatie"
               # Grouping the endopoint  
         x-tagGroups:
             - name: Trouwen
@@ -78,7 +108,6 @@ parameters:
             - name: Applicatie
               tags:
               - Applicatie
-              # - User
         
 services:
     # default configuration for services in *this* file

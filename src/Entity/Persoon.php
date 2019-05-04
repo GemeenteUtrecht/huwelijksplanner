@@ -88,20 +88,6 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
- *            	},
- *             	"produces" = {
- *         			"application/json"
- *            	},
- *             	"responses" = {
- *         			"200" = {
- *         				"description" = "Een overzicht van versies"
- *         			},	
- *         			"400" = {
- *         				"description" = "Ongeldige aanvraag"
- *         			},
- *         			"404" = {
- *         				"description" = "persoon niet gevonden"
- *         			}
  *            	}            
  *         }
  *     },

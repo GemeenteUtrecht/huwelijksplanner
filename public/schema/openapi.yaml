@@ -16,18 +16,50 @@ info:
     - [docker container](https://cloud.docker.com/u/huwelijksplanner/repository/docker/huwelijksplanner/trouwen-php)
     - [online demo](http://trouwen.demo.zaakonline.nl/)
     
-    # OpenAPI Specification, Cross-Origin Resource Sharing en linked Data
+    # OpenAPI Specification
     Deze API is gedocumenteerd in het **OpenAPI format** 
-    De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgen de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin" dit maakt ze volledig publiekelijk en toegankelijk voor iedereen. Dat geld voor elke code op elke site.
+    De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgens de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin", dit maakt ze publiekelijk en toegankelijk voor iedereen. Dat geldt voor elke code, op elke site.
     
-    # Authenticatie
+    # Filteren en Sorteren
+    Het is mogelijk om resulten van deze API te filteren aan de hand van query parameters, deze worden meegegeven in de url tijdens het aanroepen van een endpoint, door extra waarden toe te voegen na een vraagteken. Toevoegen ?bronOrganisatie=12345689 (volledige endpoint  /huwelijk?bronOrganisatie=12345689), zorgt er bijvoorbeeld voor dat alleen huwelijken met bronOrganisatie (ofwel rsin/organisatie) 123456789 worden weergegeven.
     
-    Trouwen heeft twee vormen van authenticatie:
-      - API Key
-      - OAuth2
-    OAuth2 - is een open protocol dat veilig autorisatie regelt op een simpele en gestandaardiseerde manier voor het web, mobiele en desktop applicaties.
+    Voor het filteren op datum geldt dat er een weegmethode moet worden meegegeven, voor de waardes geldt dat elke door [PHP datetime](https://php.net/manual/en/datetime.construct.php) ondersteunde waarde kan worden gebruikt. Verschillende methoden kunnen worden gebruikt om een spreiding te selecteren (bijvoorbeeld /huwelijk?wijzigingsdatum[after]=2019-01-01&wijzigingsdatum[before]=2019-02-01 om alle huwelijken gewijzigd in Januari 2019 te selecteren.
     
-    <security-definitions />
+    De mogelijke weegmethoden voor datum vergelijking zijn:
+     - after -> Data groter en gelijk aan
+     - before -> Data kleiner en gelijk aan
+     - strictly_after -> Data groter dan
+     - strictly_before -> Data kleiner dan                                               
+    
+    Daarnaast kunnen de resultaten ook worden gesorteerd, dit gaat aan de hand van de order parameter, gevolgd door desc (aflopend) of asc (oplopend). Er kunnen meerdere order parameters op volgorde van toepassing worden meegegeven (bijvoorbeeld https://trouwen.demo.zaakonline.nl/huwelijk?order[bronOrganisatie]=desc&order[identificatie]=asc)
+    
+    Kijk voor meer details over de mogelijkheden voor filteren en sorteren bij de GET (verzamel) endpoint van de entiteit die je wilt ophalen.
+    
+    # Scopes
+    Applicaties kunnen op deze API alleen wijzigingen uitvoeren waarvoor zij over de juiste rechten(scopes) beschikken. De op deze api verschikbare scopes zijn:
+     - huwelijk:schrijven
+     - huwelijk:lezen
+     - huwelijk:maken
+     - huwelijk:verwijderen
+     - persoon:schrijven
+     - persoon:lezen
+     - persoon:maken
+     - persoon:verwijderen
+     - soort:schrijven
+     - soort:lezen
+     - soort:maken
+     - soort:verwijderen
+     - applicatie:schrijven
+     - applicatie:lezen
+     - applicatie:maken
+     - applicatie:inloggen        
+             
+    # Authentication
+    Voor het gebruik van deze applicatie is een JWT Token nodig, deze hangt altijd vast aan een applicatie (ofwel user). Geldige JWT Tokens worden aangemaakt bij het registreren van een applicatie en kennen een beperkte houdbaarheid. 
+    
+    JWT Tokens kunnen zowel worden verlengd, als opnieuw worden aangevraagd, dit aan de hand van de applicatie id en sleutel.
+    
+    Let er bij het meegeven van JWT tokens op dat deze vooraf gedaan moeten worden door een Bearer en een spatie, onder de header Authorization. De volledig naam wordt daarmee: 'Authorization: Bearer [TOKEN]'
     
   version: 0.0.1
   title: 'Trouwen API'
@@ -75,6 +107,13 @@ paths:
     put:
       summary: 'Werk bij'
       description: 'Werk een Applicatie bij'
+      responses:
+        202:
+          description: 'applicatie bijgewerkt'
+        400:
+          description: 'Ongeldige aanvraag'
+        404:
+          description: 'Applicatie niet gevonden'
       tags:
         - Applicatie
       operationId: putApplicatieItem
@@ -85,23 +124,6 @@ paths:
           required: true
           schema:
             type: string
-      responses:
-        200:
-          description: 'Applicatie resource updated'
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Applicatie'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Applicatie'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Applicatie'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
       requestBody:
         content:
           application/ld+json:
@@ -118,6 +140,9 @@ paths:
     get:
       summary: Logboek
       description: 'Bekijk de wijzigingen op dit Applicatie object'
+      consumes:
+        - application/json
+        - text/html
       tags:
         - Applicatie
       operationId: logApplicatieItem
@@ -145,7 +170,7 @@ paths:
           description: 'Resource not found'
   /applicaties:
     get:
-      summary: Collectie
+      summary: Verzameling
       description: 'Haal een verzameling van Applicaties op, het is mogelijk om deze resultaten te filteren aan de hand van query parameters. <br><br>Lees meer over het filteren van resulaten onder [filteren](/#section/Filteren).'
       tags:
         - Applicatie
@@ -568,15 +593,6 @@ paths:
       consumes:
         - application/json
         - text/html
-      produces:
-        - application/json
-      responses:
-        200:
-          description: 'Een overzicht van versies'
-        400:
-          description: 'Ongeldige aanvraag'
-        404:
-          description: 'Huwelijk of aanvraag niet gevonden'
       tags:
         - Huwelijk
       operationId: logHuwelijkItem
@@ -587,6 +603,21 @@ paths:
           required: true
           schema:
             type: string
+      responses:
+        200:
+          description: 'Huwelijk resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Huwelijk-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Huwelijk-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Huwelijk-read'
+        404:
+          description: 'Resource not found'
   '/huwelijk/{id}/melding':
     post:
       summary: 'Melding huwelijk'
@@ -2123,32 +2154,19 @@ paths:
     post:
       summary: 'Token halen'
       description: 'Inloggen als Applicatie en JWT Token ophalen'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        200:
+          description: 'Applicatie succesvol ingeloged'
+        401:
+          description: 'Applicatie niet ingeloged'
       tags:
         - Applicatie
       operationId: loginApplicatieCollection
-      responses:
-        201:
-          description: 'Applicatie resource created'
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
-          links:
-            GetApplicatieItem:
-              parameters:
-                id: '$response.body#/id'
-              operationId: getApplicatieItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /applicatie/{id}`.'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
       requestBody:
         content:
           application/ld+json:
@@ -2342,15 +2360,6 @@ paths:
       consumes:
         - application/json
         - text/html
-      produces:
-        - application/json
-      responses:
-        200:
-          description: 'Een overzicht van versies'
-        400:
-          description: 'Ongeldige aanvraag'
-        404:
-          description: 'persoon niet gevonden'
       tags:
         - Persoon
       operationId: logPersoonItem
@@ -2361,6 +2370,21 @@ paths:
           required: true
           schema:
             type: string
+      responses:
+        200:
+          description: 'Persoon resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Persoon-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Persoon-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Persoon-read'
+        404:
+          description: 'Resource not found'
   '/personen/{id}/revert/{version}':
     post:
       summary: 'Versie terugdraaien'
@@ -2396,32 +2420,19 @@ paths:
     post:
       summary: Registreren
       description: 'Registreer een nieuwe Applicatie voor dit component'
+      consumes:
+        - application/json
+        - text/html
+      produces:
+        - application/json
+      responses:
+        201:
+          description: 'Applicatie aangemaakt'
+        400:
+          description: 'Ongeldige aanvraag'
       tags:
         - Applicatie
       operationId: registerApplicatieCollection
-      responses:
-        201:
-          description: 'Applicatie resource created'
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
-          links:
-            GetApplicatieItem:
-              parameters:
-                id: '$response.body#/id'
-              operationId: getApplicatieItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /applicatie/{id}`.'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
       requestBody:
         content:
           application/ld+json:
@@ -2575,15 +2586,6 @@ paths:
       consumes:
         - application/json
         - text/html
-      produces:
-        - application/json
-      responses:
-        200:
-          description: 'Een overzicht van versies'
-        400:
-          description: 'Ongeldige aanvraag'
-        404:
-          description: 'Huwelijk of aanvraag niet gevonden'
       tags:
         - Soort
       operationId: logSoortItem
@@ -2594,6 +2596,21 @@ paths:
           required: true
           schema:
             type: string
+      responses:
+        200:
+          description: 'Soort resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Soort-read'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Soort-read'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Soort-read'
+        404:
+          description: 'Resource not found'
   '/types/{id}/revert/{version}':
     post:
       summary: 'Versie terugdraaid'
@@ -2659,7 +2676,7 @@ components:
           minLength: 8
           description: 'Het RSIN van de organisatie waartoe deze Applicatie behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
         isActief:
-          description: 'Word gebruikt om aan te geven of deze aplicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden'
+          description: 'Word gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden'
           type: boolean
         registratiedatum:
           description: 'Het tijdstip waarop deze Applicatie is aangemaakt'
@@ -2725,7 +2742,7 @@ components:
           minLength: 8
           description: 'Het RSIN van de organisatie waartoe deze Applicatie behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
         isActief:
-          description: 'Word gebruikt om aan te geven of deze aplicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden'
+          description: 'Word gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden'
           type: boolean
         registratiedatum:
           description: 'Het tijdstip waarop deze Applicatie is aangemaakt'
@@ -2894,7 +2911,7 @@ components:
           format: uri
           description: 'Het contact persoon voor deze ambtenaar'
         eigenaar:
-          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
         taal:
           type: string
@@ -3244,7 +3261,7 @@ components:
           format: uri
           description: 'Het contact persoon voor deze ambtenaar'
         eigenaar:
-          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
         taal:
           type: string
@@ -4023,7 +4040,7 @@ components:
           format: uri
           description: 'Het contact persoon voor deze ambtenaar'
         eigenaar:
-          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
         huwelijkspartner: {  }
         emailadres: {  }
@@ -4113,7 +4130,7 @@ components:
           format: uri
           description: 'Het contact persoon voor deze ambtenaar'
         eigenaar:
-          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
       required:
         - naam
