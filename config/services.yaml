@@ -64,7 +64,7 @@ parameters:
               description: "Huwelijks type, bepaald beschikbare locaties, ambtenaren en aditionele producten "
             - name: Persoon
               description: "Een 'NIET' BRP persoon"
-            - name: Organisatie
+            - name: Applicatie
               description: "De organisatie wordt gebruikt om standaard configuraties in te regelen"  
             # - name: User
             #   description: "Een gebruiker, of in dit geval een applicatie gebonden aan een JWT token behorende tot een organisatie"
@@ -75,9 +75,9 @@ parameters:
               - Huwelijk
               - Soort
               - Persoon
-            - name: Organisatie
+            - name: Applicatie
               tags:
-              - Organisatie
+              - Applicatie
               # - User
         
 services:

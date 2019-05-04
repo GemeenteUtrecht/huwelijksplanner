@@ -2,7 +2,7 @@
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
     firewall_name: main
-    user_class: App\Entity\User
+    user_class: App\Entity\Applicatie
     from_email:
         address: '%env(mailer_address)%'
         sender_name: '%env(mailer_user)%'

@@ -35,7 +35,7 @@ if [ "$1" = 'php-fpm' ] || [ "$1" = 'php' ] || [ "$1" = 'bin/console' ]; then
 		# Lets make sure the database is in order
 		bin/console doctrine:schema:update --force --no-interaction
 		# Lets reset the database and load example data
-		bin/console doctrine:fixtures:load --no-interaction 
+		# bin/console doctrine:fixtures:load --no-interaction 
 	fi
 	
 	# Let update the docs to show the latest chages

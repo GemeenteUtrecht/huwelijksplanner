@@ -50,7 +50,7 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore
         auto_mapping: true
         resolve_target_entities:
-            Symfony\Component\Security\Core\User\UserInterface: \App\Entity\User
+            Symfony\Component\Security\Core\User\UserInterface: \App\Entity\Applicatie
         mappings:
             gedmo_loggable:
                 type: annotation

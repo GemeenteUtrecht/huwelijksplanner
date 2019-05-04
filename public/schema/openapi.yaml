@@ -43,6 +43,283 @@ info:
     name: 'EUPL 1.2'
     url: 'https://opensource.org/licenses/EUPL-1.2'
 paths:
+  '/applicatie/{id}':
+    get:
+      summary: 'Haal op'
+      description: 'Haalt een Applicatie op'
+      tags:
+        - Applicatie
+      operationId: getApplicatieItem
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Applicatie resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Applicatie'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicatie'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Applicatie'
+        404:
+          description: 'Resource not found'
+    put:
+      summary: 'Werk bij'
+      description: 'Werk een Applicatie bij'
+      tags:
+        - Applicatie
+      operationId: putApplicatieItem
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Applicatie resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Applicatie'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicatie'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Applicatie'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Applicatie'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Applicatie'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Applicatie'
+        description: 'The updated Applicatie resource'
+  '/applicatie/{id}/log':
+    get:
+      summary: Logboek
+      description: 'Bekijk de wijzigingen op dit Applicatie object'
+      tags:
+        - Applicatie
+      operationId: logApplicatieItem
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Applicatie resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+        404:
+          description: 'Resource not found'
+  /applicaties:
+    get:
+      summary: Collectie
+      description: 'Haal een verzameling van Applicaties op, het is mogelijk om deze resultaten te filteren aan de hand van query parameters. <br><br>Lees meer over het filteren van resulaten onder [filteren](/#section/Filteren).'
+      tags:
+        - Applicatie
+      operationId: getApplicatieCollection
+      responses:
+        200:
+          description: 'Applicatie collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Applicatie'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Applicatie'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Applicatie'
+      parameters:
+        -
+          name: id
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'id[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: naam
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: organisatie
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'organisatie[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: contactPersoon
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'contactPersoon[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: string
+          style: form
+          explode: true
+        -
+          name: 'order[id]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'order[naam]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'order[organisatie]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'order[isActief]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'order[registratiedatum]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'order[wijzigingsdatum]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'order[contactPersoon]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: isActief
+          in: query
+          required: false
+          schema:
+            type: boolean
+        -
+          name: 'registratiedatum[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'registratiedatum[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'registratiedatum[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'registratiedatum[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'wijzigingsdatum[before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'wijzigingsdatum[strictly_before]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'wijzigingsdatum[after]'
+          in: query
+          required: false
+          schema:
+            type: string
+        -
+          name: 'wijzigingsdatum[strictly_after]'
+          in: query
+          required: false
+          schema:
+            type: string
   '/huwelijk/{id}':
     get:
       summary: 'Haal een specifiek huwelijk op'
@@ -704,7 +981,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/HuwelijkAmbtenaar'
-      parameters: []
+      parameters:
+        -
+          name: bronOrganisatie
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'bronOrganisatie[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: 'order[bronOrganisatie]'
+          in: query
+          required: false
+          schema:
+            type: string
     post:
       tags:
         - HuwelijkAmbtenaar
@@ -856,7 +1155,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/HuwelijkBijzonderAmbtenaar'
-      parameters: []
+      parameters:
+        -
+          name: bronOrganisatie
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'bronOrganisatie[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: 'order[bronOrganisatie]'
+          in: query
+          required: false
+          schema:
+            type: string
     post:
       tags:
         - HuwelijkBijzonderAmbtenaar
@@ -1039,7 +1360,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/HuwelijkDocument'
-      parameters: []
+      parameters:
+        -
+          name: bronOrganisatie
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'bronOrganisatie[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: 'order[bronOrganisatie]'
+          in: query
+          required: false
+          schema:
+            type: string
     post:
       tags:
         - HuwelijkDocument
@@ -1191,7 +1534,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/HuwelijkGetuige'
-      parameters: []
+      parameters:
+        -
+          name: bronOrganisatie
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'bronOrganisatie[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: 'order[bronOrganisatie]'
+          in: query
+          required: false
+          schema:
+            type: string
     post:
       tags:
         - HuwelijkGetuige
@@ -1343,7 +1708,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/HuwelijkLocatie'
-      parameters: []
+      parameters:
+        -
+          name: bronOrganisatie
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'bronOrganisatie[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: 'order[bronOrganisatie]'
+          in: query
+          required: false
+          schema:
+            type: string
     post:
       tags:
         - HuwelijkLocatie
@@ -1495,7 +1882,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/HuwelijkPartner'
-      parameters: []
+      parameters:
+        -
+          name: bronOrganisatie
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'bronOrganisatie[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: 'order[bronOrganisatie]'
+          in: query
+          required: false
+          schema:
+            type: string
     post:
       tags:
         - HuwelijkPartner
@@ -1647,7 +2056,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Huwelijk'
-      parameters: []
+      parameters:
+        -
+          name: bronOrganisatie
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'bronOrganisatie[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: 'order[bronOrganisatie]'
+          in: query
+          required: false
+          schema:
+            type: string
     post:
       summary: 'Maak een huwelijk aan'
       tags:
@@ -1688,56 +2119,32 @@ paths:
             schema:
               $ref: '#/components/schemas/Huwelijk'
         description: 'The new Huwelijk resource'
-  /organisaties:
-    get:
-      summary: 'Haal een verzameling van organisatie resources op'
-      tags:
-        - Organisatie
-      operationId: getOrganisatieCollection
-      responses:
-        200:
-          description: 'Organisatie collection response'
-          content:
-            application/ld+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organisatie'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organisatie'
-            text/html:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Organisatie'
-      parameters: []
+  /login_check:
     post:
-      summary: 'Maak een organisatie resource aan'
+      summary: 'Token halen'
+      description: 'Inloggen als Applicatie en JWT Token ophalen'
       tags:
-        - Organisatie
-      operationId: postOrganisatieCollection
+        - Applicatie
+      operationId: loginApplicatieCollection
       responses:
         201:
-          description: 'Organisatie resource created'
+          description: 'Applicatie resource created'
           content:
             application/ld+json:
               schema:
-                $ref: '#/components/schemas/Organisatie'
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
             application/json:
               schema:
-                $ref: '#/components/schemas/Organisatie'
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
             text/html:
               schema:
-                $ref: '#/components/schemas/Organisatie'
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
           links:
-            GetOrganisatieItem:
+            GetApplicatieItem:
               parameters:
                 id: '$response.body#/id'
-              operationId: getOrganisatieItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /organisaties/{id}`.'
+              operationId: getApplicatieItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /applicatie/{id}`.'
         400:
           description: 'Invalid input'
         404:
@@ -1746,157 +2153,14 @@ paths:
         content:
           application/ld+json:
             schema:
-              $ref: '#/components/schemas/Organisatie'
+              $ref: '#/components/schemas/Applicatie-applicatie:inloggen'
           application/json:
             schema:
-              $ref: '#/components/schemas/Organisatie'
+              $ref: '#/components/schemas/Applicatie-applicatie:inloggen'
           text/html:
             schema:
-              $ref: '#/components/schemas/Organisatie'
-        description: 'The new Organisatie resource'
-  '/organisaties/{id}':
-    get:
-      summary: 'Haal een specifieke organisatie resource op'
-      tags:
-        - Organisatie
-      operationId: getOrganisatieItem
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        200:
-          description: 'Organisatie resource response'
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Organisatie'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organisatie'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Organisatie'
-        404:
-          description: 'Resource not found'
-    put:
-      summary: 'Vervang een specifieke organisatie resource'
-      tags:
-        - Organisatie
-      operationId: putOrganisatieItem
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        200:
-          description: 'Organisatie resource updated'
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/Organisatie'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Organisatie'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/Organisatie'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Organisatie'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Organisatie'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Organisatie'
-        description: 'The updated Organisatie resource'
-    delete:
-      summary: 'Verwijder een specifieke organisatie resource'
-      tags:
-        - Organisatie
-      operationId: deleteOrganisatieItem
-      responses:
-        204:
-          description: 'Organisatie resource deleted'
-        404:
-          description: 'Resource not found'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-  '/organisaties/{id}/log':
-    get:
-      summary: 'Logboek inzien'
-      description: 'Geeft een array van eerdere versies en wijzigingen van dit object'
-      consumes:
-        - application/json
-        - text/html
-      produces:
-        - application/json
-      responses:
-        200:
-          description: 'Een overzicht van versies'
-        400:
-          description: 'Ongeldige aanvraag'
-        404:
-          description: 'Huwelijk of aanvraag niet gevonden'
-      tags:
-        - Organisatie
-      operationId: logOrganisatieItem
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-  '/organisaties/{id}/revert/{version}':
-    post:
-      summary: 'Versie terugdraaien'
-      description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt'
-      consumes:
-        - application/json
-        - text/html
-      produces:
-        - application/json
-      responses:
-        202:
-          description: 'Terug gedraaid naar eerdere versie'
-        400:
-          description: 'Ongeldige aanvraag'
-        404:
-          description: 'Huwelijk of aanvraag niet gevonden'
-      tags:
-        - Organisatie
-      operationId: revertOrganisatieItem
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Organisatie-write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Organisatie-write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Organisatie-write'
-        description: 'The new Organisatie resource'
+              $ref: '#/components/schemas/Applicatie-applicatie:inloggen'
+        description: 'The new Applicatie resource'
   /personen:
     get:
       summary: 'Haalt een verzameling van personen op'
@@ -1922,7 +2186,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Persoon'
-      parameters: []
+      parameters:
+        -
+          name: bronOrganisatie
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'bronOrganisatie[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: 'order[bronOrganisatie]'
+          in: query
+          required: false
+          schema:
+            type: string
     post:
       summary: 'Voeg een persoon toe aan een huwelijk'
       tags:
@@ -2077,7 +2363,7 @@ paths:
             type: string
   '/personen/{id}/revert/{version}':
     post:
-      summary: 'Versie terugdraaid'
+      summary: 'Versie terugdraaien'
       description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt'
       consumes:
         - application/json
@@ -2106,6 +2392,48 @@ paths:
             schema:
               $ref: '#/components/schemas/Persoon-write'
         description: 'The new Persoon resource'
+  /registreer:
+    post:
+      summary: Registreren
+      description: 'Registreer een nieuwe Applicatie voor dit component'
+      tags:
+        - Applicatie
+      operationId: registerApplicatieCollection
+      responses:
+        201:
+          description: 'Applicatie resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+          links:
+            GetApplicatieItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getApplicatieItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /applicatie/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Applicatie-applicatie:maken'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Applicatie-applicatie:maken'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Applicatie-applicatie:maken'
+        description: 'The new Applicatie resource'
   /type:
     get:
       summary: 'Haalt een verzameling van huwelijks types op'
@@ -2131,7 +2459,29 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Soort'
-      parameters: []
+      parameters:
+        -
+          name: bronOrganisatie
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'bronOrganisatie[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: 'order[bronOrganisatie]'
+          in: query
+          required: false
+          schema:
+            type: string
   '/types/{id}':
     get:
       summary: 'Haalt een specifiek huwelijks type op'
@@ -2275,163 +2625,158 @@ paths:
             schema:
               $ref: '#/components/schemas/Soort-write'
         description: 'The new Soort resource'
-  /users:
-    get:
-      tags:
-        - User
-      operationId: getUserCollection
-      summary: 'Retrieves the collection of User resources.'
-      responses:
-        200:
-          description: 'User collection response'
-          content:
-            application/ld+json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User-user_user:read'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User-user_user:read'
-            text/html:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/User-user_user:read'
-      parameters: []
-    post:
-      tags:
-        - User
-      operationId: postUserCollection
-      summary: 'Creates a User resource.'
-      responses:
-        201:
-          description: 'User resource created'
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/User-user_user:read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User-user_user:read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/User-user_user:read'
-          links:
-            GetUserItem:
-              parameters:
-                id: '$response.body#/id'
-              operationId: getUserItem
-              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /users/{id}`.'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/User-user_user:write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User-user_user:write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/User-user_user:write'
-        description: 'The new User resource'
-  '/users/{id}':
-    get:
-      tags:
-        - User
-      operationId: getUserItem
-      summary: 'Retrieves a User resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        200:
-          description: 'User resource response'
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/User-user_user:read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User-user_user:read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/User-user_user:read'
-        404:
-          description: 'Resource not found'
-    delete:
-      tags:
-        - User
-      operationId: deleteUserItem
-      summary: 'Removes the User resource.'
-      responses:
-        204:
-          description: 'User resource deleted'
-        404:
-          description: 'Resource not found'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-    put:
-      tags:
-        - User
-      operationId: putUserItem
-      summary: 'Replaces the User resource.'
-      parameters:
-        -
-          name: id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        200:
-          description: 'User resource updated'
-          content:
-            application/ld+json:
-              schema:
-                $ref: '#/components/schemas/User-user_user:read'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/User-user_user:read'
-            text/html:
-              schema:
-                $ref: '#/components/schemas/User-user_user:read'
-        400:
-          description: 'Invalid input'
-        404:
-          description: 'Resource not found'
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/User-user_user:write'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/User-user_user:write'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/User-user_user:write'
-        description: 'The updated User resource'
 security:
   -
     apiKey: []
 components:
   schemas:
+    Applicatie:
+      type: object
+      description: 'Een Applicatie die is geidentificeerd en geautoriceerd om namens een organisatie wijzigingen uit te voeren'
+      properties:
+        id:
+          type: integer
+        naam:
+          type: naam
+          maxLength: 255
+          minLength: 8
+          example: mijn-applicatie
+        sleutel:
+          type: string
+          maxLength: 16
+          minLength: 5
+          example: NietZoGeheim
+          description: 'Een door de organisatie opgegeven sleutel waarmee deze Applicatie zich identificeerd bij het ophalen van en JWT token.'
+        scopes:
+          type: array
+          example: '[]'
+          description: 'De scopes (rechten) die deze Applicatie heeft. Zie [scopes](/#section/Scopes) voor meer informatie.'
+        organisatie:
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Applicatie behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
+        isActief:
+          description: 'Word gebruikt om aan te geven of deze aplicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden'
+          type: boolean
+        registratiedatum:
+          description: 'Het tijdstip waarop deze Applicatie is aangemaakt'
+          type: string
+          format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop deze Applicatie voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        contactPersoon:
+          title: Ambtenaar
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'De contactpersoon voor deze Applicatie, die bijvoorbeeld word verwittigd bij misbruik.'
+        fullname:
+          readOnly: true
+          type: string
+        user:
+          readOnly: true
+          type: boolean
+        username:
+          description: 'Username wordt door symfony gebruikt voor de gebruikersnaam maar in de context commonground component api gebruken we hem niet en onderdruken we hem door hem aan geen groupen toe te wijzen'
+        password:
+          readOnly: true
+        salt:
+          readOnly: true
+        roles:
+          readOnly: true
+    'Applicatie-applicatie:inloggen':
+      type: object
+      description: 'Een Applicatie die is geidentificeerd en geautoriceerd om namens een organisatie wijzigingen uit te voeren'
+      properties:
+        naam:
+          type: naam
+          maxLength: 255
+          minLength: 8
+          example: mijn-applicatie
+        sleutel:
+          type: string
+          maxLength: 16
+          minLength: 5
+          example: NietZoGeheim
+          description: 'Een door de organisatie opgegeven sleutel waarmee deze Applicatie zich identificeerd bij het ophalen van en JWT token.'
+    'Applicatie-applicatie:lezen':
+      type: object
+      description: 'Een Applicatie die is geidentificeerd en geautoriceerd om namens een organisatie wijzigingen uit te voeren'
+      properties:
+        id:
+          type: integer
+        naam:
+          type: naam
+          maxLength: 255
+          minLength: 8
+          example: mijn-applicatie
+        organisatie:
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Applicatie behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
+        isActief:
+          description: 'Word gebruikt om aan te geven of deze aplicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden'
+          type: boolean
+        registratiedatum:
+          description: 'Het tijdstip waarop deze Applicatie is aangemaakt'
+          type: string
+          format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop deze Applicatie voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        contactPersoon:
+          title: Ambtenaar
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'De contactpersoon voor deze Applicatie, die bijvoorbeeld word verwittigd bij misbruik.'
+    'Applicatie-applicatie:maken':
+      type: object
+      description: 'Een Applicatie die is geidentificeerd en geautoriceerd om namens een organisatie wijzigingen uit te voeren'
+      properties:
+        naam:
+          type: naam
+          maxLength: 255
+          minLength: 8
+          example: mijn-applicatie
+        sleutel:
+          type: string
+          maxLength: 16
+          minLength: 5
+          example: NietZoGeheim
+          description: 'Een door de organisatie opgegeven sleutel waarmee deze Applicatie zich identificeerd bij het ophalen van en JWT token.'
+        scopes:
+          type: array
+          example: '[]'
+          description: 'De scopes (rechten) die deze Applicatie heeft. Zie [scopes](/#section/Scopes) voor meer informatie.'
+        organisatie:
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Applicatie behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
+        contactPersoon:
+          title: Ambtenaar
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'De contactpersoon voor deze Applicatie, die bijvoorbeeld word verwittigd bij misbruik.'
     Huwelijk:
       type: object
       description: Huwelijk
@@ -2442,8 +2787,13 @@ components:
           description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft aangemaakt. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           maxLength: 40
         bronOrganisatie:
-          description: 'Het Huwelijk waartoe deze partner behoort'
+          title: bronOrganisatie
           type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         melding:
           title: ZAAK
           type: string
@@ -2528,13 +2878,24 @@ components:
           items:
             type: string
         registratiedatum:
-          description: 'Het tijdstip waarop deze entiteit is aangemaakt.'
+          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop deze entiteit voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
           type: string
           format: date-time
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
+        eigenaar:
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          type: string
         taal:
           type: string
           example: nl
@@ -2775,6 +3136,14 @@ components:
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
           description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft aangemaakt. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           maxLength: 40
+        bronOrganisatie:
+          title: bronOrganisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         melding:
           title: ZAAK
           type: string
@@ -2859,13 +3228,24 @@ components:
           items:
             type: string
         registratiedatum:
-          description: 'Het tijdstip waarop deze entiteit is aangemaakt.'
+          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop deze entiteit voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
           type: string
           format: date-time
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
+        eigenaar:
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          type: string
         taal:
           type: string
           example: nl
@@ -2968,6 +3348,14 @@ components:
           description: 'De instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen.'
           items:
             type: string
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
         taal:
           type: string
           example: nl
@@ -2981,6 +3369,14 @@ components:
       type: object
       description: ''
       properties:
+        bronOrganisatie:
+          title: bronOrganisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         primair:
           title: primair
           type: boolean
@@ -3011,10 +3407,25 @@ components:
         rol:
           description: 'Het type van dit huwelijk'
           type: string
-        registratieDatum:
-          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+        registratiedatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
           type: string
           format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
+        eigenaar:
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          type: string
         id:
           readOnly: true
           type: integer
@@ -3022,6 +3433,14 @@ components:
       type: object
       description: ''
       properties:
+        bronOrganisatie:
+          title: bronOrganisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         primair:
           title: primair
           type: boolean
@@ -3057,10 +3476,25 @@ components:
           maxLength: 255
           format: uri
           description: Persoon
-        registratieDatum:
-          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+        registratiedatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
           type: string
           format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
+        eigenaar:
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          type: string
         id:
           readOnly: true
           type: integer
@@ -3068,6 +3502,14 @@ components:
       type: object
       description: Document
       properties:
+        bronOrganisatie:
+          title: bronOrganisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         instemming:
           title: Contactpersoon
           type: url
@@ -3093,10 +3535,25 @@ components:
           maxLength: 255
           format: uri
           description: Document
-        registratieDatum:
-          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+        registratiedatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
           type: string
           format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
+        eigenaar:
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          type: string
         id:
           readOnly: true
           type: integer
@@ -3104,6 +3561,14 @@ components:
       type: object
       description: Getuigen
       properties:
+        bronOrganisatie:
+          title: bronOrganisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         instemming:
           title: Contactpersoon
           type: url
@@ -3129,10 +3594,25 @@ components:
           maxLength: 255
           format: uri
           description: Persoon
-        registratieDatum:
-          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+        registratiedatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
           type: string
           format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
+        eigenaar:
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          type: string
         id:
           readOnly: true
           type: integer
@@ -3140,6 +3620,14 @@ components:
       type: object
       description: ''
       properties:
+        bronOrganisatie:
+          title: bronOrganisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         primair:
           title: primair
           type: boolean
@@ -3167,10 +3655,25 @@ components:
           maxLength: 255
           format: uri
           description: Locatie
-        registratieDatum:
-          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+        registratiedatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
           type: string
           format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
+        eigenaar:
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          type: string
         id:
           readOnly: true
           type: integer
@@ -3178,6 +3681,14 @@ components:
       type: object
       description: Partner
       properties:
+        bronOrganisatie:
+          title: bronOrganisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         instemming:
           title: Contactpersoon
           type: url
@@ -3205,253 +3716,29 @@ components:
           maxLength: 255
           format: uri
           description: 'De partner, ofwel een persoon die als partner aan dit huwelijk is verbonden'
-        registratieDatum:
-          description: 'Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minut:seconde"'
+        registratiedatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
           type: string
           format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
+        eigenaar:
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          type: string
         id:
           readOnly: true
           type: integer
         partner: {  }
-    Organisatie:
-      type: object
-      description: Organisatie
-      properties:
-        id:
-          description: 'Het unieke identificatie nummer van deze organisatie binnen deze api <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
-          type: integer
-        rsin:
-          title: Organisatie
-          type: string
-          example: '123456789'
-          required: 'true'
-          maxLength: 9
-          minLength: 8
-          description: 'Het RSIN van deze organisatie. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef'
-        kvk:
-          title: kvk
-          type: string
-          example: '12345678'
-          required: 'true'
-          minLength: 8
-          maxLength: 9
-          description: 'Het KVK nummer van deze organisatie'
-        btw:
-          title: btw
-          type: string
-          example: NL123456789B01
-          required: 'true'
-          minLength: 14
-          maxLength: 18
-          description: 'Het BTW nummer van deze organisatie https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/btw_nummers_controleren/uw_btw_nummer, het btw nummer moet het RSIN nummer bevatten.'
-        eori:
-          title: eori
-          type: string
-          example: '123456789'
-          required: 'true'
-          minLength: 5
-          maxLength: 14
-          description: 'Het EORI (Europese Douane NR) van deze organisatie, zie ook https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/douane_voor_bedrijven/naslagwerken_en_overige_informatie/eori_nummer/'
-        naam:
-          type: string
-          maxLength: 255
-          minLength: 5
-          example: 'Gemeente Zuiddrecht'
-          description: 'De naam van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
-        beschrijving:
-          type: string
-          maxLength: 2000
-          minLength: 25
-          example: 'Deze prachtige organisatie staat voor de hoogste normen en waarden'
-          description: 'Een beschrijvende tekst over deze organisatie  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
-        emailadres:
-          type: email
-          maxLength: 255
-          minLength: 8
-          example: john@do.nl
-          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
-        telefoonnummer:
-          type: string
-          maxLength: 255
-          minLength: 10
-          example: +31(0)6-12345678
-          description: 'Het telefoon nummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
-        huwelijken:
-          description: 'HUwelijken die bij deze organisatie horen'
-          type: array
-          items:
-            type: string
-        soortenHuwelijken:
-          description: 'Soorten huwelijken die bij deze organisatie horen'
-          type: array
-          items:
-            type: string
-        personen:
-          description: 'Personen die bij deze organisatie horen'
-          type: array
-          items:
-            type: string
-        users:
-          description: 'Gebruikers die bij deze organisatie horen'
-          type: array
-          items:
-            type: string
-        instellingen:
-          title: Instellingen
-          type: array
-          example: '[]'
-          description: 'HDe instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen'
-          items:
-            type: string
-      required:
-        - naam
-        - beschrijving
-    Organisatie-read:
-      type: object
-      description: Organisatie
-      properties:
-        id:
-          description: 'Het unieke identificatie nummer van deze organisatie binnen deze api <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
-          type: integer
-        rsin:
-          title: Organisatie
-          type: string
-          example: '123456789'
-          required: 'true'
-          maxLength: 9
-          minLength: 8
-          description: 'Het RSIN van deze organisatie. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef'
-        kvk:
-          title: kvk
-          type: string
-          example: '12345678'
-          required: 'true'
-          minLength: 8
-          maxLength: 9
-          description: 'Het KVK nummer van deze organisatie'
-        btw:
-          title: btw
-          type: string
-          example: NL123456789B01
-          required: 'true'
-          minLength: 14
-          maxLength: 18
-          description: 'Het BTW nummer van deze organisatie https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/btw_nummers_controleren/uw_btw_nummer, het btw nummer moet het RSIN nummer bevatten.'
-        eori:
-          title: eori
-          type: string
-          example: '123456789'
-          required: 'true'
-          minLength: 5
-          maxLength: 14
-          description: 'Het EORI (Europese Douane NR) van deze organisatie, zie ook https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/douane_voor_bedrijven/naslagwerken_en_overige_informatie/eori_nummer/'
-        naam:
-          type: string
-          maxLength: 255
-          minLength: 5
-          example: 'Gemeente Zuiddrecht'
-          description: 'De naam van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
-        beschrijving:
-          type: string
-          maxLength: 2000
-          minLength: 25
-          example: 'Deze prachtige organisatie staat voor de hoogste normen en waarden'
-          description: 'Een beschrijvende tekst over deze organisatie  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
-        emailadres:
-          type: email
-          maxLength: 255
-          minLength: 8
-          example: john@do.nl
-          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
-        telefoonnummer:
-          type: string
-          maxLength: 255
-          minLength: 10
-          example: +31(0)6-12345678
-          description: 'Het telefoon nummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
-        instellingen:
-          title: Instellingen
-          type: array
-          example: '[]'
-          description: 'HDe instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen'
-          items:
-            type: string
-      required:
-        - naam
-        - beschrijving
-    Organisatie-write:
-      type: object
-      description: Organisatie
-      properties:
-        id:
-          description: 'Het unieke identificatie nummer van deze organisatie binnen deze api <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
-          type: integer
-        rsin:
-          title: Organisatie
-          type: string
-          example: '123456789'
-          required: 'true'
-          maxLength: 9
-          minLength: 8
-          description: 'Het RSIN van deze organisatie. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef'
-        kvk:
-          title: kvk
-          type: string
-          example: '12345678'
-          required: 'true'
-          minLength: 8
-          maxLength: 9
-          description: 'Het KVK nummer van deze organisatie'
-        btw:
-          title: btw
-          type: string
-          example: NL123456789B01
-          required: 'true'
-          minLength: 14
-          maxLength: 18
-          description: 'Het BTW nummer van deze organisatie https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/zakelijk/btw/administratie_bijhouden/btw_nummers_controleren/uw_btw_nummer, het btw nummer moet het RSIN nummer bevatten.'
-        eori:
-          title: eori
-          type: string
-          example: '123456789'
-          required: 'true'
-          minLength: 5
-          maxLength: 14
-          description: 'Het EORI (Europese Douane NR) van deze organisatie, zie ook https://www.belastingdienst.nl/wps/wcm/connect/bldcontentnl/belastingdienst/douane_voor_bedrijven/naslagwerken_en_overige_informatie/eori_nummer/'
-        naam:
-          type: string
-          maxLength: 255
-          minLength: 5
-          example: 'Gemeente Zuiddrecht'
-          description: 'De naam van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
-        beschrijving:
-          type: string
-          maxLength: 2000
-          minLength: 25
-          example: 'Deze prachtige organisatie staat voor de hoogste normen en waarden'
-          description: 'Een beschrijvende tekst over deze organisatie  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
-        emailadres:
-          type: email
-          maxLength: 255
-          minLength: 8
-          example: john@do.nl
-          description: 'Het emailadres van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
-        telefoonnummer:
-          type: string
-          maxLength: 255
-          minLength: 10
-          example: +31(0)6-12345678
-          description: 'Het telefoon nummer van deze organisatie <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
-        instellingen:
-          title: Instellingen
-          type: array
-          example: '[]'
-          description: 'HDe instellingen voor deze organisatie, kijk in de documentatie van deze api voor de mogelijke instellingen'
-          items:
-            type: string
-      required:
-        - naam
-        - beschrijving
     Persoon:
       type: object
       description: Persoon
@@ -3465,8 +3752,13 @@ components:
           description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           maxLength: 40
         bronOrganisatie:
-          description: 'Het huwelijk waartoe deze partner behoort'
+          title: bronOrganisatie
           type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         voornamen:
           type: string
           maxLength: 255
@@ -3531,6 +3823,14 @@ components:
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
           description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           maxLength: 40
+        bronOrganisatie:
+          title: bronOrganisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         voornamen:
           type: string
           maxLength: 255
@@ -3650,8 +3950,13 @@ components:
           description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           maxLength: 40
         bronOrganisatie:
-          description: 'Het huwelijk waartoe deze partner behoort'
+          title: bronOrganisatie
           type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         naam:
           description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
           type: string
@@ -3695,20 +4000,31 @@ components:
           type: array
           items:
             type: string
-        registratiedatum:
-          description: 'Het tijdstip waarop dit object is aangemaakt.'
-          type: string
-          format: date-time
-        wijzigingsdatum:
-          description: 'Het tijdstip waarop dit object voor het laatst is gewijzigd.'
-          type: string
-          format: date-time
         taal:
           type: string
           maxLength: 17
           minLength: 2
           example: NL
           description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+        registratiedatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
+          type: string
+          format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
+        eigenaar:
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          type: string
         huwelijkspartner: {  }
         emailadres: {  }
         telefoonnummer: {  }
@@ -3728,6 +4044,14 @@ components:
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
           description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           maxLength: 40
+        bronOrganisatie:
+          title: bronOrganisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         naam:
           description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
           type: string
@@ -3766,20 +4090,31 @@ components:
           description: 'Beschikbare ambtenaren voor dit soort huwelijk'
           items:
             type: string
-        registratiedatum:
-          description: 'Het tijdstip waarop dit object is aangemaakt.'
-          type: string
-          format: date-time
-        wijzigingsdatum:
-          description: 'Het tijdstip waarop dit object voor het laatst is gewijzigd.'
-          type: string
-          format: date-time
         taal:
           type: string
           maxLength: 17
           minLength: 2
           example: NL
           description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+        registratiedatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
+          type: string
+          format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
+        eigenaar:
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          type: string
       required:
         - naam
         - samenvatting
@@ -3840,23 +4175,18 @@ components:
           minLength: 2
           example: NL
           description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+        contactPersoon:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Het contact persoon voor deze ambtenaar'
       required:
         - naam
         - samenvatting
         - beschrijving
-    'User-user_user:read':
-      type: object
-      description: 'Een user of applicatie is een unique geidentificeerde entiteit wat een onderdeel van een organisatie kan zijn.'
-      properties:
-        fullname:
-          type: string
-    'User-user_user:write':
-      type: object
-      description: 'Een user of applicatie is een unique geidentificeerde entiteit wat een onderdeel van een organisatie kan zijn.'
-      properties:
-        fullname:
-          type: string
-        plainPassword: {  }
   securitySchemes:
     apiKey:
       type: apiKey
@@ -3881,7 +4211,7 @@ tags:
     name: Persoon
     description: 'Een ''NIET'' BRP persoon'
   -
-    name: Organisatie
+    name: Applicatie
     description: 'De organisatie wordt gebruikt om standaard configuraties in te regelen'
 x-tagGroups:
   -
@@ -3891,6 +4221,6 @@ x-tagGroups:
       - Soort
       - Persoon
   -
-    name: Organisatie
+    name: Applicatie
     tags:
-      - Organisatie
+      - Applicatie

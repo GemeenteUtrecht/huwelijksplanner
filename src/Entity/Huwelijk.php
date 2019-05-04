@@ -7,6 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use ApiPlatform\Core\Annotation\ApiSubresource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\BooleanFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -690,14 +695,36 @@ class Huwelijk implements StringableInterface
 	public $identificatie;
 	
 	/**
-	 * Het Huwelijk waartoe deze partner behoort
+	 * Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven
 	 *
-	 * @var \App\Entity\Organisatie
-	 * @ORM\ManyToOne(targetEntity="\App\Entity\Organisatie", cascade={"persist", "remove"}, inversedBy="huwelijken")
-	 * @ORM\JoinColumn(referencedColumnName="id")
-	 *
+	 * @var integer
+	 * @ORM\Column(
+	 *     type     = "integer",
+	 *     length   = 9
+	 * )
+	 * @Assert\Length(
+	 *      min = 8,
+	 *      max = 9,
+	 *      minMessage = "Het RSIN moet ten minste {{ limit }} karakters lang zijn",
+	 *      maxMessage = "Het RSIN kan niet langer dan {{ limit }} karakters zijn"
+	 * )
+	 * @Groups({"read"})
+	 * @ApiFilter(SearchFilter::class, strategy="exact")
+	 * @ApiFilter(OrderFilter::class)
+	 * @ApiProperty(
+	 *     attributes={
+	 *         "openapi_context"={
+	 *             "title"="bronOrganisatie",
+	 *             "type"="string",
+	 *             "example"="123456789",
+	 *             "required"="true",
+	 *             "maxLength"=9,
+	 *             "minLength"=8
+	 *         }
+	 *     }
+	 * )
 	 */
-	public $bronOrganisatie;
+	public $bronOrganisatie;	
 	
 	/**
 	 * URL-referentie naar de melding "ZAAK" van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>
@@ -938,10 +965,10 @@ class Huwelijk implements StringableInterface
 	public $producten;
 	
 	/**
-	 * Het tijdstip waarop deze entiteit is aangemaakt.
-	 * 
+	 * Het tijdstip waarop dit Ambtenaren object is aangemaakt
+	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
-     * @Gedmo\Timestampable(on="create")
+	 * @Gedmo\Timestampable(on="create")
 	 * @Assert\DateTime
 	 * @ORM\Column(
 	 *     type     = "datetime"
@@ -951,18 +978,54 @@ class Huwelijk implements StringableInterface
 	public $registratiedatum;
 	
 	/**
-	 * Het tijdstip waarop deze entiteit voor het laatst is gewijzigd.
-	 * 
+	 * Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.
+	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
 	 * @Gedmo\Timestampable(on="update")
 	 * @Assert\DateTime
 	 * @ORM\Column(
-	 *     type     = "datetime", 
+	 *     type     = "datetime",
 	 *     nullable	= true
 	 * )
 	 * @Groups({"read"})
 	 */
 	public $wijzigingsdatum;
+	
+	/**
+	 * Het contact persoon voor deze ambtenaar
+	 *
+	 * @ORM\Column(
+	 *     type     = "string",
+	 *     nullable = true
+	 * )
+	 * @Groups({"read", "write"})
+	 * @ApiProperty(
+	 *     attributes={
+	 *         "openapi_context"={
+	 *             "title"="Contactpersoon",
+	 *             "type"="url",
+	 *             "example"="https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65",
+	 *             "required"="true",
+	 *             "maxLength"=255,
+	 *             "format"="uri"
+	 *         }
+	 *     }
+	 * )
+	 * @Gedmo\Versioned
+	 */
+	public $contactPersoon;
+	
+	/**
+	 * De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt
+	 *
+	 * @var App\Entity\Applicatie $eigenaar
+	 *
+	 * @Gedmo\Blameable(on="create")
+	 * @ORM\ManyToOne(targetEntity="App\Entity\Applicatie")
+	 * @Groups({"read"})
+	 */
+	public $eigenaar;
+	
 	
 	/**
 	 * De taal waarin dit object is opgesteld <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>
