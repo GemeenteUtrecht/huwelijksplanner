@@ -174,7 +174,7 @@ class Persoon implements StringableInterface
 	public $identificatie;
 	
 	/**
-	 * Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven
+	 * Het RSIN van de organisatie waartoe deze Persoon behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven
 	 *
 	 * @var integer
 	 * @ORM\Column(
@@ -389,7 +389,7 @@ class Persoon implements StringableInterface
 	public $agenda;
 	
 	/**
-	 * Het tijdstip waarop dit object is aangemaakt.
+	 * Het tijdstip waarop dit Persoon object is aangemaakt.
 	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
 	 * @Gedmo\Timestampable(on="create")
@@ -402,7 +402,7 @@ class Persoon implements StringableInterface
 	public $registratiedatum;
 	
 	/**
-	 * Het tijdstip waarop dit object voor het laatst is gewijzigd.
+	 * Het tijdstip waarop dit Persoon object voor het laatst is gewijzigd.
 	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
 	 * @Gedmo\Timestampable(on="update")
@@ -496,6 +496,10 @@ class Persoon implements StringableInterface
 	public function setTelefoonnummer($telefoonnummer)
 	{
 		$this->telefoonnummer = $telefoonnummer;
+	}
+	public function getUrl()
+	{
+		return 'http://trouwen.demo.zaakonline.nl/personen/'.$this->id;
 	}	
 	
 	

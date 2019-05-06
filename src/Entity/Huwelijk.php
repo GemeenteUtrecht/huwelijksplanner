@@ -156,23 +156,6 @@ use App\Controller\HuwelijkController;
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
- *            	},
- *             	"produces" = {
- *         			"application/json"
- *            	},
- *             	"responses" = {
- *         			"200" = {
- *         				"description" = "Betaallink gevonden"
- *         			},	
- *         			"201" = {
- *         				"description" = "Betaallink aangemaakt"
- *         			},	
- *         			"400" = {
- *         				"description" = "Ongeldige aanvraag"
- *         			},
- *         			"404" = {
- *         				"description" = "Huwelijk niet gevonden"
- *         			}
  *            	}
  *         }
  *     },
@@ -681,7 +664,7 @@ class Huwelijk implements StringableInterface
 	public $identificatie;
 	
 	/**
-	 * Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven
+	 * Het RSIN van de organisatie waartoe deze huwelijk behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven
 	 *
 	 * @var integer
 	 * @ORM\Column(
@@ -951,7 +934,7 @@ class Huwelijk implements StringableInterface
 	public $producten;
 	
 	/**
-	 * Het tijdstip waarop dit Ambtenaren object is aangemaakt
+	 * Het tijdstip waarop dit Huwelijk object is aangemaakt
 	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
 	 * @Gedmo\Timestampable(on="create")
@@ -964,7 +947,7 @@ class Huwelijk implements StringableInterface
 	public $registratiedatum;
 	
 	/**
-	 * Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.
+	 * Het tijdstip waarop dit Huwelijk object voor het laatst is gewijzigd.
 	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
 	 * @Gedmo\Timestampable(on="update")
@@ -978,7 +961,7 @@ class Huwelijk implements StringableInterface
 	public $wijzigingsdatum;
 	
 	/**
-	 * Het contact persoon voor deze ambtenaar
+	 * Het contact persoon voor dit huwelijk
 	 *
 	 * @ORM\Column(
 	 *     type     = "string",
@@ -1244,7 +1227,7 @@ class Huwelijk implements StringableInterface
 	public $setProduct;	
 	
 	/**
-	 * Het ID van de ambtenaaar die je wilt verzoeken dit huwelijk te voltrekken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
+	 * Het ID van de ambtenaar die je wilt verzoeken dit huwelijk te voltrekken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
 	 *
 	 * @var integer
 	 * @ApiProperty(
@@ -1460,5 +1443,9 @@ class Huwelijk implements StringableInterface
 	public function getPartners()
 	{
 		return $this->partners;
+	}
+	public function getUrl()
+	{
+		return 'http://trouwen.demo.zaakonline.nl/huwelijken/'.$this->id;
 	}
 }

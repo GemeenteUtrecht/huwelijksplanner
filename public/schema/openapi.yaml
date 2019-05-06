@@ -1,29 +1,29 @@
 openapi: 3.0.2
 info:
   description: |
-    Welkom inovator! <br>
-    Fijn dat je de tijd en moeite hebt genomen om je te verdiepen in dit component. 
+    # Welkom innovator!
+    Fijn dat je de tijd en moeite hebt genomen om je te verdiepen in dit component. Het "trouwen" component bevat alle functionaliteit die nodig is om een huwelijk of partnerschap te kunnen sluiten en is ontwikkeld voor de gemeente utrecht. Het component kan bijvoorbeeld zaken aanmaken voor zaakgericht werken maar ook de voortgang binnen het trouwproces bijhouden en tonen.
     
-    # Introductie                
-    Het trouwen component bevat alle functionaliteit die nodig is om een huwelijk of partnerschap te kunnen sluiten en is ontwikkeld voor de gemeente utrecht. Het component kan bijvoorbeeld zaken aanmaken voor zaakgericht werken maar ook de voortgang binnen het trouwproces bijhouden en tonen.
+    # Ondersteuning
+    Wordt lid van het slackkanaal [https://zaakonline.slack.com](https://zaakonline.slack.com) voor ondersteuning door het ontwikkel team. En regelmatige updates over de ontwikkelingen op het gebied van de zaakonline componenten.
     
     # Common ground en open source
-    Om het voor andere partijen zo makkelijk mogenlijk te maken dit component bieden we zo veel mogenlijk informatie openbaar aan.  
+    Om het voor alle partijen zo makkelijk mogelijk te maken, stellen we zo veel mogelijk informatie over dit component openbaar beschikbaar.
     - [datamodel als pdf](/schema/datamodel.pdf)
     - [datamodel als mwb](/schema/datamodel.mwb)
     - [codebase op github](https://github.com/GemeenteUtrecht/trouwen)
     - [codebase als zip](https://github.com/GemeenteUtrecht/trouwen/archive/conduction.zip)
     - [docker container](https://cloud.docker.com/u/huwelijksplanner/repository/docker/huwelijksplanner/trouwen-php)
-    - [online demo](http://trouwen.demo.zaakonline.nl/)
+    - [online demo](https://trouwen.demo.zaakonline.nl/)
     
     # OpenAPI Specification
     Deze API is gedocumenteerd in het **OpenAPI format** 
-    De API bevat Cross-Origin Resource Sharing (CORS) en is geimplementeerd volgens de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin", dit maakt ze publiekelijk en toegankelijk voor iedereen. Dat geldt voor elke code, op elke site.
+    De API bevat Cross-Origin Resource Sharing (CORS) en is geïmplementeerd volgens de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin", dit maakt ze openbaar en dus toegankelijk voor iedereen. Dat geldt voor elke code, op elke site.
     
     # Filteren en Sorteren
-    Het is mogelijk om resulten van deze API te filteren aan de hand van query parameters, deze worden meegegeven in de url tijdens het aanroepen van een endpoint, door extra waarden toe te voegen na een vraagteken. Toevoegen ?bronOrganisatie=12345689 (volledige endpoint  /huwelijk?bronOrganisatie=12345689), zorgt er bijvoorbeeld voor dat alleen huwelijken met bronOrganisatie (ofwel rsin/organisatie) 123456789 worden weergegeven.
+    Het is mogelijk om resulten van deze API te filteren aan de hand van query parameters, deze worden meegegeven in de url tijdens het aanroepen van een endpoint, door extra waarden toe te voegen na een vraagteken. Bijvoorbeeld: ?bronOrganisatie=12345689 (*volledige endpoint  /huwelijken?bronOrganisatie=12345689*), zorgt ervoor dat alleen huwelijken met bronOrganisatie (ofwel rsin/organisatie) 123456789 worden weergegeven.
     
-    Voor het filteren op datum geldt dat er een weegmethode moet worden meegegeven, voor de waardes geldt dat elke door [PHP datetime](https://php.net/manual/en/datetime.construct.php) ondersteunde waarde kan worden gebruikt. Verschillende methoden kunnen worden gebruikt om een spreiding te selecteren (bijvoorbeeld /huwelijk?wijzigingsdatum[after]=2019-01-01&wijzigingsdatum[before]=2019-02-01 om alle huwelijken gewijzigd in Januari 2019 te selecteren.
+    Voor het filteren op datum geldt dat er een weegmethode moet worden meegegeven. Voor deze waardes geldt dat elke door [PHP datetime](https://php.net/manual/en/datetime.construct.php) ondersteunde waarde kan worden gebruikt. Verschillende methoden kunnen worden gebruikt om een spreiding te selecteren bijvoorbeeld: */huwelijken?wijzigingsdatum[after]=2019-01-01&wijzigingsdatum[before]=2019-02-01*, om alle huwelijken gewijzigd in Januari 2019 te selecteren.
     
     De mogelijke weegmethoden voor datum vergelijking zijn:
      - after -> Data groter en gelijk aan
@@ -31,12 +31,12 @@ info:
      - strictly_after -> Data groter dan
      - strictly_before -> Data kleiner dan                                               
     
-    Daarnaast kunnen de resultaten ook worden gesorteerd, dit gaat aan de hand van de order parameter, gevolgd door desc (aflopend) of asc (oplopend). Er kunnen meerdere order parameters op volgorde van toepassing worden meegegeven (bijvoorbeeld https://trouwen.demo.zaakonline.nl/huwelijk?order[bronOrganisatie]=desc&order[identificatie]=asc)
+    Daarnaast kunnen de resultaten ook worden gesorteerd, dit gaat aan de hand van de order parameter, gevolgd door desc (aflopend) of asc (oplopend). Er kunnen meerdere order parameters op volgorde van toepassing worden meegegeven (bijvoorbeeld: https://trouwen.demo.zaakonline.nl/huwelijken?order[bronOrganisatie]=desc&order[identificatie]=asc)
     
     Kijk voor meer details over de mogelijkheden voor filteren en sorteren bij de GET (verzamel) endpoint van de entiteit die je wilt ophalen.
     
     # Scopes
-    Applicaties kunnen op deze API alleen wijzigingen uitvoeren waarvoor zij over de juiste rechten(scopes) beschikken. De op deze api verschikbare scopes zijn:
+    Applicaties kunnen op deze API alleen wijzigingen uitvoeren waarvoor zij over de juiste rechten(scopes) beschikken. De op deze api berschikbare scopes zijn:
      - huwelijk:schrijven
      - huwelijk:lezen
      - huwelijk:maken
@@ -59,7 +59,7 @@ info:
     
     JWT Tokens kunnen zowel worden verlengd, als opnieuw worden aangevraagd, dit aan de hand van de applicatie id en sleutel.
     
-    Let er bij het meegeven van JWT tokens op dat deze vooraf gedaan moeten worden door een Bearer en een spatie, onder de header Authorization. De volledig naam wordt daarmee: 'Authorization: Bearer [TOKEN]'
+    Let er bij het meegeven van JWT tokens op dat deze moet worden voorafgegaan door een Bearer en een spatie, onder de header Authorization. De volledig naam wordt daarmee: 'Authorization: Bearer [TOKEN]'.
     
   version: 0.0.1
   title: 'Trouwen API'
@@ -78,7 +78,7 @@ paths:
   '/applicatie/{id}':
     get:
       summary: 'Haal op'
-      description: 'Haalt een Applicatie op'
+      description: 'Haal een Applicatie op'
       tags:
         - Applicatie
       operationId: getApplicatieItem
@@ -106,7 +106,7 @@ paths:
           description: 'Resource not found'
     put:
       summary: 'Werk bij'
-      description: 'Werk een Applicatie bij'
+      description: 'Werk een Applicatie bij.'
       responses:
         202:
           description: 'applicatie bijgewerkt'
@@ -139,7 +139,7 @@ paths:
   '/applicatie/{id}/log':
     get:
       summary: Logboek
-      description: 'Bekijk de wijzigingen op dit Applicatie object'
+      description: 'Bekijk de wijzigingen op dit Applicatie object.'
       consumes:
         - application/json
         - text/html
@@ -656,17 +656,6 @@ paths:
       consumes:
         - application/json
         - text/html
-      produces:
-        - application/json
-      responses:
-        200:
-          description: 'Betaallink gevonden'
-        201:
-          description: 'Betaallink aangemaakt'
-        400:
-          description: 'Ongeldige aanvraag'
-        404:
-          description: 'Huwelijk niet gevonden'
       tags:
         - Huwelijk
       operationId: payHuwelijkItem
@@ -677,6 +666,21 @@ paths:
           required: true
           schema:
             type: string
+      responses:
+        200:
+          description: 'Huwelijk resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Huwelijk-payment'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Huwelijk-payment'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Huwelijk-payment'
+        404:
+          description: 'Resource not found'
   '/huwelijk/{id}/removeDocument':
     post:
       summary: 'Verwijder document'
@@ -2161,9 +2165,9 @@ paths:
         - application/json
       responses:
         200:
-          description: 'Applicatie succesvol ingeloged'
+          description: 'Applicatie succesvol ingelogd'
         401:
-          description: 'Applicatie niet ingeloged'
+          description: 'Applicatie niet ingelogd'
       tags:
         - Applicatie
       operationId: loginApplicatieCollection
@@ -2663,7 +2667,7 @@ components:
           maxLength: 16
           minLength: 5
           example: NietZoGeheim
-          description: 'Een door de organisatie opgegeven sleutel waarmee deze Applicatie zich identificeerd bij het ophalen van en JWT token.'
+          description: 'Een door de organisatie opgegeven sleutel waarmee deze Applicatie zich identificeert bij het ophalen van en JWT token.'
         scopes:
           type: array
           example: '[]'
@@ -2674,7 +2678,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Applicatie behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
+          description: 'Het RSIN van de organisatie waartoe deze Applicatie behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
         isActief:
           description: 'Word gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden'
           type: boolean
@@ -2693,7 +2697,7 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'De contactpersoon voor deze Applicatie, die bijvoorbeeld word verwittigd bij misbruik.'
+          description: 'De contactpersoon voor deze Applicatie, die bijvoorbeeld wordt verwittigd bij misbruik.'
         fullname:
           readOnly: true
           type: string
@@ -2701,7 +2705,7 @@ components:
           readOnly: true
           type: boolean
         username:
-          description: 'Username wordt door symfony gebruikt voor de gebruikersnaam maar in de context commonground component api gebruken we hem niet en onderdruken we hem door hem aan geen groupen toe te wijzen'
+          description: 'Username wordt door symfony gebruikt voor de gebruikersnaam maar in de context common ground component api gebruiken we hem niet en onderdrukken we hem door hem aan geen groepen toe te wijzen'
         password:
           readOnly: true
         salt:
@@ -2722,7 +2726,7 @@ components:
           maxLength: 16
           minLength: 5
           example: NietZoGeheim
-          description: 'Een door de organisatie opgegeven sleutel waarmee deze Applicatie zich identificeerd bij het ophalen van en JWT token.'
+          description: 'Een door de organisatie opgegeven sleutel waarmee deze Applicatie zich identificeert bij het ophalen van en JWT token.'
     'Applicatie-applicatie:lezen':
       type: object
       description: 'Een Applicatie die is geidentificeerd en geautoriceerd om namens een organisatie wijzigingen uit te voeren'
@@ -2740,7 +2744,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Applicatie behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
+          description: 'Het RSIN van de organisatie waartoe deze Applicatie behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
         isActief:
           description: 'Word gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden'
           type: boolean
@@ -2759,7 +2763,7 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'De contactpersoon voor deze Applicatie, die bijvoorbeeld word verwittigd bij misbruik.'
+          description: 'De contactpersoon voor deze Applicatie, die bijvoorbeeld wordt verwittigd bij misbruik.'
     'Applicatie-applicatie:maken':
       type: object
       description: 'Een Applicatie die is geidentificeerd en geautoriceerd om namens een organisatie wijzigingen uit te voeren'
@@ -2774,7 +2778,7 @@ components:
           maxLength: 16
           minLength: 5
           example: NietZoGeheim
-          description: 'Een door de organisatie opgegeven sleutel waarmee deze Applicatie zich identificeerd bij het ophalen van en JWT token.'
+          description: 'Een door de organisatie opgegeven sleutel waarmee deze Applicatie zich identificeert bij het ophalen van en JWT token.'
         scopes:
           type: array
           example: '[]'
@@ -2785,7 +2789,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Applicatie behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
+          description: 'Het RSIN van de organisatie waartoe deze Applicatie behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
         contactPersoon:
           title: Ambtenaar
           type: url
@@ -2793,7 +2797,7 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'De contactpersoon voor deze Applicatie, die bijvoorbeeld word verwittigd bij misbruik.'
+          description: 'De contactpersoon voor deze Applicatie, die bijvoorbeeld wordt verwittigd bij misbruik.'
     Huwelijk:
       type: object
       description: Huwelijk
@@ -2810,7 +2814,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe deze huwelijk behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         melding:
           title: ZAAK
           type: string
@@ -2895,11 +2899,11 @@ components:
           items:
             type: string
         registratiedatum:
-          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
+          description: 'Het tijdstip waarop dit Huwelijk object is aangemaakt'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Huwelijk object voor het laatst is gewijzigd.'
           type: string
           format: date-time
         contactPersoon:
@@ -2909,7 +2913,7 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contact persoon voor deze ambtenaar'
+          description: 'Het contact persoon voor dit huwelijk'
         eigenaar:
           description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
@@ -3000,7 +3004,7 @@ components:
           format: UUID
           required: 'true'
           readOnly: false
-          description: 'Het ID van de ambtenaaar die je wilt verzoeken dit huwelijk te voltrekken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'Het ID van de ambtenaar die je wilt verzoeken dit huwelijk te voltrekken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
         bsn:
           type: string
           format: UUID
@@ -3160,7 +3164,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe deze huwelijk behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         melding:
           title: ZAAK
           type: string
@@ -3245,11 +3249,11 @@ components:
           items:
             type: string
         registratiedatum:
-          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
+          description: 'Het tijdstip waarop dit Huwelijk object is aangemaakt'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Huwelijk object voor het laatst is gewijzigd.'
           type: string
           format: date-time
         contactPersoon:
@@ -3259,7 +3263,7 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contact persoon voor deze ambtenaar'
+          description: 'Het contact persoon voor dit huwelijk'
         eigenaar:
           description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
@@ -3303,7 +3307,7 @@ components:
           format: UUID
           required: 'true'
           readOnly: false
-          description: 'Het ID van de ambtenaaar die je wilt verzoeken dit huwelijk te voltrekken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'Het ID van de ambtenaar die je wilt verzoeken dit huwelijk te voltrekken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
     Huwelijk-setLocation:
       type: object
       description: Huwelijk
@@ -3372,7 +3376,7 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contact persoon voor deze ambtenaar'
+          description: 'Het contact persoon voor dit huwelijk'
         taal:
           type: string
           example: nl
@@ -3775,7 +3779,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe deze Persoon behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         voornamen:
           type: string
           maxLength: 255
@@ -3814,11 +3818,11 @@ components:
           format: uri
           description: 'URL-referentie naar de agenda van dit persoon'
         registratiedatum:
-          description: 'Het tijdstip waarop dit object is aangemaakt.'
+          description: 'Het tijdstip waarop dit Persoon object is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Persoon object voor het laatst is gewijzigd.'
           type: string
           format: date-time
         taal:
@@ -3828,6 +3832,8 @@ components:
           example: NL
           description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
         huwelijkspartner: {  }
+        url:
+          readOnly: true
     Persoon-read:
       type: object
       description: Persoon
@@ -3847,7 +3853,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe deze Persoon behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         voornamen:
           type: string
           maxLength: 255
@@ -3886,11 +3892,11 @@ components:
           format: uri
           description: 'URL-referentie naar de agenda van dit persoon'
         registratiedatum:
-          description: 'Het tijdstip waarop dit object is aangemaakt.'
+          description: 'Het tijdstip waarop dit Persoon object is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Persoon object voor het laatst is gewijzigd.'
           type: string
           format: date-time
         taal:
@@ -3973,7 +3979,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         naam:
           description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
           type: string
@@ -4024,11 +4030,11 @@ components:
           example: NL
           description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
         registratiedatum:
-          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
+          description: 'Het tijdstip waarop dit Soort object is aangemaakt'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Soort object voor het laatst is gewijzigd.'
           type: string
           format: date-time
         contactPersoon:
@@ -4038,13 +4044,15 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contact persoon voor deze ambtenaar'
+          description: 'Het contactpersoon voor het Soort object'
         eigenaar:
           description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
         huwelijkspartner: {  }
         emailadres: {  }
         telefoonnummer: {  }
+        url:
+          readOnly: true
       required:
         - naam
         - samenvatting
@@ -4068,7 +4076,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
         naam:
           description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
           type: string
@@ -4114,11 +4122,11 @@ components:
           example: NL
           description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
         registratiedatum:
-          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
+          description: 'Het tijdstip waarop dit Soort object is aangemaakt'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Soort object voor het laatst is gewijzigd.'
           type: string
           format: date-time
         contactPersoon:
@@ -4128,7 +4136,7 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contact persoon voor deze ambtenaar'
+          description: 'Het contactpersoon voor het Soort object'
         eigenaar:
           description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
@@ -4199,7 +4207,7 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contact persoon voor deze ambtenaar'
+          description: 'Het contactpersoon voor het Soort object'
       required:
         - naam
         - samenvatting
@@ -4215,7 +4223,7 @@ servers:
     url: //trouwen.zaakonline.nl/
     description: 'Sandbox server'
 externalDocs:
-  description: 'Find out more in depth information on the working of the zaakonline code base.'
+  description: 'Vind hier meer informatie over de zaakonline code base.'
   url: 'https://github.com/ConductionNL/zaakonline'
 tags:
   -
@@ -4229,7 +4237,7 @@ tags:
     description: 'Een ''NIET'' BRP persoon'
   -
     name: Applicatie
-    description: 'De organisatie wordt gebruikt om standaard configuraties in te regelen'
+    description: 'Een software applicatie binnen een organisatie die gebruik maakt van een component voor het creëren, ophalen, bijwerken of verwijderen van gegevens. Applicaties kunnen worden geregistreerd om namens een organisatie te handelen op een component. In deze zin zijn applicaties dan ook onderdeel van het beheerproces, infrastructuur en configuratie van een component in plaats van het datamodel dat door het component wordt geleverd.'
 x-tagGroups:
   -
     name: Trouwen
