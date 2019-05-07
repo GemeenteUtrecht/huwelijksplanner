@@ -16,7 +16,7 @@ parameters:
                 Fijn dat je de tijd en moeite hebt genomen om je te verdiepen in dit component. Het "trouwen" component bevat alle functionaliteit die nodig is om een huwelijk of partnerschap te kunnen sluiten en is ontwikkeld voor de gemeente utrecht. Het component kan bijvoorbeeld zaken aanmaken voor zaakgericht werken maar ook de voortgang binnen het trouwproces bijhouden en tonen.
 
                 # Ondersteuning
-                Wordt lid van het slackkanaal [https://zaakonline.slack.com](https://zaakonline.slack.com) voor ondersteuning door het ontwikkel team. En regelmatige updates over de ontwikkelingen op het gebied van de zaakonline componenten.
+                Word lid van het slackkanaal [https://zaakonline.slack.com](https://zaakonline.slack.com) voor ondersteuning door het ontwikkel team. En krijg regelmatig updates over de ontwikkelingen op het gebied van de zaakonline componenten.
              
                 # Common ground en open source
                 Om het voor alle partijen zo makkelijk mogelijk te maken, stellen we zo veel mogelijk informatie over dit component openbaar beschikbaar.
@@ -47,7 +47,7 @@ parameters:
                 Kijk voor meer details over de mogelijkheden voor filteren en sorteren bij de GET (verzamel) endpoint van de entiteit die je wilt ophalen.
                 
                 # Scopes
-                Applicaties kunnen op deze API alleen wijzigingen uitvoeren waarvoor zij over de juiste rechten(scopes) beschikken. De op deze api berschikbare scopes zijn:
+                Applicaties kunnen op deze API alleen wijzigingen uitvoeren waarvoor zij over de juiste rechten(scopes) beschikken. De op deze api beschikbare scopes zijn:
                  - huwelijk:schrijven
                  - huwelijk:lezen
                  - huwelijk:maken

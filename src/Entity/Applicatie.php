@@ -40,7 +40,7 @@ use App\Controller\UserController;
  *      	"path"="/applicaties",
  *  		"openapi_context" = {
  * 				"summary" = "Verzameling",
- *         		"description" = "Haal een verzameling van Applicaties op, het is mogelijk om deze resultaten te filteren aan de hand van query parameters. <br><br>Lees meer over het filteren van resulaten onder [filteren](/#section/Filteren)."            
+ *         		"description" = "Haal een verzameling van Applicaties op, het is mogelijk om deze resultaten te filteren aan de hand van query parameters. <br><br>Lees meer over het filteren van resultaten onder [filteren](/#section/Filteren)."            
  *  		}
  *  	},
  *     "register"={
@@ -52,22 +52,7 @@ use App\Controller\UserController;
  *
  *         "openapi_context" = {
  *         		"summary" = "Registreren",
- *         		"description" = "Registreer een nieuwe Applicatie voor dit component",
- *          	"consumes" = {
- *              	"application/json",
- *               	"text/html",
- *            	},
- *             	"produces" = {
- *         			"application/json"
- *            	},
- *             	"responses" = {
- *         			"201" = {
- *         				"description" = "Applicatie aangemaakt"
- *         			},
- *         			"400" = {
- *         				"description" = "Ongeldige aanvraag"
- *         			}
- *            	}
+ *         		"description" = "Registreer een nieuwe Applicatie voor dit component"
  *         }
  *     },
  *     "login"={
@@ -78,22 +63,7 @@ use App\Controller\UserController;
  *     	   "denormalization_context"={"groups"={"applicatie:inloggen"}}, 
  *         "openapi_context" = {
  *         		"summary" = "Token halen",
- *         		"description" = "Inloggen als Applicatie en JWT Token ophalen",
- *          	"consumes" = {
- *              	"application/json",
- *               	"text/html",
- *            	},
- *             	"produces" = {
- *         			"application/json"
- *            	},
- *             	"responses" = {
- *         			"200" = {
- *         				"description" = "Applicatie succesvol ingelogd"
- *         			},
- *         			"401" = {
- *         				"description" = "Applicatie niet ingelogd"
- *         			}
- *            	}
+ *         		"description" = "Inloggen als Applicatie en JWT Token ophalen"
  *         }
  *     },
  *  },
@@ -113,18 +83,7 @@ use App\Controller\UserController;
  *      	"path"="/applicatie/{id}",
  *  		"openapi_context" = {
  * 				"summary" = "Werk bij",
- *         		"description" = "Werk een Applicatie bij.",
- *             	"responses" = {
- *         			"202" = {
- *         				"description" = "applicatie bijgewerkt"
- *         			},	
- *         			"400" = {
- *         				"description" = "Ongeldige aanvraag"
- *         			},
- *         			"404" = {
- *         				"description" = "Applicatie niet gevonden"
- *         			}
- *            	}            
+ *         		"description" = "Werk een Applicatie bij"
  *  		}
  *  	},
  *     "log"={
@@ -135,11 +94,7 @@ use App\Controller\UserController;
  *     		"denormalization_context"={"groups"={"applicatie:schrijven"}},
  *         	"openapi_context" = {
  *         		"summary" = "Logboek",
- *         		"description" = "Bekijk de wijzigingen op dit Applicatie object.",
- *          	"consumes" = {
- *              	"application/json",
- *               	"text/html",
- *            	}
+ *         		"description" = "Bekijk de wijzigingen op dit Applicatie object"
  *         }
  *     }
  *  }
