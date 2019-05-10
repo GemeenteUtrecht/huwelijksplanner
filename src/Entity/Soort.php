@@ -238,7 +238,7 @@ class Soort implements StringableInterface
 	public $naam;
 	
 	/**
-	 * Een samenvattende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>
+	 * Een korte samenvattende tekst over deze huwelijks soort bedoeld ter introductie.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>
 	 *
 	 * @var string
 	 *
@@ -271,7 +271,7 @@ class Soort implements StringableInterface
 	public $samenvatting;
 	
 	/**
-	 * Een beschrijvende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>
+	 * EenEen uitgebreide beschrijvende tekst over deze huwelijks soort bedoeld ter verdere verduidelijking.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>
 	 *
 	 * @var string
 	 *

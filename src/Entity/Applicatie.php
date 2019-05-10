@@ -231,7 +231,7 @@ class Applicatie implements UserInterface, StringableInterface
 	public $organisatie;	
 	
 	/**
-	 * Word gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden
+	 * Wordt gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden
 	 * 
 	 * @Groups({"applicatie:lezen","applicatie:schrijven"})
      * @ApiFilter(BooleanFilter::class)
@@ -306,7 +306,7 @@ class Applicatie implements UserInterface, StringableInterface
 	 */
 	
 	/**
-	 * Username wordt door symfony gebruikt voor de gebruikersnaam maar in de context common ground component api gebruiken we hem niet en onderdrukken we hem door hem aan geen groepen toe te wijzen
+	 * Username wordt door symfony gebruikt voor de gebruikersnaam maar in de context common ground component api gebruiken we hem niet en onderdrukken we hem door hem niet toe te wijzen aan groepen.
 	 *
 	 * @Groups({"none"})
 	 */
