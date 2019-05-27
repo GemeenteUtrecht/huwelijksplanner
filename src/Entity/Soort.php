@@ -38,7 +38,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/type",
  *  		"openapi_context" = {
- * 				"summary" = "Haalt een verzameling van huwelijks types op"
+ * 				"summary" = "Haalt een verzameling van huwelijkstypes op."
  *  		}
  *  	},
  *  	"post"={
@@ -46,7 +46,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"personen"={"groups"={"write"}},
  *      	"path"="/personen",
  *  		"openapi_context" = {
- * 				"summary" = "Voeg een persoon toe aan een huwelijk"
+ * 				"summary" = "Voeg een persoon toe aan een huwelijk."
  *  		}
  *  	}
  *  },
@@ -56,7 +56,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/types/{id}",
  *  		"openapi_context" = {
- * 				"summary" = "Haalt een specifiek huwelijks type op"
+ * 				"summary" = "Haalt een specifiek huwelijks type op."
  *  		}
  *  	},
  *     "put"={
@@ -64,7 +64,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/types/{id}",
  *  		"openapi_context" = {
- * 				"summary" = "Vervang een specifiek issue huwelijks type"
+ * 				"summary" = "Vervang een specifiek issue huwelijks type."
  *  		}
  *  	},
  *     "delete"={
@@ -72,7 +72,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/types/{id}",
  *  		"openapi_context" = {
- * 				"summary" = "Verwijder een specifiek huwelijks type"
+ * 				"summary" = "Verwijder een specifiek huwelijks type."
  *  		}
  *  	},
  *     "log"={
@@ -83,7 +83,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *     		"denormalization_context"={"groups"={"write"}},
  *         	"openapi_context" = {
  *         		"summary" = "Logboek inzien",
- *         		"description" = "Geeft een array van eerdere versies en wijzigingen van dit object",
+ *         		"description" = "Geeft een array van eerdere versies en wijzigingen van dit object.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -97,8 +97,8 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *     		"normalization_context"={"groups"={"read"}},
  *     		"denormalization_context"={"groups"={"write"}},
  *         	"openapi_context" = {
- *         		"summary" = "Versie terugdraaid",
- *         		"description" = "Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt",
+ *         		"summary" = "Versie herstellen.",
+ *         		"description" = "Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -132,7 +132,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
 class Soort implements StringableInterface
 {
 	/**
-	 * Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
+	 * Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.
 	 * 
 	 * @var int|null
 	 *
@@ -145,7 +145,7 @@ class Soort implements StringableInterface
 	public $id;
 	
 	/**
-	 * De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
+	 * De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.
 	 *
 	 * @var string
 	 * @ORM\Column(
@@ -155,7 +155,7 @@ class Soort implements StringableInterface
 	 * )
 	 * @Assert\Length(
 	 *      max = 40,
-	 *      maxMessage = "Het RSIN kan niet langer dan {{ limit }} karakters zijn"
+	 *      maxMessage = "Het RSIN kan niet langer dan {{ limit }} karakters zijn."
 	 * )
 	 * @Groups({"read", "write"})
 	 * @ApiProperty(
@@ -173,7 +173,7 @@ class Soort implements StringableInterface
 	public $identificatie;
 	
 	/**
-	 * Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven
+	 * Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven.
 	 *
 	 * @var integer
 	 * @ORM\Column(
@@ -183,8 +183,8 @@ class Soort implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 8,
 	 *      max = 9,
-	 *      minMessage = "Het RSIN moet ten minste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "Het RSIN kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "Het RSIN moet minimaal {{ limit }} karakters lang zijn.",
+	 *      maxMessage = "Het RSIN mag maximaal {{ limit }} karakters zijn."
 	 * )
 	 * @Groups({"read"})
 	 * @ApiFilter(SearchFilter::class, strategy="exact")
@@ -205,7 +205,7 @@ class Soort implements StringableInterface
 	public $bronOrganisatie;	
 	
 	/**
-	 * De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>
+	 * De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>.
 	 *
 	 * @var string
 	 *
@@ -219,8 +219,8 @@ class Soort implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 5,
 	 *      max = 255,
-	 *      minMessage = "De naam moet ten minste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "De naam kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "De naam moet minimaal {{ limit }} karakters lang zijn.",
+	 *      maxMessage = "De naam mag maximaal {{ limit }} karakters zijn."
 	 * )
 	 * @Groups({"read", "write"})
 	 * @ApiProperty(
@@ -238,7 +238,7 @@ class Soort implements StringableInterface
 	public $naam;
 	
 	/**
-	 * Een korte samenvattende tekst over deze huwelijks soort bedoeld ter introductie.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>
+	 * Een korte samenvattende tekst over deze huwelijk soort bedoeld ter introductie.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>.
 	 *
 	 * @var string
 	 *
@@ -251,8 +251,8 @@ class Soort implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 25,
 	 *      max = 2000,
-	 *      minMessage = "De sammnvatting moet ten minste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "De samenvatting kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "De sammnvatting moet minimaal {{ limit }} karakters lang zijn",
+	 *      maxMessage = "De samenvatting mag maximaal {{ limit }} karakters zijn"
 	 * )
 	 *
 	 * @Groups({"read", "write"})
@@ -263,7 +263,7 @@ class Soort implements StringableInterface
 	 *             "type"="string",
 	 *             "minLength"=25,
 	 *             "maxLength"=2000,
-	 *             "example"="Deze prachtige locatie is zeker het aanbevelen waard"
+	 *             "example"="Deze prachtige locatie is zeker het aanbevelen waard."
 	 *         }
 	 *     }
 	 * )
@@ -271,7 +271,7 @@ class Soort implements StringableInterface
 	public $samenvatting;
 	
 	/**
-	 * EenEen uitgebreide beschrijvende tekst over deze huwelijks soort bedoeld ter verdere verduidelijking.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>
+	 * Een uitgebreide beschrijvende tekst over deze huwelijk soort bedoeld ter verdere verduidelijking.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>.
 	 *
 	 * @var string
 	 *
@@ -284,8 +284,8 @@ class Soort implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 25,
 	 *      max = 2000,
-	 *      minMessage = "De beschrijving moet ten minste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "De beschrijving kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "De beschrijving moet minimaal {{ limit }} karakters lang zijn.",
+	 *      maxMessage = "De beschrijving mag maximaal {{ limit }} karakters zijn."
 	 * )
 	 * @Groups({"read", "write"})
 	 * @ApiProperty(
@@ -295,7 +295,7 @@ class Soort implements StringableInterface
 	 *             "type"="string",
 	 *             "minLength"=25,
 	 *             "maxLength"=2000,
-	 *             "example"="Deze uitsterst sfeervolle trouwzaal is de droom van ieder koppel"
+	 *             "example"="Deze uitsterst sfeervolle trouwzaal is de droom van ieder koppel."
 	 *         }
 	 *     }
 	 * )
@@ -303,7 +303,7 @@ class Soort implements StringableInterface
 	public $beschrijving;	
 	
 	/**
-	 * Het primaire product dat wordt gebruikt om dit huwelijk te verekenen
+	 * Het primaire product dat wordt gebruikt om dit huwelijk te verekenen.
 	 *
 	 * @ORM\Column(
 	 *     type     = "string",
@@ -328,7 +328,7 @@ class Soort implements StringableInterface
 	public $product;
 	
 	/**
-	 *  Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen
+	 *  Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.
 	 *
 	 * @var array
 	 * @ORM\Column(
@@ -350,7 +350,7 @@ class Soort implements StringableInterface
 	public $extraProducten;
 	
 	/**
-	 *  Beschikbare locaties voor dit soort huwelijk
+	 *  Beschikbare locaties voor dit soort huwelijk.
 	 *
 	 * @var array
 	 * @ORM\Column(
@@ -372,7 +372,7 @@ class Soort implements StringableInterface
 	public $locaties;	
 	
 	/**
-	 * Beschikbare ambtenaren voor dit soort huwelijk
+	 * Beschikbare ambtenaren voor dit soort huwelijk.
 	 *
 	 * @var array
 	 * @ORM\Column(
@@ -394,7 +394,7 @@ class Soort implements StringableInterface
 	public $ambtenaren;
 	
 	/**
-	 * De huwelijken die gebruik maken van deze huwelijks soort
+	 * De huwelijken die gebruik maken van deze huwelijk soort.
 	 *
 	 * @todo eigenlijk setten met een primary flag op het onderliggende object en dan een collection filter
 	 *
@@ -409,7 +409,7 @@ class Soort implements StringableInterface
 	public $huwelijken;
 		
 	/**
-	 * De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>
+	 * De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.
 	 *
 	 * @var string Een Unicode language identifier, ofwel RFC 3066 taalcode.
 	 *
@@ -422,8 +422,8 @@ class Soort implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 2,
 	 *      max = 17,
-	 *      minMessage = "De taal moet tenminste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "De taal kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "De taal moet minimaal {{ limit }} karakters lang zijn.",
+	 *      maxMessage = "De taal mag maximaal {{ limit }} karakters zijn."
 	 * )
 	 * @ApiProperty(
 	 *     attributes={
@@ -440,7 +440,7 @@ class Soort implements StringableInterface
 	public $taal = 'nl';
 	
 	/**
-	 * Het tijdstip waarop dit Soort object is aangemaakt
+	 * Het tijdstip waarop dit Soort object is aangemaakt.
 	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
 	 * @Gedmo\Timestampable(on="create")
@@ -467,7 +467,7 @@ class Soort implements StringableInterface
 	public $wijzigingsdatum;
 	
 	/**
-	 * Het contactpersoon voor het Soort object
+	 * De contactpersoon voor het Soort object.
 	 *
 	 * @ORM\Column(
 	 *     type     = "string",
@@ -491,7 +491,7 @@ class Soort implements StringableInterface
 	public $contactPersoon;
 	
 	/**
-	 * Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.
+	 * Met eigenaar wordt bijgehouden welke applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.
 	 *
 	 * @var App\Entity\Applicatie $eigenaar
 	 *

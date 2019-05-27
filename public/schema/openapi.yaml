@@ -5,7 +5,7 @@ info:
     Fijn dat je de tijd en moeite hebt genomen om je te verdiepen in dit component. Het "trouwen" component bevat alle functionaliteit die nodig is om een huwelijk of partnerschap te kunnen sluiten en is ontwikkeld voor de gemeente utrecht. Het component kan bijvoorbeeld zaken aanmaken voor zaakgericht werken maar ook de voortgang binnen het trouwproces bijhouden en tonen.
     
     # Ondersteuning
-    Wordt lid van het slackkanaal [https://zaakonline.slack.com](https://zaakonline.slack.com) voor ondersteuning door het ontwikkel team. En regelmatige updates over de ontwikkelingen op het gebied van de zaakonline componenten.
+    Word lid van het slackkanaal [https://zaakonline.slack.com](https://zaakonline.slack.com) voor ondersteuning door het ontwikkel team. En krijg regelmatig updates over de ontwikkelingen op het gebied van de zaakonline componenten.
     
     # Common ground en open source
     Om het voor alle partijen zo makkelijk mogelijk te maken, stellen we zo veel mogelijk informatie over dit component openbaar beschikbaar.
@@ -21,7 +21,7 @@ info:
     De API bevat Cross-Origin Resource Sharing (CORS) en is geïmplementeerd volgens de [W3C spec](https://www.w3.org/TR/cors/) standaarden. De API staat cross-domain communicatie van de browser toe. Alle responses hebben een "wildcard same-origin", dit maakt ze openbaar en dus toegankelijk voor iedereen. Dat geldt voor elke code, op elke site.
     
     # Filteren en Sorteren
-    Het is mogelijk om resulten van deze API te filteren aan de hand van query parameters, deze worden meegegeven in de url tijdens het aanroepen van een endpoint, door extra waarden toe te voegen na een vraagteken. Bijvoorbeeld: ?bronOrganisatie=12345689 (*volledige endpoint  /huwelijken?bronOrganisatie=12345689*), zorgt ervoor dat alleen huwelijken met bronOrganisatie (ofwel rsin/organisatie) 123456789 worden weergegeven.
+    Het is mogelijk om resultaten van deze API te filteren aan de hand van query parameters, deze worden meegegeven in de url tijdens het aanroepen van een endpoint, door extra waarden toe te voegen na een vraagteken. Bijvoorbeeld: ?bronOrganisatie=12345689 (*volledige endpoint  /huwelijken?bronOrganisatie=12345689*), zorgt ervoor dat alleen huwelijken met bronOrganisatie (ofwel rsin/organisatie) 123456789 worden weergegeven.
     
     Voor het filteren op datum geldt dat er een weegmethode moet worden meegegeven. Voor deze waardes geldt dat elke door [PHP datetime](https://php.net/manual/en/datetime.construct.php) ondersteunde waarde kan worden gebruikt. Verschillende methoden kunnen worden gebruikt om een spreiding te selecteren bijvoorbeeld: */huwelijken?wijzigingsdatum[after]=2019-01-01&wijzigingsdatum[before]=2019-02-01*, om alle huwelijken gewijzigd in Januari 2019 te selecteren.
     
@@ -36,7 +36,7 @@ info:
     Kijk voor meer details over de mogelijkheden voor filteren en sorteren bij de GET (verzamel) endpoint van de entiteit die je wilt ophalen.
     
     # Scopes
-    Applicaties kunnen op deze API alleen wijzigingen uitvoeren waarvoor zij over de juiste rechten(scopes) beschikken. De op deze api berschikbare scopes zijn:
+    Applicaties kunnen op deze API alleen wijzigingen uitvoeren waarvoor zij over de juiste rechten(scopes) beschikken. De op deze api beschikbare scopes zijn:
      - huwelijk:schrijven
      - huwelijk:lezen
      - huwelijk:maken
@@ -59,9 +59,9 @@ info:
     
     JWT Tokens kunnen zowel worden verlengd, als opnieuw worden aangevraagd, dit aan de hand van de applicatie id en sleutel.
     
-    Let er bij het meegeven van JWT tokens op dat deze moet worden voorafgegaan door een Bearer en een spatie, onder de header Authorization. De volledig naam wordt daarmee: 'Authorization: Bearer [TOKEN]'.
+    Let er bij het meegeven van JWT tokens op, dat deze moet worden voorafgegaan door een Bearer en een spatie, onder de header Authorization. De volledig naam wordt daarmee: 'Authorization: Bearer [TOKEN]'.
     
-  version: 0.0.1
+  version: '0.0.22 Alpha'
   title: 'Trouwen API'
   termsOfService: 'http://www.zaakonline.nl/terms/'
   contact:
@@ -78,7 +78,7 @@ paths:
   '/applicatie/{id}':
     get:
       summary: 'Haal op'
-      description: 'Haal een Applicatie op'
+      description: 'Haal een Applicatie op.'
       tags:
         - Applicatie
       operationId: getApplicatieItem
@@ -107,13 +107,6 @@ paths:
     put:
       summary: 'Werk bij'
       description: 'Werk een Applicatie bij.'
-      responses:
-        202:
-          description: 'applicatie bijgewerkt'
-        400:
-          description: 'Ongeldige aanvraag'
-        404:
-          description: 'Applicatie niet gevonden'
       tags:
         - Applicatie
       operationId: putApplicatieItem
@@ -124,6 +117,23 @@ paths:
           required: true
           schema:
             type: string
+      responses:
+        200:
+          description: 'Applicatie resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Applicatie'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicatie'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Applicatie'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
       requestBody:
         content:
           application/ld+json:
@@ -140,9 +150,6 @@ paths:
     get:
       summary: Logboek
       description: 'Bekijk de wijzigingen op dit Applicatie object.'
-      consumes:
-        - application/json
-        - text/html
       tags:
         - Applicatie
       operationId: logApplicatieItem
@@ -171,7 +178,7 @@ paths:
   /applicaties:
     get:
       summary: Verzameling
-      description: 'Haal een verzameling van Applicaties op, het is mogelijk om deze resultaten te filteren aan de hand van query parameters. <br><br>Lees meer over het filteren van resulaten onder [filteren](/#section/Filteren).'
+      description: 'Haal een verzameling van Applicaties op, het is mogelijk om deze resultaten te filteren aan de hand van query parameters. <br><br>Lees meer over het filteren van resultaten onder [filteren](/#section/Filteren).'
       tags:
         - Applicatie
       operationId: getApplicatieCollection
@@ -347,7 +354,7 @@ paths:
             type: string
   '/huwelijk/{id}':
     get:
-      summary: 'Haal een specifiek huwelijk op'
+      summary: 'Haal een specifiek huwelijk op.'
       tags:
         - Huwelijk
       operationId: getHuwelijkItem
@@ -374,7 +381,7 @@ paths:
         404:
           description: 'Resource not found'
     put:
-      summary: 'Vervang een specifiek huwelijk'
+      summary: 'Vervang een specifiek huwelijk.'
       tags:
         - Huwelijk
       operationId: putHuwelijkItem
@@ -415,7 +422,7 @@ paths:
               $ref: '#/components/schemas/Huwelijk'
         description: 'The updated Huwelijk resource'
     delete:
-      summary: 'Verwijder een specifiek huwelijk'
+      summary: 'Verwijder een specifiek huwelijk.'
       tags:
         - Huwelijk
       operationId: deleteHuwelijkItem
@@ -433,8 +440,8 @@ paths:
             type: string
   '/huwelijk/{id}/aanvraag':
     post:
-      summary: 'Aanvraag huwelijk'
-      description: 'Doe een aanvraag huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt'
+      summary: 'Aanvraag huwelijk.'
+      description: 'Doe een aanvraag huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt.'
       consumes:
         - application/json
         - text/html
@@ -464,8 +471,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/addDocument':
     post:
-      summary: 'Voeg een document toe'
-      description: 'Voeg een document toe aan dit huwelijk, bijvoorbeeld een geboorteakte'
+      summary: 'Voeg een document toe.'
+      description: 'Voeg een document toe aan dit huwelijk, bijvoorbeeld een geboorteakte.'
       consumes:
         - application/json
         - text/html
@@ -495,8 +502,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/addPartner':
     post:
-      summary: 'Voeg een partner toe'
-      description: 'Nodig een partner uit om dit huwelijk te bevestigen en deel te nemen, er zijn 2 partners per huwelijk'
+      summary: 'Voeg een partner toe.'
+      description: 'Nodig een partner uit om dit huwelijk te bevestigen en deel te nemen, er zijn 2 partners per huwelijk.'
       consumes:
         - application/json
         - text/html
@@ -526,8 +533,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/addProduct':
     post:
-      summary: 'Voeg een product toe'
-      description: 'Voeg een extra product (bijvoorbeeld trouwboekje) toe aan dit huwelijk'
+      summary: 'Voeg een product toe.'
+      description: 'Voeg een extra product (bijvoorbeeld trouwboekje) toe aan dit huwelijk.'
       consumes:
         - application/json
         - text/html
@@ -557,8 +564,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/addWitness':
     post:
-      summary: 'Voeg een getuige toe'
-      description: 'Voeg een getuige toe die voor een van de partners getuigt, er moeten/mogen per partner minimaal 1 en maximaal 2 getuigen zijn'
+      summary: 'Voeg een getuige toe.'
+      description: 'Voeg een getuige toe die voor een van de partners getuigt, er moeten/mogen per partner minimaal 1 en maximaal 2 getuigen zijn.'
       consumes:
         - application/json
         - text/html
@@ -588,8 +595,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/log':
     get:
-      summary: 'Logboek inzien'
-      description: 'Geeft een array van eerdere versies en wijzigingen van dit object'
+      summary: 'Logboek inzien.'
+      description: 'Geeft een array van eerdere versies en wijzigingen van dit object.'
       consumes:
         - application/json
         - text/html
@@ -620,8 +627,8 @@ paths:
           description: 'Resource not found'
   '/huwelijk/{id}/melding':
     post:
-      summary: 'Melding huwelijk'
-      description: 'Doe een melding voorgenomen huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt'
+      summary: 'Melding voorgenomen huwelijk.'
+      description: 'Doe een melding voorgenomen huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt.'
       consumes:
         - application/json
         - text/html
@@ -651,8 +658,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/pay':
     get:
-      summary: 'Haal betaallink op'
-      description: 'Geeft een betaallink terug voor huwelijk, het aanvragen van een betaallink heeft gevolgen (aanmaak factuur etc), waardoor het huwelijk hierna niet meer kan worden aangpast'
+      summary: 'Haal betaallink op.'
+      description: 'Geeft een betaallink terug voor huwelijk, het aanvragen van een betaallink heeft gevolgen (aanmaak factuur etc), waardoor het huwelijk hierna niet meer kan worden aangepast.'
       consumes:
         - application/json
         - text/html
@@ -683,8 +690,8 @@ paths:
           description: 'Resource not found'
   '/huwelijk/{id}/removeDocument':
     post:
-      summary: 'Verwijder document'
-      description: 'Verwijder een eerder toegevoegd document'
+      summary: 'Verwijder document.'
+      description: 'Verwijder een eerder toegevoegd document.'
       consumes:
         - application/json
         - text/html
@@ -714,8 +721,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/removeOfficial':
     post:
-      summary: 'Verwijder de trouwambtenaar'
-      description: 'Verwijder de eerder aangevraagde trouwambtenaar van dit huwelijk'
+      summary: 'Verwijder de trouwambtenaar.'
+      description: 'Verwijder de eerder aangevraagde trouwambtenaar van dit huwelijk.'
       consumes:
         - application/json
         - text/html
@@ -723,7 +730,7 @@ paths:
         - application/json
       responses:
         202:
-          description: 'Trouwambentenaar verwijderd uit dit huwelijk'
+          description: 'Trouwambtenaar verwijderd uit dit huwelijk'
         400:
           description: 'Ongeldige aanvraag'
         404:
@@ -745,8 +752,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/removeProduct':
     post:
-      summary: 'Verwijder product'
-      description: 'Verwijder een eerder gekozen product'
+      summary: 'Verwijder product.'
+      description: 'Verwijder een eerder gekozen product.'
       consumes:
         - application/json
         - text/html
@@ -776,8 +783,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/removeWitness':
     post:
-      summary: 'Verwijder een getuige'
-      description: 'Verwijder een getuige van dit huwelijk'
+      summary: 'Verwijder een getuige.'
+      description: 'Verwijder een getuige van dit huwelijk.'
       consumes:
         - application/json
         - text/html
@@ -807,8 +814,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/requestOfficial':
     post:
-      summary: 'Vraag een trouwambtenaar aan'
-      description: 'Vraag een (specifieke) trouwambtenaar aan om dit huwelijk te voltrekken'
+      summary: 'Vraag een trouwambtenaar aan.'
+      description: 'Vraag een (specifieke) trouwambtenaar aan om dit huwelijk te voltrekken.'
       consumes:
         - application/json
         - text/html
@@ -838,8 +845,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/requestSpecial':
     post:
-      summary: 'Vraag een bijzonder trouwambtenaar aan'
-      description: 'Vraag een niet geregistreerde trouwambtenaar aan om dit huwelijk te voltrekken'
+      summary: 'Vraag een trouwambtenaar voor een dag aan.'
+      description: 'Vraag een niet geregistreerde trouwambtenaar aan om dit huwelijk te voltrekken.'
       consumes:
         - application/json
         - text/html
@@ -869,8 +876,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/revert/{version}':
     post:
-      summary: 'Versie terugdraaid'
-      description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt'
+      summary: 'Versie herstellen.'
+      description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt.'
       consumes:
         - application/json
         - text/html
@@ -900,8 +907,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/setLocation':
     post:
-      summary: 'Stel een locatie in voor dit huwelijk'
-      description: 'Geef de locatie op waar dit huwelijk gaat plaatsvinden'
+      summary: 'Stel een locatie in voor dit huwelijk.'
+      description: 'Geef de locatie op waar dit huwelijk gaat plaatsvinden.'
       consumes:
         - application/json
         - text/html
@@ -931,8 +938,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/setProduct':
     post:
-      summary: 'Kies het type van dit huwelijk'
-      description: 'Kies het primaire type van dit huwelijk (bijvoorbeeld gratis). Het primaire product bepaald welke overige producten, diensten, ambtenaren en locaties kunnen worden gekozen'
+      summary: 'Kies het type van dit huwelijk.'
+      description: 'Kies het primaire type van dit huwelijk (bijvoorbeeld gratis). Het primaire product bepaald welke overige producten, diensten, ambtenaren en locaties kunnen worden gekozen.'
       consumes:
         - application/json
         - text/html
@@ -962,8 +969,8 @@ paths:
         description: 'The new Huwelijk resource'
   '/huwelijk/{id}/validate':
     post:
-      summary: 'Valideer huwelijksdossier'
-      description: 'Controleer of het huwelijksdossier juist en volledig is'
+      summary: 'Valideer huwelijksdossier.'
+      description: 'Controleer of het huwelijksdossier juist en volledig is.'
       consumes:
         - application/json
         - text/html
@@ -1341,8 +1348,8 @@ paths:
         description: 'The updated HuwelijkBijzonderAmbtenaar resource'
   /huwelijk_bsn:
     post:
-      summary: 'Haal huwelijk op BSN'
-      description: 'Haal een huwelijk op aan de hand van een BSN nummer, als er voor dit BSN nog geen huwelijk is, wordt er een huwelijk aangemaakt'
+      summary: 'Haal huwelijk op met BSN.'
+      description: 'Haal een huwelijk op aan de hand van een BSN nummer, als er voor dit BSN nog geen huwelijk is, wordt er een huwelijk aangemaakt.'
       consumes:
         - application/json
         - text/html
@@ -2068,7 +2075,7 @@ paths:
         description: 'The updated HuwelijkPartner resource'
   /huwelijken:
     get:
-      summary: 'Haalt een verzameling van huwelijken op'
+      summary: 'Haalt een verzameling van huwelijken op.'
       tags:
         - Huwelijk
       operationId: getHuwelijkCollection
@@ -2115,7 +2122,7 @@ paths:
           schema:
             type: string
     post:
-      summary: 'Maak een huwelijk aan'
+      summary: 'Maak een huwelijk aan.'
       tags:
         - Huwelijk
       operationId: postHuwelijkCollection
@@ -2157,20 +2164,33 @@ paths:
   /login_check:
     post:
       summary: 'Token halen'
-      description: 'Inloggen als Applicatie en JWT Token ophalen'
-      consumes:
-        - application/json
-        - text/html
-      produces:
-        - application/json
-      responses:
-        200:
-          description: 'Applicatie succesvol ingelogd'
-        401:
-          description: 'Applicatie niet ingelogd'
+      description: 'Inloggen als Applicatie en JWT Token ophalen.'
       tags:
         - Applicatie
       operationId: loginApplicatieCollection
+      responses:
+        201:
+          description: 'Applicatie resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+          links:
+            GetApplicatieItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getApplicatieItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /applicatie/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
       requestBody:
         content:
           application/ld+json:
@@ -2185,7 +2205,7 @@ paths:
         description: 'The new Applicatie resource'
   /personen:
     get:
-      summary: 'Haalt een verzameling van personen op'
+      summary: 'Haalt een verzameling van personen op.'
       tags:
         - Persoon
       operationId: getPersoonCollection
@@ -2232,7 +2252,7 @@ paths:
           schema:
             type: string
     post:
-      summary: 'Voeg een persoon toe aan een huwelijk'
+      summary: 'Voeg een persoon toe aan een huwelijk.'
       tags:
         - Soort
       operationId: postSoortCollection
@@ -2273,7 +2293,7 @@ paths:
         description: 'The new Soort resource'
   '/personen/{id}':
     get:
-      summary: 'Haal een specifiek persoon op'
+      summary: 'Haal een specifiek persoon op.'
       tags:
         - Persoon
       operationId: getPersoonItem
@@ -2300,7 +2320,7 @@ paths:
         404:
           description: 'Resource not found'
     put:
-      summary: 'Vervang een specifiek persoon'
+      summary: 'Vervang een specifiek persoon.'
       tags:
         - Persoon
       operationId: putPersoonItem
@@ -2341,7 +2361,7 @@ paths:
               $ref: '#/components/schemas/Persoon'
         description: 'The updated Persoon resource'
     delete:
-      summary: 'Verwijder een specifiek issue'
+      summary: 'Verwijder een specifiek issue.'
       tags:
         - Persoon
       operationId: deletePersoonItem
@@ -2359,8 +2379,8 @@ paths:
             type: string
   '/personen/{id}/log':
     get:
-      summary: 'Logboek inzien'
-      description: 'Geeft een array van eerdere versies en wijzigingen van dit object'
+      summary: 'Logboek inzien.'
+      description: 'Geeft een array van eerdere versies en wijzigingen van dit object.'
       consumes:
         - application/json
         - text/html
@@ -2391,8 +2411,8 @@ paths:
           description: 'Resource not found'
   '/personen/{id}/revert/{version}':
     post:
-      summary: 'Versie terugdraaien'
-      description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt'
+      summary: 'Versie herstellen.'
+      description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt.'
       consumes:
         - application/json
         - text/html
@@ -2423,20 +2443,33 @@ paths:
   /registreer:
     post:
       summary: Registreren
-      description: 'Registreer een nieuwe Applicatie voor dit component'
-      consumes:
-        - application/json
-        - text/html
-      produces:
-        - application/json
-      responses:
-        201:
-          description: 'Applicatie aangemaakt'
-        400:
-          description: 'Ongeldige aanvraag'
+      description: 'Registreer een nieuwe Applicatie voor dit component.'
       tags:
         - Applicatie
       operationId: registerApplicatieCollection
+      responses:
+        201:
+          description: 'Applicatie resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Applicatie-applicatie:lezen'
+          links:
+            GetApplicatieItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getApplicatieItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /applicatie/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
       requestBody:
         content:
           application/ld+json:
@@ -2451,7 +2484,7 @@ paths:
         description: 'The new Applicatie resource'
   /type:
     get:
-      summary: 'Haalt een verzameling van huwelijks types op'
+      summary: 'Haalt een verzameling van huwelijkstypes op.'
       tags:
         - Soort
       operationId: getSoortCollection
@@ -2499,7 +2532,7 @@ paths:
             type: string
   '/types/{id}':
     get:
-      summary: 'Haalt een specifiek huwelijks type op'
+      summary: 'Haalt een specifiek huwelijks type op.'
       tags:
         - Soort
       operationId: getSoortItem
@@ -2526,7 +2559,7 @@ paths:
         404:
           description: 'Resource not found'
     put:
-      summary: 'Vervang een specifiek issue huwelijks type'
+      summary: 'Vervang een specifiek issue huwelijks type.'
       tags:
         - Soort
       operationId: putSoortItem
@@ -2567,7 +2600,7 @@ paths:
               $ref: '#/components/schemas/Soort'
         description: 'The updated Soort resource'
     delete:
-      summary: 'Verwijder een specifiek huwelijks type'
+      summary: 'Verwijder een specifiek huwelijks type.'
       tags:
         - Soort
       operationId: deleteSoortItem
@@ -2586,7 +2619,7 @@ paths:
   '/types/{id}/log':
     get:
       summary: 'Logboek inzien'
-      description: 'Geeft een array van eerdere versies en wijzigingen van dit object'
+      description: 'Geeft een array van eerdere versies en wijzigingen van dit object.'
       consumes:
         - application/json
         - text/html
@@ -2617,8 +2650,8 @@ paths:
           description: 'Resource not found'
   '/types/{id}/revert/{version}':
     post:
-      summary: 'Versie terugdraaid'
-      description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt'
+      summary: 'Versie herstellen.'
+      description: 'Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt.'
       consumes:
         - application/json
         - text/html
@@ -2680,10 +2713,10 @@ components:
           minLength: 8
           description: 'Het RSIN van de organisatie waartoe deze Applicatie behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
         isActief:
-          description: 'Word gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden'
+          description: 'Wordt gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden.'
           type: boolean
         registratiedatum:
-          description: 'Het tijdstip waarop deze Applicatie is aangemaakt'
+          description: 'Het tijdstip waarop deze Applicatie is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
@@ -2705,7 +2738,7 @@ components:
           readOnly: true
           type: boolean
         username:
-          description: 'Username wordt door symfony gebruikt voor de gebruikersnaam maar in de context common ground component api gebruiken we hem niet en onderdrukken we hem door hem aan geen groepen toe te wijzen'
+          description: 'Username wordt door symfony gebruikt voor de gebruikersnaam maar in de context common ground component api gebruiken we hem niet en onderdrukken we hem door hem niet toe te wijzen aan groepen.'
         password:
           readOnly: true
         salt:
@@ -2746,10 +2779,10 @@ components:
           minLength: 8
           description: 'Het RSIN van de organisatie waartoe deze Applicatie behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef.'
         isActief:
-          description: 'Word gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden'
+          description: 'Wordt gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden.'
           type: boolean
         registratiedatum:
-          description: 'Het tijdstip waarop deze Applicatie is aangemaakt'
+          description: 'Het tijdstip waarop deze Applicatie is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
@@ -2814,7 +2847,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze huwelijk behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe deze huwelijk behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de geauthenticeerde applicatie en kan niet worden overschreven.'
         melding:
           title: ZAAK
           type: string
@@ -2840,11 +2873,11 @@ components:
           default: huwelijk
           description: 'Het type van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
         datum:
-          description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden'
+          description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden.'
           type: string
           format: date-time
         tijd:
-          description: 'Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden'
+          description: 'Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden.'
           type: string
         mogelijkeDatums:
           description: 'Datums die mogelijk zijn, binnen de door de gebruiker opgeven criteria'
@@ -3164,7 +3197,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze huwelijk behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe deze huwelijk behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de geauthenticeerde applicatie en kan niet worden overschreven.'
         melding:
           title: ZAAK
           type: string
@@ -3190,11 +3223,11 @@ components:
           default: huwelijk
           description: 'Het type van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
         datum:
-          description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden'
+          description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden.'
           type: string
           format: date-time
         tijd:
-          description: 'Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden'
+          description: 'Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden.'
           type: string
         mogelijkeDatums:
           description: 'Datums die mogelijk zijn, binnen de door de gebruiker opgeven criteria'
@@ -3349,11 +3382,11 @@ components:
           default: huwelijk
           description: 'Het type van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
         datum:
-          description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden'
+          description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden.'
           type: string
           format: date-time
         tijd:
-          description: 'Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden'
+          description: 'Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden.'
           type: string
         issues:
           title: issues
@@ -3791,32 +3824,32 @@ components:
           maxLength: 255
           minLength: 2
           example: 'van der'
-          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.'
         geslachtsnaam:
           type: string
           maxLength: 255
           minLength: 2
           example: Do
-          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>'
+          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.'
         emailadres:
           type: email
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.'
         telefoonnummer:
           type: string
           maxLength: 255
           minLength: 10
           example: +31(0)6-12345678
-          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.'
         agenda:
           type: url
           example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'URL-referentie naar de agenda van dit persoon'
+          description: 'URL-referentie naar de agenda van dit persoon.'
         registratiedatum:
           description: 'Het tijdstip waarop dit Persoon object is aangemaakt.'
           type: string
@@ -3830,7 +3863,7 @@ components:
           maxLength: 17
           minLength: 2
           example: NL
-          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
         huwelijkspartner: {  }
         url:
           readOnly: true
@@ -3865,32 +3898,32 @@ components:
           maxLength: 255
           minLength: 2
           example: 'van der'
-          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.'
         geslachtsnaam:
           type: string
           maxLength: 255
           minLength: 2
           example: Do
-          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>'
+          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.'
         emailadres:
           type: email
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.'
         telefoonnummer:
           type: string
           maxLength: 255
           minLength: 10
           example: +31(0)6-12345678
-          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.'
         agenda:
           type: url
           example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'URL-referentie naar de agenda van dit persoon'
+          description: 'URL-referentie naar de agenda van dit persoon.'
         registratiedatum:
           description: 'Het tijdstip waarop dit Persoon object is aangemaakt.'
           type: string
@@ -3904,7 +3937,7 @@ components:
           maxLength: 17
           minLength: 2
           example: NL
-          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
     Persoon-write:
       type: object
       description: Persoon
@@ -3928,49 +3961,49 @@ components:
           maxLength: 255
           minLength: 2
           example: 'van der'
-          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.'
         geslachtsnaam:
           type: string
           maxLength: 255
           minLength: 2
           example: Do
-          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>'
+          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.'
         emailadres:
           type: email
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.'
         telefoonnummer:
           type: string
           maxLength: 255
           minLength: 10
           example: +31(0)6-12345678
-          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>'
+          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.'
         agenda:
           type: url
           example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'URL-referentie naar de agenda van dit persoon'
+          description: 'URL-referentie naar de agenda van dit persoon.'
         taal:
           type: string
           maxLength: 17
           minLength: 2
           example: NL
-          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
     Soort:
       type: object
       description: Soort
       properties:
         id:
-          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           type: integer
         identificatie:
           type: string
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
-          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           maxLength: 40
         bronOrganisatie:
           title: bronOrganisatie
@@ -3979,15 +4012,15 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven.'
         naam:
-          description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
+          description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>.'
           type: string
         samenvatting:
-          description: 'Een samenvattende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          description: 'Een korte samenvattende tekst over deze huwelijk soort bedoeld ter introductie.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>.'
           type: string
         beschrijving:
-          description: 'Een beschrijvende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          description: 'Een uitgebreide beschrijvende tekst over deze huwelijk soort bedoeld ter verdere verduidelijking.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>.'
           type: string
         product:
           title: Contactpersoon
@@ -3996,30 +4029,30 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen'
+          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen.'
         extraProducten:
           title: issues
           type: array
           example: '[]'
-          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen'
+          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.'
           items:
             type: string
         locaties:
           title: issues
           type: array
           example: '[]'
-          description: 'Beschikbare locaties voor dit soort huwelijk'
+          description: 'Beschikbare locaties voor dit soort huwelijk.'
           items:
             type: string
         ambtenaren:
           title: issues
           type: array
           example: '[]'
-          description: 'Beschikbare ambtenaren voor dit soort huwelijk'
+          description: 'Beschikbare ambtenaren voor dit soort huwelijk.'
           items:
             type: string
         huwelijken:
-          description: 'De huwelijken die gebruik maken van deze huwelijks soort'
+          description: 'De huwelijken die gebruik maken van deze huwelijk soort.'
           type: array
           items:
             type: string
@@ -4028,9 +4061,9 @@ components:
           maxLength: 17
           minLength: 2
           example: NL
-          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
         registratiedatum:
-          description: 'Het tijdstip waarop dit Soort object is aangemaakt'
+          description: 'Het tijdstip waarop dit Soort object is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
@@ -4044,9 +4077,9 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contactpersoon voor het Soort object'
+          description: 'De contactpersoon voor het Soort object.'
         eigenaar:
-          description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
+          description: 'Met eigenaar wordt bijgehouden welke applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
         huwelijkspartner: {  }
         emailadres: {  }
@@ -4062,12 +4095,12 @@ components:
       description: Soort
       properties:
         id:
-          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           type: integer
         identificatie:
           type: string
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
-          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           maxLength: 40
         bronOrganisatie:
           title: bronOrganisatie
@@ -4076,15 +4109,15 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven.'
         naam:
-          description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
+          description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>.'
           type: string
         samenvatting:
-          description: 'Een samenvattende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          description: 'Een korte samenvattende tekst over deze huwelijk soort bedoeld ter introductie.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>.'
           type: string
         beschrijving:
-          description: 'Een beschrijvende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          description: 'Een uitgebreide beschrijvende tekst over deze huwelijk soort bedoeld ter verdere verduidelijking.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>.'
           type: string
         product:
           title: Contactpersoon
@@ -4093,26 +4126,26 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen'
+          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen.'
         extraProducten:
           title: issues
           type: array
           example: '[]'
-          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen'
+          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.'
           items:
             type: string
         locaties:
           title: issues
           type: array
           example: '[]'
-          description: 'Beschikbare locaties voor dit soort huwelijk'
+          description: 'Beschikbare locaties voor dit soort huwelijk.'
           items:
             type: string
         ambtenaren:
           title: issues
           type: array
           example: '[]'
-          description: 'Beschikbare ambtenaren voor dit soort huwelijk'
+          description: 'Beschikbare ambtenaren voor dit soort huwelijk.'
           items:
             type: string
         taal:
@@ -4120,9 +4153,9 @@ components:
           maxLength: 17
           minLength: 2
           example: NL
-          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
         registratiedatum:
-          description: 'Het tijdstip waarop dit Soort object is aangemaakt'
+          description: 'Het tijdstip waarop dit Soort object is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
@@ -4136,9 +4169,9 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contactpersoon voor het Soort object'
+          description: 'De contactpersoon voor het Soort object.'
         eigenaar:
-          description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
+          description: 'Met eigenaar wordt bijgehouden welke applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
       required:
         - naam
@@ -4149,21 +4182,21 @@ components:
       description: Soort
       properties:
         id:
-          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           type: integer
         identificatie:
           type: string
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
-          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           maxLength: 40
         naam:
-          description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>'
+          description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>.'
           type: string
         samenvatting:
-          description: 'Een samenvattende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          description: 'Een korte samenvattende tekst over deze huwelijk soort bedoeld ter introductie.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>.'
           type: string
         beschrijving:
-          description: 'Een beschrijvende tekst over deze huwelijks soort  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>'
+          description: 'Een uitgebreide beschrijvende tekst over deze huwelijk soort bedoeld ter verdere verduidelijking.  <br /><b>Schema:</b> <a href="https://schema.org/description">https://schema.org/description</a>.'
           type: string
         product:
           title: Contactpersoon
@@ -4172,26 +4205,26 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen'
+          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen.'
         extraProducten:
           title: issues
           type: array
           example: '[]'
-          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen'
+          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.'
           items:
             type: string
         locaties:
           title: issues
           type: array
           example: '[]'
-          description: 'Beschikbare locaties voor dit soort huwelijk'
+          description: 'Beschikbare locaties voor dit soort huwelijk.'
           items:
             type: string
         ambtenaren:
           title: issues
           type: array
           example: '[]'
-          description: 'Beschikbare ambtenaren voor dit soort huwelijk'
+          description: 'Beschikbare ambtenaren voor dit soort huwelijk.'
           items:
             type: string
         taal:
@@ -4199,7 +4232,7 @@ components:
           maxLength: 17
           minLength: 2
           example: NL
-          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>'
+          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
         contactPersoon:
           title: Contactpersoon
           type: url
@@ -4207,7 +4240,7 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contactpersoon voor het Soort object'
+          description: 'De contactpersoon voor het Soort object.'
       required:
         - naam
         - samenvatting
@@ -4228,13 +4261,13 @@ externalDocs:
 tags:
   -
     name: Huwelijk
-    description: 'Representeerd een huwelijk'
+    description: 'Representeert een huwelijk.'
   -
     name: Soort
-    description: 'Huwelijks type, bepaald beschikbare locaties, ambtenaren en aditionele producten '
+    description: 'Huwelijks type, bepaald beschikbare locaties, ambtenaren en aditionele producten.'
   -
     name: Persoon
-    description: 'Een ''NIET'' BRP persoon'
+    description: 'Een ''NIET'' BRP persoon.'
   -
     name: Applicatie
     description: 'Een software applicatie binnen een organisatie die gebruik maakt van een component voor het creëren, ophalen, bijwerken of verwijderen van gegevens. Applicaties kunnen worden geregistreerd om namens een organisatie te handelen op een component. In deze zin zijn applicaties dan ook onderdeel van het beheerproces, infrastructuur en configuratie van een component in plaats van het datamodel dat door het component wordt geleverd.'

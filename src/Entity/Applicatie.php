@@ -52,7 +52,7 @@ use App\Controller\UserController;
  *
  *         "openapi_context" = {
  *         		"summary" = "Registreren",
- *         		"description" = "Registreer een nieuwe Applicatie voor dit component"
+ *         		"description" = "Registreer een nieuwe Applicatie voor dit component."
  *         }
  *     },
  *     "login"={
@@ -63,7 +63,7 @@ use App\Controller\UserController;
  *     	   "denormalization_context"={"groups"={"applicatie:inloggen"}}, 
  *         "openapi_context" = {
  *         		"summary" = "Token halen",
- *         		"description" = "Inloggen als Applicatie en JWT Token ophalen"
+ *         		"description" = "Inloggen als Applicatie en JWT Token ophalen."
  *         }
  *     },
  *  },
@@ -74,7 +74,7 @@ use App\Controller\UserController;
  *      	"path"="/applicatie/{id}",
  *  		"openapi_context" = {
  * 				"summary" = "Haal op",
- *         		"description" = "Haal een Applicatie op"           
+ *         		"description" = "Haal een Applicatie op."           
  *  		}
  *  	},
  *     "put"={
@@ -83,7 +83,7 @@ use App\Controller\UserController;
  *      	"path"="/applicatie/{id}",
  *  		"openapi_context" = {
  * 				"summary" = "Werk bij",
- *         		"description" = "Werk een Applicatie bij"
+ *         		"description" = "Werk een Applicatie bij."
  *  		}
  *  	},
  *     "log"={
@@ -94,7 +94,7 @@ use App\Controller\UserController;
  *     		"denormalization_context"={"groups"={"applicatie:schrijven"}},
  *         	"openapi_context" = {
  *         		"summary" = "Logboek",
- *         		"description" = "Bekijk de wijzigingen op dit Applicatie object"
+ *         		"description" = "Bekijk de wijzigingen op dit Applicatie object."
  *         }
  *     }
  *  }
@@ -223,7 +223,7 @@ class Applicatie implements UserInterface, StringableInterface
 	 *             "required"="true",
 	 *             "maxLength"=9,
 	 *             "minLength"=8,
-	 *             "description"="Het RSIN van deze organisatie. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef"
+	 *             "description"="Het RSIN van deze organisatie. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef."
 	 *         }
 	 *     }
 	 * )
@@ -231,7 +231,7 @@ class Applicatie implements UserInterface, StringableInterface
 	public $organisatie;	
 	
 	/**
-	 * Wordt gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden
+	 * Wordt gebruikt om aan te geven of deze applicatie actief is (en mag inloggen) of dat deze slechts wordt gebruikt voor archief doeleinden.
 	 * 
 	 * @Groups({"applicatie:lezen","applicatie:schrijven"})
      * @ApiFilter(BooleanFilter::class)
@@ -241,7 +241,7 @@ class Applicatie implements UserInterface, StringableInterface
 	public $isActief;
 	
 	/**
-	 * Het tijdstip waarop deze Applicatie is aangemaakt
+	 * Het tijdstip waarop deze Applicatie is aangemaakt.
 	 *
 	 * @var datetime Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
 	 * @Gedmo\Timestampable(on="create")
@@ -290,7 +290,7 @@ class Applicatie implements UserInterface, StringableInterface
 	 *             "required"="true",
 	 *             "maxLength"=255,
 	 *             "format"="uri",
-	 *             "description"="URL-referentie naar de Ambtenaar verantwoordelijk voor deze Applicatie"
+	 *             "description"="URL-referentie naar de Ambtenaar verantwoordelijk voor deze Applicatie."
 	 *         }
 	 *     }
 	 * )
