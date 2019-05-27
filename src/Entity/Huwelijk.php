@@ -45,7 +45,7 @@ use App\Controller\HuwelijkController;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/huwelijken",
  *  		"openapi_context" = {
- * 				"summary" = "Haalt een verzameling van huwelijken op"
+ * 				"summary" = "Haalt een verzameling van huwelijken op."
  *  		}
  *  	},
  *  	"post"={
@@ -53,7 +53,7 @@ use App\Controller\HuwelijkController;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/huwelijken",
  *  		"openapi_context" = {
- * 					"summary" = "Maak een huwelijk aan"
+ * 					"summary" = "Maak een huwelijk aan."
  *  		}
  *  	},   
  *     "on_bsn"={
@@ -67,8 +67,8 @@ use App\Controller\HuwelijkController;
  *     	   "denormalization_context"={"groups"={"BSN"}},
  *     	   
  *         "openapi_context" = {
- *         		"summary" = "Haal huwelijk op BSN",
- *         		"description" = "Haal een huwelijk op aan de hand van een BSN nummer, als er voor dit BSN nog geen huwelijk is, wordt er een huwelijk aangemaakt",
+ *         		"summary" = "Haal huwelijk op met BSN.",
+ *         		"description" = "Haal een huwelijk op aan de hand van een BSN nummer, als er voor dit BSN nog geen huwelijk is, wordt er een huwelijk aangemaakt.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -96,7 +96,7 @@ use App\Controller\HuwelijkController;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/huwelijk/{id}",
  *  		"openapi_context" = {
- * 				"summary" = "Haal een specifiek huwelijk op"
+ * 				"summary" = "Haal een specifiek huwelijk op."
  *  		}
  *  	},
  *     "put"={
@@ -104,7 +104,7 @@ use App\Controller\HuwelijkController;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/huwelijk/{id}",
  *  		"openapi_context" = {
- * 				"summary" = "Vervang een specifiek huwelijk"
+ * 				"summary" = "Vervang een specifiek huwelijk."
  *  		}
  *  	},
  *     "delete"={
@@ -112,7 +112,7 @@ use App\Controller\HuwelijkController;
  *  		"denormalizationContext"={},
  *      	"path"="/huwelijk/{id}",
  *  		"openapi_context" = {
- * 				"summary" = "Verwijder een specifiek huwelijk"
+ * 				"summary" = "Verwijder een specifiek huwelijk."
  *  		}
  *  	},
  *     "add_partner"={
@@ -122,8 +122,8 @@ use App\Controller\HuwelijkController;
  *     	   "normalization_context"={"groups"={"invite"}},
  *     	   "denormalization_context"={"groups"={"invite"}},
  *         "openapi_context" = {
- *         		"summary" = "Voeg een partner toe",
- *         		"description" = "Nodig een partner uit om dit huwelijk te bevestigen en deel te nemen, er zijn 2 partners per huwelijk",
+ *         		"summary" = "Voeg een partner toe.",
+ *         		"description" = "Nodig een partner uit om dit huwelijk te bevestigen en deel te nemen, er zijn 2 partners per huwelijk.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -151,28 +151,11 @@ use App\Controller\HuwelijkController;
  *     	   "normalization_context"={"groups"={"payment"}},
  *     	   "denormalization_context"={"groups"={"payment"}},
  *         "openapi_context" = {
- *         		"summary" = "Haal betaallink op",
- *         		"description" = "Geeft een betaallink terug voor huwelijk, het aanvragen van een betaallink heeft gevolgen (aanmaak factuur etc), waardoor het huwelijk hierna niet meer kan worden aangpast",
+ *         		"summary" = "Haal betaallink op.",
+ *         		"description" = "Geeft een betaallink terug voor huwelijk, het aanvragen van een betaallink heeft gevolgen (aanmaak factuur etc), waardoor het huwelijk hierna niet meer kan worden aangepast.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
- *            	},
- *             	"produces" = {
- *         			"application/json"
- *            	},
- *             	"responses" = {
- *         			"200" = {
- *         				"description" = "Betaallink gevonden"
- *         			},	
- *         			"201" = {
- *         				"description" = "Betaallink aangemaakt"
- *         			},	
- *         			"400" = {
- *         				"description" = "Ongeldige aanvraag"
- *         			},
- *         			"404" = {
- *         				"description" = "Huwelijk niet gevonden"
- *         			}
  *            	}
  *         }
  *     },
@@ -183,8 +166,8 @@ use App\Controller\HuwelijkController;
  *     	   "normalization_context"={"groups"={"inviteGetuige"}},
  *     	   "denormalization_context"={"groups"={"inviteGetuige"}},
  *         "openapi_context" = {
- *         		"summary" = "Voeg een getuige toe",
- *         		"description" = "Voeg een getuige toe die voor een van de partners getuigt, er moeten/mogen per partner minimaal 1 en maximaal 2 getuigen zijn",
+ *         		"summary" = "Voeg een getuige toe.",
+ *         		"description" = "Voeg een getuige toe die voor een van de partners getuigt, er moeten/mogen per partner minimaal 1 en maximaal 2 getuigen zijn.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -212,8 +195,8 @@ use App\Controller\HuwelijkController;
  *     	   "normalization_context"={"groups"={"remove"}},
  *     	   "denormalization_context"={"groups"={"remove"}},
  *         "openapi_context" = {
- *         		"summary" = "Verwijder een getuige",
- *         		"description" = "Verwijder een getuige van dit huwelijk",
+ *         		"summary" = "Verwijder een getuige.",
+ *         		"description" = "Verwijder een getuige van dit huwelijk.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -241,8 +224,8 @@ use App\Controller\HuwelijkController;
  *     	   "normalization_context"={"groups"={"setLocation"}},
  *     	   "denormalization_context"={"groups"={"setLocation"}},
  *         "openapi_context" = {
- *         		"summary" = "Stel een locatie in voor dit huwelijk",
- *         		"description" = "Geef de locatie op waar dit huwelijk gaat plaatsvinden",
+ *         		"summary" = "Stel een locatie in voor dit huwelijk.",
+ *         		"description" = "Geef de locatie op waar dit huwelijk gaat plaatsvinden.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -270,8 +253,8 @@ use App\Controller\HuwelijkController;
  *     	   "normalization_context"={"groups"={"setProduct"}},
  *     	   "denormalization_context"={"groups"={"setProduct"}},
  *         "openapi_context" = {
- *         		"summary" = "Kies het type van dit huwelijk",
- *         		"description" = "Kies het primaire type van dit huwelijk (bijvoorbeeld gratis). Het primaire product bepaald welke overige producten, diensten, ambtenaren en locaties kunnen worden gekozen",
+ *         		"summary" = "Kies het type van dit huwelijk.",
+ *         		"description" = "Kies het primaire type van dit huwelijk (bijvoorbeeld gratis). Het primaire product bepaald welke overige producten, diensten, ambtenaren en locaties kunnen worden gekozen.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -299,8 +282,8 @@ use App\Controller\HuwelijkController;
  *     	   "normalization_context"={"groups"={"productAdd"}},
  *     	   "denormalization_context"={"groups"={"productAdd"}},
  *         "openapi_context" = {
- *         		"summary" = "Voeg een product toe",
- *         		"description" = "Voeg een extra product (bijvoorbeeld trouwboekje) toe aan dit huwelijk",
+ *         		"summary" = "Voeg een product toe.",
+ *         		"description" = "Voeg een extra product (bijvoorbeeld trouwboekje) toe aan dit huwelijk.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -328,8 +311,8 @@ use App\Controller\HuwelijkController;
  *     	   "normalization_context"={"groups"={"remove"}},
  *     	   "denormalization_context"={"groups"={"remove"}},
  *         "openapi_context" = {
- *         		"summary" = "Verwijder product",
- *         		"description" = "Verwijder een eerder gekozen product",
+ *         		"summary" = "Verwijder product.",
+ *         		"description" = "Verwijder een eerder gekozen product.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -357,8 +340,8 @@ use App\Controller\HuwelijkController;
  *     	   "normalization_context"={"groups"={"documentAdd"}},
  *     	   "denormalization_context"={"groups"={"documentAdd"}},
  *         "openapi_context" = {
- *         		"summary" = "Voeg een document toe",
- *         		"description" = "Voeg een document toe aan dit huwelijk, bijvoorbeeld een geboorteakte",
+ *         		"summary" = "Voeg een document toe.",
+ *         		"description" = "Voeg een document toe aan dit huwelijk, bijvoorbeeld een geboorteakte.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -386,8 +369,8 @@ use App\Controller\HuwelijkController;
  *     	   "normalization_context"={"groups"={"remove"}},
  *     	   "denormalization_context"={"groups"={"remove"}},
  *         "openapi_context" = {
- *         		"summary" = "Verwijder document",
- *         		"description" = "Verwijder een eerder toegevoegd document",
+ *         		"summary" = "Verwijder document.",
+ *         		"description" = "Verwijder een eerder toegevoegd document.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -415,8 +398,8 @@ use App\Controller\HuwelijkController;
  *     		"normalization_context"={"groups"={"requestOfficial"}},
  *     		"denormalization_context"={"groups"={"requestOfficial"}},
  *         "openapi_context" = {
- *         		"summary" = "Vraag een trouwambtenaar aan",
- *         		"description" = "Vraag een (specifieke) trouwambtenaar aan om dit huwelijk te voltrekken",
+ *         		"summary" = "Vraag een trouwambtenaar aan.",
+ *         		"description" = "Vraag een (specifieke) trouwambtenaar aan om dit huwelijk te voltrekken.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -444,8 +427,8 @@ use App\Controller\HuwelijkController;
  *     		"normalization_context"={"groups"={"invite"}},
  *     		"denormalization_context"={"groups"={"invite"}},
  *         "openapi_context" = {
- *         		"summary" = "Vraag een bijzonder trouwambtenaar aan",
- *         		"description" = "Vraag een niet geregistreerde trouwambtenaar aan om dit huwelijk te voltrekken",
+ *         		"summary" = "Vraag een trouwambtenaar voor een dag aan.",
+ *         		"description" = "Vraag een niet geregistreerde trouwambtenaar aan om dit huwelijk te voltrekken.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -473,8 +456,8 @@ use App\Controller\HuwelijkController;
  *     		"normalization_context"={"groups"={"remove"}},
  *     		"denormalization_context"={"groups"={"remove"}},
  *         "openapi_context" = {
- *         		"summary" = "Verwijder de trouwambtenaar",
- *         		"description" = "Verwijder de eerder aangevraagde trouwambtenaar van dit huwelijk",
+ *         		"summary" = "Verwijder de trouwambtenaar.",
+ *         		"description" = "Verwijder de eerder aangevraagde trouwambtenaar van dit huwelijk.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -484,7 +467,7 @@ use App\Controller\HuwelijkController;
  *            	},
  *             	"responses" = {
  *         			"202" = {
- *         				"description" = "Trouwambentenaar verwijderd uit dit huwelijk"
+ *         				"description" = "Trouwambtenaar verwijderd uit dit huwelijk"
  *         			},	
  *         			"400" = {
  *         				"description" = "Ongeldige aanvraag"
@@ -502,8 +485,8 @@ use App\Controller\HuwelijkController;
  *     		"normalization_context"={"groups"={"validate"}},
  *     		"denormalization_context"={"groups"={"validate"}},
  *         "openapi_context" = {
- *         		"summary" = "Valideer huwelijksdossier",
- *         		"description" = "Controleer of het huwelijksdossier juist en volledig is",
+ *         		"summary" = "Valideer huwelijksdossier.",
+ *         		"description" = "Controleer of het huwelijksdossier juist en volledig is.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -531,8 +514,8 @@ use App\Controller\HuwelijkController;
  *     		"normalization_context"={"groups"={"melding"}},
  *     		"denormalization_context"={"groups"={"melding"}},
  *         	"openapi_context" = {
- *         		"summary" = "Melding huwelijk",
- *         		"description" = "Doe een melding voorgenomen huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt",
+ *         		"summary" = "Melding voorgenomen huwelijk.",
+ *         		"description" = "Doe een melding voorgenomen huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -560,8 +543,8 @@ use App\Controller\HuwelijkController;
  *     		"normalization_context"={"groups"={"aanvraag"}},
  *     		"denormalization_context"={"groups"={"aanvraag"}},
  *         	"openapi_context" = {
- *         		"summary" = "Aanvraag huwelijk",
- *         		"description" = "Doe een aanvraag huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt",
+ *         		"summary" = "Aanvraag huwelijk.",
+ *         		"description" = "Doe een aanvraag huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -589,25 +572,11 @@ use App\Controller\HuwelijkController;
  *     		"normalization_context"={"groups"={"read"}},
  *     		"denormalization_context"={"groups"={"write"}},
  *         	"openapi_context" = {
- *         		"summary" = "Logboek inzien",
- *         		"description" = "Geeft een array van eerdere versies en wijzigingen van dit object",
+ *         		"summary" = "Logboek inzien.",
+ *         		"description" = "Geeft een array van eerdere versies en wijzigingen van dit object.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
- *            	},
- *             	"produces" = {
- *         			"application/json"
- *            	},
- *             	"responses" = {
- *         			"200" = {
- *         				"description" = "Een overzicht van versies"
- *         			},	
- *         			"400" = {
- *         				"description" = "Ongeldige aanvraag"
- *         			},
- *         			"404" = {
- *         				"description" = "Huwelijk of aanvraag niet gevonden"
- *         			}
  *            	}            
  *         }
  *     },
@@ -618,8 +587,8 @@ use App\Controller\HuwelijkController;
  *     		"normalization_context"={"groups"={"read"}},
  *     		"denormalization_context"={"groups"={"write"}},
  *         	"openapi_context" = {
- *         		"summary" = "Versie terugdraaid",
- *         		"description" = "Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt",
+ *         		"summary" = "Versie herstellen.",
+ *         		"description" = "Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -695,7 +664,7 @@ class Huwelijk implements StringableInterface
 	public $identificatie;
 	
 	/**
-	 * Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven
+	 * Het RSIN van de organisatie waartoe deze huwelijk behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de geauthenticeerde applicatie en kan niet worden overschreven.
 	 *
 	 * @var integer
 	 * @ORM\Column(
@@ -743,7 +712,7 @@ class Huwelijk implements StringableInterface
 	 *             "required"="true",
 	 *             "maxLength"=200,
 	 *             "format"="uri",
-	 *             "description"="URL-referentie naar de melding ZAAK van dit huwelijk"
+	 *             "description"="URL-referentie naar de melding ZAAK van dit huwelijk."
 	 *         }
 	 *     }
 	 * )
@@ -770,7 +739,7 @@ class Huwelijk implements StringableInterface
 	 *             "required"="true",
 	 *             "maxLength"=200,
 	 *             "format"="uri",
-	 *             "description"="URL-referentie naar de aanvraag ZAAK van dit huwelijk"
+	 *             "description"="URL-referentie naar de aanvraag ZAAK van dit huwelijk."
 	 *         }
 	 *     }
 	 * )
@@ -802,7 +771,7 @@ class Huwelijk implements StringableInterface
 	public $type = "huwelijk";
 	
 	/**
-	 * De dag waarop de huwelijksvoltrekking zal plaatsvinden
+	 * De dag waarop de huwelijksvoltrekking zal plaatsvinden.
 	 * 
 	 * @var string Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maan uur:minut:seconde"
 	 * @Assert\Date
@@ -815,7 +784,7 @@ class Huwelijk implements StringableInterface
 	public $datum;
 	
 	/**
-	 * Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden
+	 * Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden.
 	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maan uur:minut:seconde"
 	 * @ORM\Column(nullable = true)
@@ -965,7 +934,7 @@ class Huwelijk implements StringableInterface
 	public $producten;
 	
 	/**
-	 * Het tijdstip waarop dit Ambtenaren object is aangemaakt
+	 * Het tijdstip waarop dit Huwelijk object is aangemaakt
 	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
 	 * @Gedmo\Timestampable(on="create")
@@ -978,7 +947,7 @@ class Huwelijk implements StringableInterface
 	public $registratiedatum;
 	
 	/**
-	 * Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.
+	 * Het tijdstip waarop dit Huwelijk object voor het laatst is gewijzigd.
 	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
 	 * @Gedmo\Timestampable(on="update")
@@ -992,7 +961,7 @@ class Huwelijk implements StringableInterface
 	public $wijzigingsdatum;
 	
 	/**
-	 * Het contact persoon voor deze ambtenaar
+	 * Het contact persoon voor dit huwelijk
 	 *
 	 * @ORM\Column(
 	 *     type     = "string",
@@ -1016,7 +985,7 @@ class Huwelijk implements StringableInterface
 	public $contactPersoon;
 	
 	/**
-	 * De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt
+	 * Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.
 	 *
 	 * @var App\Entity\Applicatie $eigenaar
 	 *
@@ -1258,7 +1227,7 @@ class Huwelijk implements StringableInterface
 	public $setProduct;	
 	
 	/**
-	 * Het ID van de ambtenaaar die je wilt verzoeken dit huwelijk te voltrekken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
+	 * Het ID van de ambtenaar die je wilt verzoeken dit huwelijk te voltrekken. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
 	 *
 	 * @var integer
 	 * @ApiProperty(
@@ -1474,5 +1443,9 @@ class Huwelijk implements StringableInterface
 	public function getPartners()
 	{
 		return $this->partners;
+	}
+	public function getUrl()
+	{
+		return 'http://trouwen.demo.zaakonline.nl/huwelijken/'.$this->id;
 	}
 }

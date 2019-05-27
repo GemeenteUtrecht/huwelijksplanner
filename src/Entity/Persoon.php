@@ -39,7 +39,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/personen",
  *  		"openapi_context" = {
- * 				"summary" = "Haalt een verzameling van personen op"
+ * 				"summary" = "Haalt een verzameling van personen op."
  *  		}
  *  	},
  *  	"post"={
@@ -47,7 +47,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"personen"={"groups"={"write"}},
  *      	"path"="/personen",
  *  		"openapi_context" = {
- * 					"summary" = "Maak een persoon aan"
+ * 					"summary" = "Maak een persoon aan."
  *  		}
  *  	}
  *  },
@@ -57,7 +57,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/personen/{id}",
  *  		"openapi_context" = {
- * 				"summary" = "Haal een specifiek persoon op"
+ * 				"summary" = "Haal een specifiek persoon op."
  *  		}
  *  	},
  *     "put"={
@@ -65,7 +65,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/personen/{id}",
  *  		"openapi_context" = {
- * 				"summary" = "Vervang een specifiek persoon"
+ * 				"summary" = "Vervang een specifiek persoon."
  *  		}
  *  	},
  *     "delete"={
@@ -73,7 +73,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  		"denormalizationContext"={"groups"={"write"}},
  *      	"path"="/personen/{id}",
  *  		"openapi_context" = {
- * 				"summary" = "Verwijder een specifiek issue"
+ * 				"summary" = "Verwijder een specifiek issue."
  *  		}
  *  	},
  *     "log"={
@@ -83,25 +83,11 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *     		"normalization_context"={"groups"={"read"}},
  *     		"denormalization_context"={"groups"={"write"}},
  *         	"openapi_context" = {
- *         		"summary" = "Logboek inzien",
- *         		"description" = "Geeft een array van eerdere versies en wijzigingen van dit object",
+ *         		"summary" = "Logboek inzien.",
+ *         		"description" = "Geeft een array van eerdere versies en wijzigingen van dit object.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
- *            	},
- *             	"produces" = {
- *         			"application/json"
- *            	},
- *             	"responses" = {
- *         			"200" = {
- *         				"description" = "Een overzicht van versies"
- *         			},	
- *         			"400" = {
- *         				"description" = "Ongeldige aanvraag"
- *         			},
- *         			"404" = {
- *         				"description" = "persoon niet gevonden"
- *         			}
  *            	}            
  *         }
  *     },
@@ -112,8 +98,8 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *     		"normalization_context"={"groups"={"read"}},
  *     		"denormalization_context"={"groups"={"write"}},
  *         	"openapi_context" = {
- *         		"summary" = "Versie terugdraaien",
- *         		"description" = "Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt",
+ *         		"summary" = "Versie herstellen.",
+ *         		"description" = "Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt.",
  *          	"consumes" = {
  *              	"application/json",
  *               	"text/html",
@@ -188,7 +174,7 @@ class Persoon implements StringableInterface
 	public $identificatie;
 	
 	/**
-	 * Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven
+	 * Het RSIN van de organisatie waartoe deze Persoon behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven
 	 *
 	 * @var integer
 	 * @ORM\Column(
@@ -232,8 +218,8 @@ class Persoon implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 2,
 	 *      max = 255,
-	 *      minMessage = "De voornaam moet tenminste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "De voornaam kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "De voornaam moet minimaal {{ limit }} karakters lang zijn.",
+	 *      maxMessage = "De voornaam mag maximaal {{ limit }} karakters zijn."
 	 * )
 	 * @Groups({"read", "write"})
 	 * @ApiProperty(
@@ -252,7 +238,7 @@ class Persoon implements StringableInterface
 	public $voornamen;
 	
 	/**
-	 * Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>
+	 * Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.
 	 *
 	 * @var string
 	 *
@@ -264,8 +250,8 @@ class Persoon implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 2,
 	 *      max = 255,
-	 *      minMessage = "Het voorvoegsel moet tenminste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "Het voorvoegsel kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "Het voorvoegsel moet minimaal {{ limit }} karakters lang zijn.",
+	 *      maxMessage = "Het voorvoegsel mag maximaal {{ limit }} karakters zijn."
 	 * )
 	 * @Groups({"read", "write"})
 	 * @ApiProperty(
@@ -284,7 +270,7 @@ class Persoon implements StringableInterface
 	public $voorvoegselGeslachtsnaam;
 	
 	/**
-	 * De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>
+	 * De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.
 	 *
 	 * @var string
 	 *
@@ -296,8 +282,8 @@ class Persoon implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 2,
 	 *      max = 255,
-	 *      minMessage = "De geslachtsnaam moet tenminste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "De geslachtsnaam kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "De geslachtsnaam moet minimaal {{ limit }} karakters lang zijn.",
+	 *      maxMessage = "De geslachtsnaam mag maximaal {{ limit }} karakters zijn."
 	 * )
 	 * @Groups({"read", "write"})
 	 * @ApiProperty(
@@ -316,7 +302,7 @@ class Persoon implements StringableInterface
 	public $geslachtsnaam;	
 	
 	/**
-	 * Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>
+	 * Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.
 	 *
 	 * @var string
 	 *
@@ -332,8 +318,8 @@ class Persoon implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 8,
 	 *      max = 255,
-	 *      minMessage = "Het emailadres moet minimaal  {{ limit }} tekens lang zijn",
-	 *      maxMessage = "Het emailadres mag maximaal {{ limit }} tekens lang zijn"
+	 *      minMessage = "Het emailadres moet minimaal  {{ limit }} tekens lang zijn.",
+	 *      maxMessage = "Het emailadres mag maximaal {{ limit }} tekens lang zijn."
 	 * )
 	 * @Groups({"read", "write"})
 	 * @ApiProperty(
@@ -352,15 +338,15 @@ class Persoon implements StringableInterface
 	public $emailadres;
 	
 	/**
-	 * Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>
+	 * Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.
 	 *
 	 * @var string
 	 *
 	 * @Assert\Length(
 	 *      min = 10,
 	 *      max = 255,
-	 *      minMessage = "Het telefoonnummer moet minimaal {{ limit }} tekens lang zijn",
-	 *      maxMessage = "Het telefoonnummer mag maximaal {{ limit }} tekens lang zijn"
+	 *      minMessage = "Het telefoonnummer moet minimaal {{ limit }} tekens lang zijn.",
+	 *      maxMessage = "Het telefoonnummer mag maximaal {{ limit }} tekens lang zijn."
 	 * )
 	 * @Groups({"read", "write"})
 	 * @ApiProperty(
@@ -379,7 +365,7 @@ class Persoon implements StringableInterface
 	public $telefoonnummer;
 	
 	/**
-	 * URL-referentie naar de agenda van dit persoon
+	 * URL-referentie naar de agenda van dit persoon.
 	 *
 	 * @ORM\Column(
 	 *     type     = "string",
@@ -394,7 +380,7 @@ class Persoon implements StringableInterface
 	 *             "required"="true",
 	 *             "maxLength"=255,
 	 *             "format"="uri",
-	 *             "description"="URL-referentie naar de agenda van deze persoon"
+	 *             "description"="URL-referentie naar de agenda van deze persoon."
 	 *         }
 	 *     }
 	 * )
@@ -403,9 +389,9 @@ class Persoon implements StringableInterface
 	public $agenda;
 	
 	/**
-	 * Het tijdstip waarop dit object is aangemaakt.
+	 * Het tijdstip waarop dit Persoon object is aangemaakt.
 	 *
-	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
+	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde."
 	 * @Gedmo\Timestampable(on="create")
 	 * @Assert\DateTime
 	 * @ORM\Column(
@@ -416,9 +402,9 @@ class Persoon implements StringableInterface
 	public $registratiedatum;
 	
 	/**
-	 * Het tijdstip waarop dit object voor het laatst is gewijzigd.
+	 * Het tijdstip waarop dit Persoon object voor het laatst is gewijzigd.
 	 *
-	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
+	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde."
 	 * @Gedmo\Timestampable(on="update")
 	 * @Assert\DateTime
 	 * @ORM\Column(
@@ -430,7 +416,7 @@ class Persoon implements StringableInterface
 	public $wijzigingsdatum;
 		
 	/**
-	 * De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>
+	 * De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.
 	 *
 	 * @var string Een Unicode language identifier, ofwel RFC 3066 taalcode.
 	 *
@@ -443,8 +429,8 @@ class Persoon implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 2,
 	 *      max = 17,
-	 *      minMessage = "De taal moet tenminste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "De taal kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "De taal moet minmaal {{ limit }} karakters lang zijn.",
+	 *      maxMessage = "De taal kan mag maximaal {{ limit }} karakters zijn."
 	 * )
 	 * @ApiProperty(
 	 *     attributes={
@@ -510,6 +496,10 @@ class Persoon implements StringableInterface
 	public function setTelefoonnummer($telefoonnummer)
 	{
 		$this->telefoonnummer = $telefoonnummer;
+	}
+	public function getUrl()
+	{
+		return 'http://trouwen.demo.zaakonline.nl/personen/'.$this->id;
 	}	
 	
 	
