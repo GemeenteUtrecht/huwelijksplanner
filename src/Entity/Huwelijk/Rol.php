@@ -53,7 +53,7 @@ class Rol  implements StringableInterface
 	public $id;
 	
 	/**
-	 * Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven
+	 * Het RSIN van de organisatie waartoe deze Ambtenaar behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de geauthenticeerde applicatie en kan niet worden overschreven.
 	 *
 	 * @var integer
 	 * @ORM\Column(
@@ -63,8 +63,8 @@ class Rol  implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 8,
 	 *      max = 9,
-	 *      minMessage = "Het RSIN moet ten minste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "Het RSIN kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "Het RSIN moet minimaal {{ limit }} karakters lang zijn.",
+	 *      maxMessage = "Het RSIN mag maximaal {{ limit }} karakters zijn."
 	 * )
 	 * @Groups({"read"})
 	 * @ApiFilter(SearchFilter::class, strategy="exact")
@@ -101,7 +101,7 @@ class Rol  implements StringableInterface
 	 *             "required"="true",
 	 *             "maxLength"=255,
 	 *             "format"="uri",
-	 *             "description"="URL-referentie naar de BRP inschrijving van dit persoon"
+	 *             "description"="URL-referentie naar de BRP inschrijving van deze persoon."
 	 *         }
 	 *     }
 	 * )
@@ -109,7 +109,7 @@ class Rol  implements StringableInterface
 	public $instemming;
 	
 	/**
-	 * Het rol 
+	 * De rol 
 	 *
 	 * @var string
 	 * @Assert\Choice({"huwelijk", "partnerschap"})
@@ -132,7 +132,7 @@ class Rol  implements StringableInterface
 	public $soort = "getuige";
 	
 	/**
-	 * @var string A representation for the status of this object
+	 * @var string Een representatie van de status van dit object.
 	 * @Assert\DateTime
 	 * @ORM\Column(
 	 *     type     = "string",
@@ -142,7 +142,7 @@ class Rol  implements StringableInterface
 	public $status = "uitgenodigd";
 	
 	/**
-	 * Het Huwelijk waartoe deze partner behoort
+	 * Het huwelijk waartoe deze partner behoort.
 	 *
 	 * @var \App\Entity\Huwelijk
 	 * @ORM\ManyToOne(targetEntity="\App\Entity\Huwelijk", cascade={"persist", "remove"}, inversedBy="rollen")
@@ -152,7 +152,7 @@ class Rol  implements StringableInterface
 	public $huwelijk;
 	
 	/**
-	 * De eventuele rol waar deze rol betrekking op heeft, bijvoorbeeld getuigen voor een partner
+	 * De eventuele rol waar deze rol betrekking op heeft, bijvoorbeeld getuigen voor een partner.
 	 *
 	 * @var \App\Entity\Huwelijk\HuwelijkPartner
 	 * @ORM\ManyToOne(targetEntity="\App\Entity\Huwelijk\Rol", cascade={"persist", "remove"}, inversedBy="rollen")
@@ -162,7 +162,7 @@ class Rol  implements StringableInterface
 	public $rol;	
 	
 	/**
-	 * Rollen die betrekking hebben op deze rol bijvoorbeel getuigen voor een partner
+	 * Rollen die betrekking hebben op deze rol bijvoorbeel getuigen voor een partner.
 	 *
 	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk\Rol[]|null
 	 *
@@ -176,7 +176,7 @@ class Rol  implements StringableInterface
 	public $rollen;
 		
 	/**
-	 * Houder van deze rol (Persoon of Ambtenaar)
+	 * Houder van deze rol (B.v. persoon of ambtenaar).
 	 *
 	 * @ORM\Column(
 	 *     type     = "string",
@@ -201,9 +201,9 @@ class Rol  implements StringableInterface
 	public $houder;
 	
 	/**
-	 * Het tijdstip waarop dit Ambtenaren object is aangemaakt
+	 * Het tijdstip waarop dit Rol object is aangemaakt.
 	 *
-	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
+	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde."
 	 * @Gedmo\Timestampable(on="create")
 	 * @Assert\DateTime
 	 * @ORM\Column(
@@ -214,9 +214,9 @@ class Rol  implements StringableInterface
 	public $registratiedatum;
 	
 	/**
-	 * Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.
+	 * Het tijdstip waarop dit Rol object voor het laatst is gewijzigd.
 	 *
-	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
+	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde."
 	 * @Gedmo\Timestampable(on="update")
 	 * @Assert\DateTime
 	 * @ORM\Column(
@@ -228,7 +228,7 @@ class Rol  implements StringableInterface
 	public $wijzigingsdatum;
 		
 	/**
-	 * De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt
+	 * De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt.
 	 *
 	 * @var App\Entity\Applicatie $eigenaar
 	 *
