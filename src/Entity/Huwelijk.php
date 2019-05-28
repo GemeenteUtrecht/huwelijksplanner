@@ -822,8 +822,21 @@ class Huwelijk implements StringableInterface
 	 * @Groups({"read"})
 	 *
 	 */
-	public $locaties;
+	public $locaties;	
 	
+	/**
+	 * Rollen op dit huwelijk, zo als partner, getuige en ambtenaar
+	 *
+	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk\Rol[]|null
+	 *
+	 * @MaxDepth(3)
+	 * @ORM\OneToMany(
+	 * 		targetEntity="\App\Entity\Huwelijk\Rol",
+	 * 		mappedBy="huwelijk")
+	 * @Groups({"read"})
+	 *
+	 */
+	public $rollen;
 	
 	/**
 	 * De partners die in dit huwelijk treden 
