@@ -518,38 +518,6 @@ class Soort implements StringableInterface
 		return $this->toString();
 	}
 	
-	/* @todo registratie datum */
-		
-	public function getHuwelijkspartner()
-	{
-		return $this->huwelijkspartner;
-	}
-	
-	public function setHuwelijkspartner($huwelijkspartner)
-	{
-		$this->huwelijkspartner = $huwelijkspartner;
-		return $this;
-	} 
-	
-	public function getEmailadres()
-	{
-		return $this->emailadres;
-	}
-	
-	public function setEmailadres($emailadres)
-	{
-		$this->emailadres = $emailadres;
-	}
-	
-	public function getTelefoonnummer()
-	{
-		return $this->telefoonnummer;
-	}
-	
-	public function setTelefoonnummer($telefoonnummer)
-	{
-		$this->telefoonnummer = $telefoonnummer;
-	}
 	public function getUrl()
 	{
 		return 'http://trouwen.demo.zaakonline.nl/type/'.$this->id;

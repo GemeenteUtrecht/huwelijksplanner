@@ -189,7 +189,7 @@ use App\Controller\HuwelijkController;
  *         }
  *     },
  *     "remove_witness"={
- *         "method"="POST",
+ *         "method"="DELETE",
  *         "path"="/huwelijk/{id}/removeWitness",
  *         "controller"= HuwelijkController::class,
  *     	   "normalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
@@ -305,7 +305,7 @@ use App\Controller\HuwelijkController;
  *         }
  *     },
  *     "remove_product"={
- *         "method"="POST",
+ *         "method"="DELETE",
  *         "path"="/huwelijk/{id}/removeProduct",
  *         "controller"= HuwelijkController::class,
  *     	   "normalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
@@ -363,7 +363,7 @@ use App\Controller\HuwelijkController;
  *         }
  *     },
  *     "remove_document"={
- *         "method"="POST",
+ *         "method"="DELETE",
  *         "path"="/huwelijk/{id}/removeDocument",
  *         "controller"= HuwelijkController::class,
  *     	   "normalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
@@ -450,7 +450,7 @@ use App\Controller\HuwelijkController;
  *         }
  *     },
  *     "remove_official"={
- *         "method"="POST",
+ *         "method"="DELETE",
  *         "path"="/huwelijk/{id}/removeOfficial",
  *         "controller"= HuwelijkController::class,
  *     		"normalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
