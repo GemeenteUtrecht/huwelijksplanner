@@ -34,16 +34,16 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  @ApiResource( 
  *  collectionOperations={
  *  	"get"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/type",
  *  		"openapi_context" = {
  * 				"summary" = "Haalt een verzameling van huwelijkstypes op."
  *  		}
  *  	},
  *  	"post"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"personen"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"personen"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/personen",
  *  		"openapi_context" = {
  * 				"summary" = "Voeg een persoon toe aan een huwelijk."
@@ -52,24 +52,24 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  },
  * 	itemOperations={
  *     "get"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/types/{id}",
  *  		"openapi_context" = {
  * 				"summary" = "Haalt een specifiek huwelijks type op."
  *  		}
  *  	},
  *     "put"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/types/{id}",
  *  		"openapi_context" = {
  * 				"summary" = "Vervang een specifiek issue huwelijks type."
  *  		}
  *  	},
  *     "delete"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/types/{id}",
  *  		"openapi_context" = {
  * 				"summary" = "Verwijder een specifiek huwelijks type."
@@ -79,8 +79,8 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *         	"method"="GET",
  *         	"path"="/types/{id}/log",
  *          "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"read"}},
- *     		"denormalization_context"={"groups"={"write"}},
+ *     		"normalization_context"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *         	"openapi_context" = {
  *         		"summary" = "Logboek inzien",
  *         		"description" = "Geeft een array van eerdere versies en wijzigingen van dit object.",
@@ -94,8 +94,8 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *         	"method"="POST",
  *         	"path"="/types/{id}/revert/{version}",
  *          "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"read"}},
- *     		"denormalization_context"={"groups"={"write"}},
+ *     		"normalization_context"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *         	"openapi_context" = {
  *         		"summary" = "Versie herstellen.",
  *         		"description" = "Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt.",

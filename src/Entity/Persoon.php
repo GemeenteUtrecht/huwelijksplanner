@@ -35,16 +35,16 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  @ApiResource( 
  *  collectionOperations={
  *  	"get"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/personen",
  *  		"openapi_context" = {
  * 				"summary" = "Haalt een verzameling van personen op."
  *  		}
  *  	},
  *  	"post"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"personen"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"personen"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/personen",
  *  		"openapi_context" = {
  * 					"summary" = "Maak een persoon aan."
@@ -53,24 +53,24 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *  },
  * 	itemOperations={
  *     "get"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/personen/{id}",
  *  		"openapi_context" = {
  * 				"summary" = "Haal een specifiek persoon op."
  *  		}
  *  	},
  *     "put"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/personen/{id}",
  *  		"openapi_context" = {
  * 				"summary" = "Vervang een specifiek persoon."
  *  		}
  *  	},
  *     "delete"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/personen/{id}",
  *  		"openapi_context" = {
  * 				"summary" = "Verwijder een specifiek issue."
@@ -80,8 +80,8 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *         	"method"="GET",
  *         	"path"="/personen/{id}/log",
  *          "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"read"}},
- *     		"denormalization_context"={"groups"={"write"}},
+ *     		"normalization_context"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *         	"openapi_context" = {
  *         		"summary" = "Logboek inzien.",
  *         		"description" = "Geeft een array van eerdere versies en wijzigingen van dit object.",
@@ -95,8 +95,8 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
  *         	"method"="POST",
  *         	"path"="/personen/{id}/revert/{version}",
  *          "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"read"}},
- *     		"denormalization_context"={"groups"={"write"}},
+ *     		"normalization_context"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *         	"openapi_context" = {
  *         		"summary" = "Versie herstellen.",
  *         		"description" = "Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt.",

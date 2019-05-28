@@ -41,16 +41,16 @@ use App\Controller\HuwelijkController;
  * @ApiResource( 
  *  collectionOperations={
  *  	"get"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/huwelijken",
  *  		"openapi_context" = {
  * 				"summary" = "Haalt een verzameling van huwelijken op."
  *  		}
  *  	},
  *  	"post"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/huwelijken",
  *  		"openapi_context" = {
  * 					"summary" = "Maak een huwelijk aan."
@@ -63,8 +63,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk_bsn",
  *         "controller"= HuwelijkController::class,
- *     	   "normalization_context"={"groups"={"read"}},
- *     	   "denormalization_context"={"groups"={"BSN"}},
+ *     	   "normalization_context"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     	   "denormalization_context"={"groups"={"BSN"},"enable_max_depth" = true, "circular_reference_handler"},
  *     	   
  *         "openapi_context" = {
  *         		"summary" = "Haal huwelijk op met BSN.",
@@ -92,16 +92,16 @@ use App\Controller\HuwelijkController;
  *  },
  * 	itemOperations={
  *     "get"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/huwelijk/{id}",
  *  		"openapi_context" = {
  * 				"summary" = "Haal een specifiek huwelijk op."
  *  		}
  *  	},
  *     "put"={
- *  		"normalizationContext"={"groups"={"read"}},
- *  		"denormalizationContext"={"groups"={"write"}},
+ *  		"normalizationContext"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *  		"denormalizationContext"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *      	"path"="/huwelijk/{id}",
  *  		"openapi_context" = {
  * 				"summary" = "Vervang een specifiek huwelijk."
@@ -119,8 +119,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/addPartner",
  *         "controller"= HuwelijkController::class,
- *     	   "normalization_context"={"groups"={"invite"}},
- *     	   "denormalization_context"={"groups"={"invite"}},
+ *     	   "normalization_context"={"groups"={"invite"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     	   "denormalization_context"={"groups"={"invite"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Voeg een partner toe.",
  *         		"description" = "Nodig een partner uit om dit huwelijk te bevestigen en deel te nemen, er zijn 2 partners per huwelijk.",
@@ -148,8 +148,8 @@ use App\Controller\HuwelijkController;
  *         "method"="GET",
  *         "path"="/huwelijk/{id}/pay",
  *         "controller"= HuwelijkController::class,
- *     	   "normalization_context"={"groups"={"payment"}},
- *     	   "denormalization_context"={"groups"={"payment"}},
+ *     	   "normalization_context"={"groups"={"payment"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     	   "denormalization_context"={"groups"={"payment"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Haal betaallink op.",
  *         		"description" = "Geeft een betaallink terug voor huwelijk, het aanvragen van een betaallink heeft gevolgen (aanmaak factuur etc), waardoor het huwelijk hierna niet meer kan worden aangepast.",
@@ -163,8 +163,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/addWitness",
  *         "controller"= HuwelijkController::class,
- *     	   "normalization_context"={"groups"={"inviteGetuige"}},
- *     	   "denormalization_context"={"groups"={"inviteGetuige"}},
+ *     	   "normalization_context"={"groups"={"inviteGetuige"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     	   "denormalization_context"={"groups"={"inviteGetuige"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Voeg een getuige toe.",
  *         		"description" = "Voeg een getuige toe die voor een van de partners getuigt, er moeten/mogen per partner minimaal 1 en maximaal 2 getuigen zijn.",
@@ -192,8 +192,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/removeWitness",
  *         "controller"= HuwelijkController::class,
- *     	   "normalization_context"={"groups"={"remove"}},
- *     	   "denormalization_context"={"groups"={"remove"}},
+ *     	   "normalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     	   "denormalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Verwijder een getuige.",
  *         		"description" = "Verwijder een getuige van dit huwelijk.",
@@ -221,8 +221,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/setLocation",
  *         "controller"= HuwelijkController::class,
- *     	   "normalization_context"={"groups"={"setLocation"}},
- *     	   "denormalization_context"={"groups"={"setLocation"}},
+ *     	   "normalization_context"={"groups"={"setLocation"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     	   "denormalization_context"={"groups"={"setLocation"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Stel een locatie in voor dit huwelijk.",
  *         		"description" = "Geef de locatie op waar dit huwelijk gaat plaatsvinden.",
@@ -250,8 +250,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/setProduct",
  *         "controller"= HuwelijkController::class,
- *     	   "normalization_context"={"groups"={"setProduct"}},
- *     	   "denormalization_context"={"groups"={"setProduct"}},
+ *     	   "normalization_context"={"groups"={"setProduct"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     	   "denormalization_context"={"groups"={"setProduct"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Kies het type van dit huwelijk.",
  *         		"description" = "Kies het primaire type van dit huwelijk (bijvoorbeeld gratis). Het primaire product bepaald welke overige producten, diensten, ambtenaren en locaties kunnen worden gekozen.",
@@ -279,8 +279,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/addProduct",
  *         "controller"= HuwelijkController::class,
- *     	   "normalization_context"={"groups"={"productAdd"}},
- *     	   "denormalization_context"={"groups"={"productAdd"}},
+ *     	   "normalization_context"={"groups"={"productAdd"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     	   "denormalization_context"={"groups"={"productAdd"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Voeg een product toe.",
  *         		"description" = "Voeg een extra product (bijvoorbeeld trouwboekje) toe aan dit huwelijk.",
@@ -308,8 +308,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/removeProduct",
  *         "controller"= HuwelijkController::class,
- *     	   "normalization_context"={"groups"={"remove"}},
- *     	   "denormalization_context"={"groups"={"remove"}},
+ *     	   "normalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     	   "denormalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Verwijder product.",
  *         		"description" = "Verwijder een eerder gekozen product.",
@@ -337,8 +337,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/addDocument",
  *         "controller"= HuwelijkController::class,
- *     	   "normalization_context"={"groups"={"documentAdd"}},
- *     	   "denormalization_context"={"groups"={"documentAdd"}},
+ *     	   "normalization_context"={"groups"={"documentAdd"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     	   "denormalization_context"={"groups"={"documentAdd"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Voeg een document toe.",
  *         		"description" = "Voeg een document toe aan dit huwelijk, bijvoorbeeld een geboorteakte.",
@@ -366,8 +366,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/removeDocument",
  *         "controller"= HuwelijkController::class,
- *     	   "normalization_context"={"groups"={"remove"}},
- *     	   "denormalization_context"={"groups"={"remove"}},
+ *     	   "normalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     	   "denormalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Verwijder document.",
  *         		"description" = "Verwijder een eerder toegevoegd document.",
@@ -395,8 +395,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/requestOfficial",
  *         "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"requestOfficial"}},
- *     		"denormalization_context"={"groups"={"requestOfficial"}},
+ *     		"normalization_context"={"groups"={"requestOfficial"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"requestOfficial"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Vraag een trouwambtenaar aan.",
  *         		"description" = "Vraag een (specifieke) trouwambtenaar aan om dit huwelijk te voltrekken.",
@@ -424,8 +424,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/requestSpecial",
  *         "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"invite"}},
- *     		"denormalization_context"={"groups"={"invite"}},
+ *     		"normalization_context"={"groups"={"invite"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"invite"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Vraag een trouwambtenaar voor een dag aan.",
  *         		"description" = "Vraag een niet geregistreerde trouwambtenaar aan om dit huwelijk te voltrekken.",
@@ -453,8 +453,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/removeOfficial",
  *         "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"remove"}},
- *     		"denormalization_context"={"groups"={"remove"}},
+ *     		"normalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"remove"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Verwijder de trouwambtenaar.",
  *         		"description" = "Verwijder de eerder aangevraagde trouwambtenaar van dit huwelijk.",
@@ -482,8 +482,8 @@ use App\Controller\HuwelijkController;
  *         "method"="POST",
  *         "path"="/huwelijk/{id}/validate",
  *         "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"validate"}},
- *     		"denormalization_context"={"groups"={"validate"}},
+ *     		"normalization_context"={"groups"={"validate"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"validate"},"enable_max_depth" = true, "circular_reference_handler"},
  *         "openapi_context" = {
  *         		"summary" = "Valideer huwelijksdossier.",
  *         		"description" = "Controleer of het huwelijksdossier juist en volledig is.",
@@ -511,8 +511,8 @@ use App\Controller\HuwelijkController;
  *         	"method"="POST",
  *         	"path"="/huwelijk/{id}/melding",
  *          "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"melding"}},
- *     		"denormalization_context"={"groups"={"melding"}},
+ *     		"normalization_context"={"groups"={"melding"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"melding"},"enable_max_depth" = true, "circular_reference_handler"},
  *         	"openapi_context" = {
  *         		"summary" = "Melding voorgenomen huwelijk.",
  *         		"description" = "Doe een melding voorgenomen huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt.",
@@ -540,8 +540,8 @@ use App\Controller\HuwelijkController;
  *         	"method"="POST",
  *         	"path"="/huwelijk/{id}/aanvraag",
  *          "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"aanvraag"}},
- *     		"denormalization_context"={"groups"={"aanvraag"}},
+ *     		"normalization_context"={"groups"={"aanvraag"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"aanvraag"},"enable_max_depth" = true, "circular_reference_handler"},
  *         	"openapi_context" = {
  *         		"summary" = "Aanvraag huwelijk.",
  *         		"description" = "Doe een aanvraag huwelijk bij de betreffende gemeente voor dit huwelijk, er kan geen aanvullende informatie worden verstrekt.",
@@ -569,8 +569,8 @@ use App\Controller\HuwelijkController;
  *         	"method"="GET",
  *         	"path"="/huwelijk/{id}/log",
  *          "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"read"}},
- *     		"denormalization_context"={"groups"={"write"}},
+ *     		"normalization_context"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *         	"openapi_context" = {
  *         		"summary" = "Logboek inzien.",
  *         		"description" = "Geeft een array van eerdere versies en wijzigingen van dit object.",
@@ -584,8 +584,8 @@ use App\Controller\HuwelijkController;
  *         	"method"="POST",
  *         	"path"="/huwelijk/{id}/revert/{version}",
  *          "controller"= HuwelijkController::class,
- *     		"normalization_context"={"groups"={"read"}},
- *     		"denormalization_context"={"groups"={"write"}},
+ *     		"normalization_context"={"groups"={"read"},"enable_max_depth" = true, "circular_reference_handler"},
+ *     		"denormalization_context"={"groups"={"write"},"enable_max_depth" = true, "circular_reference_handler"},
  *         	"openapi_context" = {
  *         		"summary" = "Versie herstellen.",
  *         		"description" = "Herstel een eerdere versie van dit object. Dit is een destructieve actie die niet ongedaan kan worden gemaakt.",
