@@ -4152,7 +4152,7 @@ components:
           description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
     Rol:
       type: object
-      description: Rol
+      description: 'Rol van een PERSOON of AMBTENAAR op een huwelijk'
       properties:
         id:
           type: integer
@@ -4484,8 +4484,8 @@ tags:
     name: Soort
     description: 'Huwelijks type, bepaald beschikbare locaties, ambtenaren en aditionele producten.'
   -
-    name: Persoon
-    description: 'Een ''NIET'' BRP persoon.'
+    name: Rol
+    description: 'Een rol van een PERSOON of AMBTENAAR'
   -
     name: Applicatie
     description: 'Een software applicatie binnen een organisatie die gebruik maakt van een component voor het creëren, ophalen, bijwerken of verwijderen van gegevens. Applicaties kunnen worden geregistreerd om namens een organisatie te handelen op een component. In deze zin zijn applicaties dan ook onderdeel van het beheerproces, infrastructuur en configuratie van een component in plaats van het datamodel dat door het component wordt geleverd.'
@@ -4495,7 +4495,7 @@ x-tagGroups:
     tags:
       - Huwelijk
       - Soort
-      - Persoon
+      - Rol
   -
     name: Applicatie
     tags:

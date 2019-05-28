@@ -94,8 +94,8 @@ parameters:
               description: "Representeert een huwelijk."
             - name: Soort
               description: "Huwelijks type, bepaald beschikbare locaties, ambtenaren en aditionele producten."
-            - name: Persoon
-              description: "Een 'NIET' BRP persoon."
+            - name: Rol
+              description: "Een rol van een PERSOON of AMBTENAAR"
             - name: Applicatie
               description: "Een software applicatie binnen een organisatie die gebruik maakt van een component voor het creëren, ophalen, bijwerken of verwijderen van gegevens. Applicaties kunnen worden geregistreerd om namens een organisatie te handelen op een component. In deze zin zijn applicaties dan ook onderdeel van het beheerproces, infrastructuur en configuratie van een component in plaats van het datamodel dat door het component wordt geleverd."  
             # Grouping the endopoint  
@@ -104,7 +104,7 @@ parameters:
               tags:
               - Huwelijk
               - Soort
-              - Persoon
+              - Rol
             - name: Applicatie
               tags:
               - Applicatie

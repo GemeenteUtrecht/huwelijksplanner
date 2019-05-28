@@ -19,7 +19,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
 use App\Entity\Token;
 
 /** 
- * Rol
+ * Rol van een PERSOON of AMBTENAAR op een huwelijk
  * 
  * Beschrijving
  * 
