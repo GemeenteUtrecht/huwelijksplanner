@@ -841,13 +841,22 @@ class Huwelijk implements StringableInterface
 	/**
 	 * De partners die in dit huwelijk treden 
 	 *
-	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk\HuwelijkPartner[]|null
-	 *
-     * @MaxDepth(3)
-	 * @ORM\OneToMany(
-	 * 		targetEntity="\App\Entity\Huwelijk\HuwelijkPartner", 
-	 * 		mappedBy="huwelijk")
-	 * @Groups({"read"})
+	 * @var array
+	 * @ORM\Column(
+	 *  	type="array",
+	 *  	nullable=true
+	 *  )
+	 * @Groups({"read", "write"})
+	 * @ApiProperty(
+	 *     attributes={
+	 *         "openapi_context"={
+	 *             "title"="Partners",
+	 *             "type"="array",
+	 *             "example"="['http://brp.demo.zaakonline.nl/personen/1']",
+	 *             "description"="De partners die in dit huwelijk treden"
+	 *         }
+	 *     }
+	 * )
 	 *
 	 */
 	public $partners;
@@ -855,13 +864,22 @@ class Huwelijk implements StringableInterface
 	/**
 	 * De personen die voor dit huwelijk gaan getuigen
 	 *
-	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk\HuwelijkGetuigen[]|null
-	 *
-     * @MaxDepth(3)
-	 * @ORM\OneToMany(
-	 * 		targetEntity="\App\Entity\Huwelijk\HuwelijkGetuige", 
-	 * 		mappedBy="huwelijk")
-	 * @Groups({"read"})
+	 * @var array
+	 * @ORM\Column(
+	 *  	type="array",
+	 *  	nullable=true
+	 *  )
+	 * @Groups({"read", "write"})
+	 * @ApiProperty(
+	 *     attributes={
+	 *         "openapi_context"={
+	 *             "title"="Partners",
+	 *             "type"="array",
+	 *             "example"="['http://brp.demo.zaakonline.nl/personen/1']",
+	 *             "description"="De personen die voor dit huwelijk gaan getuigen"
+	 *         }
+	 *     }
+	 * )
 	 *
 	 */
 	public $getuigen;
@@ -869,12 +887,22 @@ class Huwelijk implements StringableInterface
 	/**
 	 * De trouwambtenaren die betrokken zijn bij deze huwelijksvoltrekking
 	 *
-	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk\HuwelijkAmbtenaar[]
-	 *
-     * @MaxDepth(3)
-	 * @ORM\OneToMany(targetEntity="\App\Entity\Huwelijk\HuwelijkAmbtenaar", mappedBy="huwelijk")
-	 * @Groups({"read"})
-	 *
+	 * @var array
+	 * @ORM\Column(
+	 *  	type="array",
+	 *  	nullable=true
+	 *  )
+	 * @Groups({"read", "write"})
+	 * @ApiProperty(
+	 *     attributes={
+	 *         "openapi_context"={
+	 *             "title"="Partners",
+	 *             "type"="array",
+	 *             "example"="['http://brp.demo.zaakonline.nl/personen/1']",
+	 *             "description"="De trouwambtenaren die betrokken zijn bij deze huwelijksvoltrekking"
+	 *         }
+	 *     }
+	 * )
 	 */
 	public $ambtenaren;
 	
