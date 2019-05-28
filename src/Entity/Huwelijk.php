@@ -623,7 +623,7 @@ use App\Controller\HuwelijkController;
 class Huwelijk implements StringableInterface
 {
 	/**
-	 * Het identificatie nummer van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a><br /><br /><b>Note</b> This is for devolopment purposes, the INT ID wil be replaced by BLOB UUID on production
+	 * Het identificatienummer van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a><br /><br /><b>Note</b> This is for devolopment purposes, the INT ID wil be replaced by BLOB UUID on production
 	 *
 	 * @var int|null
 	 *
@@ -674,8 +674,8 @@ class Huwelijk implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 8,
 	 *      max = 9,
-	 *      minMessage = "Het RSIN moet ten minste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "Het RSIN kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "Het RSIN moet minimaal {{ limit }} karakters lang zijn",
+	 *      maxMessage = "Het RSIN mag maximaal {{ limit }} karakters zijn"
 	 * )
 	 * @Groups({"read"})
 	 * @ApiFilter(SearchFilter::class, strategy="exact")
@@ -696,7 +696,7 @@ class Huwelijk implements StringableInterface
 	public $bronOrganisatie;	
 	
 	/**
-	 * URL-referentie naar de melding "ZAAK" van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>
+	 * URL-referentie naar de melding "ZAAK" van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>
 	 *
 	 * @var string
 	 * @ORM\Column(
@@ -722,7 +722,7 @@ class Huwelijk implements StringableInterface
 	public $melding;
 	
 	/**
-	 * URL-referentie naar de aanvraag "ZAAK" van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>
+	 * URL-referentie naar de aanvraag "ZAAK" van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>
 	 *
 	 * @var string
 	 * @ORM\Column(
@@ -748,7 +748,7 @@ class Huwelijk implements StringableInterface
 	public $aanvraag;
 	
 	/**
-	 * Het type van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>
+	 * Het type van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>
 	 * 
 	 * @var string
 	 * @Assert\Choice({"huwelijk", "partnerschap"})
@@ -795,7 +795,7 @@ class Huwelijk implements StringableInterface
 	public $tijd;
 	
 	/**
-	 * Datums die mogelijk zijn, binnen de door de gebruiker opgeven criteria
+	 * Datums die mogelijk zijn, binnen de door de gebruiker opgeven criteria.
 	 *
 	 * @var array|null Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maan uur:minut:seconde"
 	 * @Groups({"read"})
@@ -803,7 +803,7 @@ class Huwelijk implements StringableInterface
 	public $mogelijkeDatums;
 	
 	/**
-	 * Tijdstippen die mogelijk zijn, binnen de door de gebruiker opgeven criteria
+	 * Tijdstippen die mogelijk zijn, binnen de door de gebruiker opgeven criteria.
 	 *
 	 * @var array|null  Een "Y-m-d H:i:s" waarde bijv. "2018-12-31 13:33:05" ofwel "Jaar-dag-maan uur:minut:seconde"
 	 * @Groups({"read"})
@@ -811,7 +811,7 @@ class Huwelijk implements StringableInterface
 	public $mogelijkeTijden;
 	
 	/**
-	 * De gekozen locatie voor dit huwelijk
+	 * De gekozen locatie voor dit huwelijk.
 	 *
 	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk\HuwelijkLocatie[]|null
 	 *
@@ -825,7 +825,7 @@ class Huwelijk implements StringableInterface
 	public $locaties;	
 	
 	/**
-	 * Rollen op dit huwelijk, zo als partner, getuige en ambtenaar
+	 * Rollen op dit huwelijk, zoals partner, getuige en ambtenaar.
 	 *
 	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk\Rol[]|null
 	 *
@@ -839,7 +839,7 @@ class Huwelijk implements StringableInterface
 	public $rollen;
 	
 	/**
-	 * De partners die in dit huwelijk treden 
+	 * De partners die in dit huwelijk treden.
 	 *
 	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk\HuwelijkPartner[]|null
 	 *
@@ -853,7 +853,7 @@ class Huwelijk implements StringableInterface
 	public $partners;
 	
 	/**
-	 * De personen die voor dit huwelijk gaan getuigen
+	 * De personen die voor dit huwelijk gaan getuigen.
 	 *
 	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk\HuwelijkGetuigen[]|null
 	 *
@@ -867,7 +867,7 @@ class Huwelijk implements StringableInterface
 	public $getuigen;
 	
 	/**
-	 * De trouwambtenaren die betrokken zijn bij deze huwelijksvoltrekking
+	 * De trouwambtenaren die betrokken zijn bij deze huwelijksvoltrekking.
 	 *
 	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk\HuwelijkAmbtenaar[]
 	 *
@@ -879,7 +879,7 @@ class Huwelijk implements StringableInterface
 	public $ambtenaren;
 	
 	/**
-	 * De bij dit huwelijk behorende/benodigde documenten
+	 * De bij dit huwelijk behorende/benodigde documenten.
 	 *
 	 * @var \Doctrine\Common\Collections\Collection|\App\Entity\Huwelijk\HuwelijkDocument[]
 	 *
@@ -891,7 +891,7 @@ class Huwelijk implements StringableInterface
 	public $documenten;
 	
 	/**
-	 * Aan dit huwelijk verbonden issues,
+	 * De aan dit huwelijk verbonden issues.
 	 *
 	 * @var array
 	 * @ORM\Column(
@@ -913,7 +913,7 @@ class Huwelijk implements StringableInterface
 	public $issues;
 		
 	/**
-	 * Het soort huwelijk wat is gekozen, bijvoorbeeld gratis
+	 * Het soort huwelijk wat is gekozen, bijvoorbeeld gratis.
 	 *
 	 * @todo eigenlijk setten met een primary flag op het onderliggende object en dan een collection filter
 	 *
@@ -947,9 +947,9 @@ class Huwelijk implements StringableInterface
 	public $producten;
 	
 	/**
-	 * Het tijdstip waarop dit Huwelijk object is aangemaakt
+	 * Het tijdstip waarop dit Huwelijk is aangemaakt.
 	 *
-	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
+	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde."
 	 * @Gedmo\Timestampable(on="create")
 	 * @Assert\DateTime
 	 * @ORM\Column(
@@ -960,9 +960,9 @@ class Huwelijk implements StringableInterface
 	public $registratiedatum;
 	
 	/**
-	 * Het tijdstip waarop dit Huwelijk object voor het laatst is gewijzigd.
+	 * Het tijdstip waarop dit Huwelijk voor het laatst is gewijzigd.
 	 *
-	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
+	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde."
 	 * @Gedmo\Timestampable(on="update")
 	 * @Assert\DateTime
 	 * @ORM\Column(
@@ -974,7 +974,7 @@ class Huwelijk implements StringableInterface
 	public $wijzigingsdatum;
 	
 	/**
-	 * Het contact persoon voor dit huwelijk
+	 * De contactpersoon voor dit huwelijk.
 	 *
 	 * @ORM\Column(
 	 *     type     = "string",
@@ -998,7 +998,7 @@ class Huwelijk implements StringableInterface
 	public $contactPersoon;
 	
 	/**
-	 * Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.
+	 * Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. De eigenaar kan dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.
 	 *
 	 * @var App\Entity\Applicatie $eigenaar
 	 *
@@ -1010,7 +1010,7 @@ class Huwelijk implements StringableInterface
 	
 	
 	/**
-	 * De taal waarin dit object is opgesteld <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>
+	 * De taal waarin dit huwelijk is opgesteld. <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>
 	 *
 	 * @var string
 	 * @Assert\Language
@@ -1031,42 +1031,7 @@ class Huwelijk implements StringableInterface
 	 * @Groups({"read","write"})
 	 */
 	public $taal = "nl";	
-	
-	/**
-	 * @var integer The non decimal value for the price of this product (excluding tax)
-	 *
-	 * @Groups({"read"})
-	 */
-	public $exclAmount = 0;
-	
-	/**
-	 * @var integer The the percentage of the on this product, in percentage so 1% = 1, and not 0,01
-	 *
-	 * @Groups({"read"})
-	 */
-	public $taxPercentage = 0;
-	
-	/**
-	 * @var integer The non decimal value for the tax of this huwelijk
-	 *
-	 * @Groups({"read"})
-	 */
-	public $taxAmount = 0;
-	
-	/**
-	 * @var integer The non decimal value for the price of this v (including tax)
-	 *
-	 * @Groups({"read"})
-	 */
-	public $inclAmount = 0;
-	
-	/**
-	 * @var string The base currency of this huwelijk
-	 *
-	 * @Groups({"read"})
-	 */
-	public $currency = "EUR";	
-	
+
 	/*
 	 * 
 	 *  Hieronder staan eigenlijk veredelde DTO's waar nog een andere oplossing voor moet worden gevonden.
@@ -1075,7 +1040,7 @@ class Huwelijk implements StringableInterface
 	 */
 	
 	/**
-	 * Het emailadres van de persoon die je probeert te uit te nodigen <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>
+	 * Het emailadres van de persoon die je wil uitnodigen. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>
 	 *
 	 * @var string
 	 * @ApiProperty(
@@ -1095,7 +1060,7 @@ class Huwelijk implements StringableInterface
 	public $emailadres;
 	
 	/**
-	 * Het telefoonnummer van de persoon die je probeert te uit te nodigen, als je deze meegeeft zal er tevens een sms worden verzonden <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>
+	 * Het telefoonnummer van de persoon die je wil uitnodigen, als je deze meegeeft zal er tevens een sms worden verzonden. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>
 	 *
 	 * @var string
 	 * @ApiProperty(
@@ -1160,7 +1125,7 @@ class Huwelijk implements StringableInterface
 	public $partner;
 	
 	/**
-	 * Het id van het object dat moet worden verwijderd <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
+	 * Het id van het object dat moet worden verwijderd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
 	 *
 	 * @var string
 	 * @Groups({"remove"})
@@ -1168,7 +1133,7 @@ class Huwelijk implements StringableInterface
 	public $removeId;
 	
 	/**
-	 * Een link naar het te uploaden document of een base64 representatie van dat document  <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a> or <b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a> 
+	 * Een link naar het te uploaden document of een base64 representatie van dat document. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a> or <b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a> 
 	 *
 	 * @var string
 	 * @ApiProperty(
@@ -1185,7 +1150,7 @@ class Huwelijk implements StringableInterface
 	public $document;
 	
 	/**
-	 * Een beschrijving van het type document dat je probeert te uploaden <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>
+	 * Een beschrijving van het type document dat je probeert te uploaden. <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>
 	 *
 	 * @var string
 	 * @SerializedName("type")
@@ -1193,8 +1158,8 @@ class Huwelijk implements StringableInterface
 	 *     attributes={
 	 *         "openapi_context"={
 	 *             "type"="string",
-	 *             "enum"={"geboorte akte", "paspoort"},
-	 *             "example"="geboorte akte",
+	 *             "enum"={"geboorteakte", "paspoort"},
+	 *             "example"="geboorteakte",
 	 *             "readOnly"=false
 	 *         }
 	 *     }

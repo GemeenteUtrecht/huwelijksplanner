@@ -132,7 +132,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
 class Soort implements StringableInterface
 {
 	/**
-	 * Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.
+	 * Het identificatienummer van deze Persoon. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.
 	 * 
 	 * @var int|null
 	 *
@@ -145,7 +145,7 @@ class Soort implements StringableInterface
 	public $id;
 	
 	/**
-	 * De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.
+	 * De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreëerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.
 	 *
 	 * @var string
 	 * @ORM\Column(
@@ -163,7 +163,7 @@ class Soort implements StringableInterface
 	 *         "openapi_context"={
 	 *             "type"="string",
 	 *             "example"="6a36c2c4-213e-4348-a467-dfa3a30f64aa",
-	 *             "description"="De unieke identificatie van dit object de organisatie die dit object heeft gecreeerd.",
+	 *             "description"="De unieke identificatie van dit object de organisatie die dit object heeft gecreëerd.",
 	 *             "maxLength"=40
 	 *         }
 	 *     }
@@ -173,7 +173,7 @@ class Soort implements StringableInterface
 	public $identificatie;
 	
 	/**
-	 * Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven.
+	 * Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de geauthenticeerde applicatie en kan niet worden overschreven.
 	 *
 	 * @var integer
 	 * @ORM\Column(
@@ -303,7 +303,7 @@ class Soort implements StringableInterface
 	public $beschrijving;	
 	
 	/**
-	 * Het primaire product dat wordt gebruikt om dit huwelijk te verekenen.
+	 * Het primaire product dat wordt gebruikt om dit huwelijk te verrekenen.
 	 *
 	 * @ORM\Column(
 	 *     type     = "string",
@@ -328,7 +328,7 @@ class Soort implements StringableInterface
 	public $product;
 	
 	/**
-	 *  Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.
+	 *  Additionele producten (zoals trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.
 	 *
 	 * @var array
 	 * @ORM\Column(
@@ -342,7 +342,7 @@ class Soort implements StringableInterface
 	 *             "title"="issues",
 	 *             "type"="array",
 	 *             "example"="[]",
-	 *             "description"="Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen"
+	 *             "description"="Additionele producten (zoals trouwboekje) die voor dit soort huwelijk kunnen worden gekozen."
 	 *         }
 	 *     }
 	 * )
@@ -440,9 +440,9 @@ class Soort implements StringableInterface
 	public $taal = 'nl';
 	
 	/**
-	 * Het tijdstip waarop dit Soort object is aangemaakt.
+	 * Het tijdstip waarop dit Soort huwelijk is aangemaakt.
 	 *
-	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
+	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde."
 	 * @Gedmo\Timestampable(on="create")
 	 * @Assert\DateTime
 	 * @ORM\Column(
@@ -453,9 +453,9 @@ class Soort implements StringableInterface
 	public $registratiedatum;
 	
 	/**
-	 * Het tijdstip waarop dit Soort object voor het laatst is gewijzigd.
+	 * Het tijdstip waarop dit Soort huwelijk voor het laatst is gewijzigd.
 	 *
-	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde"
+	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde."
 	 * @Gedmo\Timestampable(on="update")
 	 * @Assert\DateTime
 	 * @ORM\Column(
@@ -467,7 +467,7 @@ class Soort implements StringableInterface
 	public $wijzigingsdatum;
 	
 	/**
-	 * De contactpersoon voor het Soort object.
+	 * De contactpersoon voor het Soort huwelijk.
 	 *
 	 * @ORM\Column(
 	 *     type     = "string",
@@ -491,7 +491,7 @@ class Soort implements StringableInterface
 	public $contactPersoon;
 	
 	/**
-	 * Met eigenaar wordt bijgehouden welke applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.
+	 * Met eigenaar wordt bijgehouden welke applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheert en uitgeeft. De eigenaar kan dan ook worden gezien in de trant van autorisatie en configuratie, in plaats van als onderdeel van het datamodel.
 	 *
 	 * @var App\Entity\Applicatie $eigenaar
 	 *

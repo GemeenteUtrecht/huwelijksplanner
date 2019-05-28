@@ -3009,7 +3009,7 @@ components:
           required: 'true'
           maxLength: 200
           format: uri
-          description: 'URL-referentie naar de melding "ZAAK" van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+          description: 'URL-referentie naar de melding "ZAAK" van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
         aanvraag:
           title: ZAAK
           type: string
@@ -3017,7 +3017,7 @@ components:
           required: 'true'
           maxLength: 200
           format: uri
-          description: 'URL-referentie naar de aanvraag "ZAAK" van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+          description: 'URL-referentie naar de aanvraag "ZAAK" van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
         type:
           type: string
           enum:
@@ -3025,7 +3025,7 @@ components:
             - partnerschap
           example: huwelijk
           default: huwelijk
-          description: 'Het type van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
+          description: 'Het type van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
         datum:
           description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden.'
           type: string
@@ -3034,42 +3034,42 @@ components:
           description: 'Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden.'
           type: string
         mogelijkeDatums:
-          description: 'Datums die mogelijk zijn, binnen de door de gebruiker opgeven criteria'
+          description: 'Datums die mogelijk zijn, binnen de door de gebruiker opgeven criteria.'
           type: array
           items:
             type: string
         mogelijkeTijden:
-          description: 'Tijdstippen die mogelijk zijn, binnen de door de gebruiker opgeven criteria'
+          description: 'Tijdstippen die mogelijk zijn, binnen de door de gebruiker opgeven criteria.'
           type: array
           items:
             type: string
         locaties:
-          description: 'De gekozen locatie voor dit huwelijk'
+          description: 'De gekozen locatie voor dit huwelijk.'
           type: array
           items:
             type: string
         rollen:
-          description: 'Rollen op dit huwelijk, zo als partner, getuige en ambtenaar'
+          description: 'Rollen op dit huwelijk, zoals partner, getuige en ambtenaar.'
           type: array
           items:
             type: string
         partners:
-          description: 'De partners die in dit huwelijk treden'
+          description: 'De partners die in dit huwelijk treden.'
           type: array
           items:
             type: string
         getuigen:
-          description: 'De personen die voor dit huwelijk gaan getuigen'
+          description: 'De personen die voor dit huwelijk gaan getuigen.'
           type: array
           items:
             type: string
         ambtenaren:
-          description: 'De trouwambtenaren die betrokken zijn bij deze huwelijksvoltrekking'
+          description: 'De trouwambtenaren die betrokken zijn bij deze huwelijksvoltrekking.'
           type: array
           items:
             type: string
         documenten:
-          description: 'De bij dit huwelijk behorende/benodigde documenten'
+          description: 'De bij dit huwelijk behorende/benodigde documenten.'
           type: array
           items:
             type: string
@@ -3077,11 +3077,11 @@ components:
           title: issues
           type: array
           example: '[]'
-          description: 'Aan dit huwelijk verbonden issues,'
+          description: 'De aan dit huwelijk verbonden issues.'
           items:
             type: string
         soort:
-          description: 'Het soort huwelijk wat is gekozen, bijvoorbeeld gratis'
+          description: 'Het soort huwelijk wat is gekozen, bijvoorbeeld gratis.'
           type: string
         producten:
           title: Instellingen
@@ -3091,11 +3091,11 @@ components:
           items:
             type: string
         registratiedatum:
-          description: 'Het tijdstip waarop dit Huwelijk object is aangemaakt'
+          description: 'Het tijdstip waarop dit Huwelijk is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit Huwelijk object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Huwelijk voor het laatst is gewijzigd.'
           type: string
           format: date-time
         contactPersoon:
@@ -3105,9 +3105,9 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contact persoon voor dit huwelijk'
+          description: 'De contactpersoon voor dit huwelijk.'
         eigenaar:
-          description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
+          description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. De eigenaar kan dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
         taal:
           type: string
@@ -3115,22 +3115,7 @@ components:
           maxLength: 5
           format: Language
           readOnly: false
-          description: 'De taal waarin dit object is opgesteld <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>'
-        exclAmount:
-          description: 'The non decimal value for the price of this product (excluding tax)'
-          type: integer
-        taxPercentage:
-          description: 'The the percentage of the on this product, in percentage so 1% = 1, and not 0,01'
-          type: integer
-        taxAmount:
-          description: 'The non decimal value for the tax of this huwelijk'
-          type: integer
-        inclAmount:
-          description: 'The non decimal value for the price of this v (including tax)'
-          type: integer
-        currency:
-          description: 'The base currency of this huwelijk'
-          type: string
+          description: 'De taal waarin dit huwelijk is opgesteld. <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>'
         emailadres:
           type: string
           example: john@do.com
@@ -3138,14 +3123,14 @@ components:
           maxLength: 250
           format: email
           readOnly: false
-          description: 'Het emailadres van de persoon die je probeert te uit te nodigen <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het emailadres van de persoon die je wil uitnodigen. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         telefoonnummer:
           type: string
           example: 06-12345678
           maxLength: 15
           format: phone
           readOnly: false
-          description: 'Het telefoonnummer van de persoon die je probeert te uit te nodigen, als je deze meegeeft zal er tevens een sms worden verzonden <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het telefoonnummer van de persoon die je wil uitnodigen, als je deze meegeeft zal er tevens een sms worden verzonden. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         voornamen:
           type: string
           example: John
@@ -3164,21 +3149,21 @@ components:
           description: 'Het id van de partner dat gekoppeld moet worden aan bijvoorbeeld zijn/haar getuige of document. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           type: integer
         removeId:
-          description: 'Het id van het object dat moet worden verwijderd <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'Het id van het object dat moet worden verwijderd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           type: string
         document:
           type: 'url or base64'
           required: 'true'
           readOnly: false
-          description: 'Een link naar het te uploaden document of een base64 representatie van dat document  <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a> or <b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+          description: 'Een link naar het te uploaden document of een base64 representatie van dat document. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a> or <b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
         documentType:
           type: string
           enum:
-            - 'geboorte akte'
+            - geboorteakte
             - paspoort
-          example: 'geboorte akte'
+          example: geboorteakte
           readOnly: false
-          description: 'Een beschrijving van het type document dat je probeert te uploaden <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
+          description: 'Een beschrijving van het type document dat je probeert te uploaden. <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
         setLocation:
           type: string
           format: UUID
@@ -3213,7 +3198,7 @@ components:
           description: 'De zaakrepresentatie maakt een array aan conform ZTC specs, die we kunnen gebruiken om een zaak in te schieten.'
         id:
           readOnly: true
-          description: 'Het identificatie nummer van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a><br /><br /><b>Note</b> This is for devolopment purposes, the INT ID wil be replaced by BLOB UUID on production'
+          description: 'Het identificatienummer van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a><br /><br /><b>Note</b> This is for devolopment purposes, the INT ID wil be replaced by BLOB UUID on production'
           type: integer
         trouwdatum:
           readOnly: true
@@ -3243,15 +3228,15 @@ components:
           type: 'url or base64'
           required: 'true'
           readOnly: false
-          description: 'Een link naar het te uploaden document of een base64 representatie van dat document  <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a> or <b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+          description: 'Een link naar het te uploaden document of een base64 representatie van dat document. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a> or <b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
         documentType:
           type: string
           enum:
-            - 'geboorte akte'
+            - geboorteakte
             - paspoort
-          example: 'geboorte akte'
+          example: geboorteakte
           readOnly: false
-          description: 'Een beschrijving van het type document dat je probeert te uploaden <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
+          description: 'Een beschrijving van het type document dat je probeert te uploaden. <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
     Huwelijk-invite:
       type: object
       description: Huwelijk
@@ -3263,14 +3248,14 @@ components:
           maxLength: 250
           format: email
           readOnly: false
-          description: 'Het emailadres van de persoon die je probeert te uit te nodigen <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het emailadres van de persoon die je wil uitnodigen. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         telefoonnummer:
           type: string
           example: 06-12345678
           maxLength: 15
           format: phone
           readOnly: false
-          description: 'Het telefoonnummer van de persoon die je probeert te uit te nodigen, als je deze meegeeft zal er tevens een sms worden verzonden <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het telefoonnummer van de persoon die je wil uitnodigen, als je deze meegeeft zal er tevens een sms worden verzonden. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         voornamen:
           type: string
           example: John
@@ -3296,14 +3281,14 @@ components:
           maxLength: 250
           format: email
           readOnly: false
-          description: 'Het emailadres van de persoon die je probeert te uit te nodigen <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het emailadres van de persoon die je wil uitnodigen. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         telefoonnummer:
           type: string
           example: 06-12345678
           maxLength: 15
           format: phone
           readOnly: false
-          description: 'Het telefoonnummer van de persoon die je probeert te uit te nodigen, als je deze meegeeft zal er tevens een sms worden verzonden <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
+          description: 'Het telefoonnummer van de persoon die je wil uitnodigen, als je deze meegeeft zal er tevens een sms worden verzonden. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>'
         voornamen:
           type: string
           example: John
@@ -3342,7 +3327,7 @@ components:
       properties:
         id:
           readOnly: true
-          description: 'Het identificatie nummer van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a><br /><br /><b>Note</b> This is for devolopment purposes, the INT ID wil be replaced by BLOB UUID on production'
+          description: 'Het identificatienummer van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a><br /><br /><b>Note</b> This is for devolopment purposes, the INT ID wil be replaced by BLOB UUID on production'
           type: integer
         identificatie:
           type: string
@@ -3364,7 +3349,7 @@ components:
           required: 'true'
           maxLength: 200
           format: uri
-          description: 'URL-referentie naar de melding "ZAAK" van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+          description: 'URL-referentie naar de melding "ZAAK" van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
         aanvraag:
           title: ZAAK
           type: string
@@ -3372,7 +3357,7 @@ components:
           required: 'true'
           maxLength: 200
           format: uri
-          description: 'URL-referentie naar de aanvraag "ZAAK" van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
+          description: 'URL-referentie naar de aanvraag "ZAAK" van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a>'
         type:
           type: string
           enum:
@@ -3380,7 +3365,7 @@ components:
             - partnerschap
           example: huwelijk
           default: huwelijk
-          description: 'Het type van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
+          description: 'Het type van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
         datum:
           description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden.'
           type: string
@@ -3389,42 +3374,42 @@ components:
           description: 'Het tijdstip waarop de huwelijksvoltrekking zal plaatsvinden.'
           type: string
         mogelijkeDatums:
-          description: 'Datums die mogelijk zijn, binnen de door de gebruiker opgeven criteria'
+          description: 'Datums die mogelijk zijn, binnen de door de gebruiker opgeven criteria.'
           type: array
           items:
             type: string
         mogelijkeTijden:
-          description: 'Tijdstippen die mogelijk zijn, binnen de door de gebruiker opgeven criteria'
+          description: 'Tijdstippen die mogelijk zijn, binnen de door de gebruiker opgeven criteria.'
           type: array
           items:
             type: string
         locaties:
-          description: 'De gekozen locatie voor dit huwelijk'
+          description: 'De gekozen locatie voor dit huwelijk.'
           type: array
           items:
             type: string
         rollen:
-          description: 'Rollen op dit huwelijk, zo als partner, getuige en ambtenaar'
+          description: 'Rollen op dit huwelijk, zoals partner, getuige en ambtenaar.'
           type: array
           items:
             type: string
         partners:
-          description: 'De partners die in dit huwelijk treden'
+          description: 'De partners die in dit huwelijk treden.'
           type: array
           items:
             type: string
         getuigen:
-          description: 'De personen die voor dit huwelijk gaan getuigen'
+          description: 'De personen die voor dit huwelijk gaan getuigen.'
           type: array
           items:
             type: string
         ambtenaren:
-          description: 'De trouwambtenaren die betrokken zijn bij deze huwelijksvoltrekking'
+          description: 'De trouwambtenaren die betrokken zijn bij deze huwelijksvoltrekking.'
           type: array
           items:
             type: string
         documenten:
-          description: 'De bij dit huwelijk behorende/benodigde documenten'
+          description: 'De bij dit huwelijk behorende/benodigde documenten.'
           type: array
           items:
             type: string
@@ -3432,11 +3417,11 @@ components:
           title: issues
           type: array
           example: '[]'
-          description: 'Aan dit huwelijk verbonden issues,'
+          description: 'De aan dit huwelijk verbonden issues.'
           items:
             type: string
         soort:
-          description: 'Het soort huwelijk wat is gekozen, bijvoorbeeld gratis'
+          description: 'Het soort huwelijk wat is gekozen, bijvoorbeeld gratis.'
           type: string
         producten:
           title: Instellingen
@@ -3446,11 +3431,11 @@ components:
           items:
             type: string
         registratiedatum:
-          description: 'Het tijdstip waarop dit Huwelijk object is aangemaakt'
+          description: 'Het tijdstip waarop dit Huwelijk is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit Huwelijk object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Huwelijk voor het laatst is gewijzigd.'
           type: string
           format: date-time
         contactPersoon:
@@ -3460,9 +3445,9 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contact persoon voor dit huwelijk'
+          description: 'De contactpersoon voor dit huwelijk.'
         eigenaar:
-          description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
+          description: 'Met eigenaar wordt bijgehouden welke  applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. De eigenaar kan dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
         taal:
           type: string
@@ -3470,22 +3455,7 @@ components:
           maxLength: 5
           format: Language
           readOnly: false
-          description: 'De taal waarin dit object is opgesteld <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>'
-        exclAmount:
-          description: 'The non decimal value for the price of this product (excluding tax)'
-          type: integer
-        taxPercentage:
-          description: 'The the percentage of the on this product, in percentage so 1% = 1, and not 0,01'
-          type: integer
-        taxAmount:
-          description: 'The non decimal value for the tax of this huwelijk'
-          type: integer
-        inclAmount:
-          description: 'The non decimal value for the price of this v (including tax)'
-          type: integer
-        currency:
-          description: 'The base currency of this huwelijk'
-          type: string
+          description: 'De taal waarin dit huwelijk is opgesteld. <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>'
       required:
         - tijd
     Huwelijk-requestOfficial:
@@ -3537,7 +3507,7 @@ components:
             - partnerschap
           example: huwelijk
           default: huwelijk
-          description: 'Het type van dit huwelijk <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
+          description: 'Het type van dit huwelijk. <br /><b>Schema:</b> <a href="https://schema.org/additionalType">https://schema.org/additionalType</a>'
         datum:
           description: 'De dag waarop de huwelijksvoltrekking zal plaatsvinden.'
           type: string
@@ -3549,7 +3519,7 @@ components:
           title: issues
           type: array
           example: '[]'
-          description: 'Aan dit huwelijk verbonden issues,'
+          description: 'De aan dit huwelijk verbonden issues.'
           items:
             type: string
         producten:
@@ -3566,14 +3536,14 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het contact persoon voor dit huwelijk'
+          description: 'De contactpersoon voor dit huwelijk.'
         taal:
           type: string
           example: nl
           maxLength: 5
           format: Language
           readOnly: false
-          description: 'De taal waarin dit object is opgesteld <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>'
+          description: 'De taal waarin dit huwelijk is opgesteld. <br /><b>Schema:</b> <a href="https://schema.org/Language">https://schema.org/Language</a>'
       required:
         - tijd
     HuwelijkAmbtenaar:
@@ -3955,12 +3925,12 @@ components:
       description: Persoon
       properties:
         id:
-          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'Het identificatienummer van deze Persoon. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           type: integer
         identificatie:
           type: string
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
-          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreëerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           maxLength: 40
         bronOrganisatie:
           title: bronOrganisatie
@@ -3969,50 +3939,50 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Persoon behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe deze Persoon behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de geauthenticeerde applicatie en kan niet worden overschreven.'
         voornamen:
           type: string
           maxLength: 255
           minLength: 2
           example: John
-          description: 'De naam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+          description: 'De naam van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
         voorvoegselGeslachtsnaam:
           type: string
           maxLength: 255
           minLength: 2
           example: 'van der'
-          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.'
+          description: 'Voorvoegsel van de achternaam. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.'
         geslachtsnaam:
           type: string
           maxLength: 255
           minLength: 2
           example: Do
-          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.'
+          description: 'De achternaam van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.'
         emailadres:
           type: email
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.'
+          description: 'Het emailadres van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.'
         telefoonnummer:
           type: string
           maxLength: 255
           minLength: 10
           example: +31(0)6-12345678
-          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.'
+          description: 'Het telefoonnummer van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.'
         agenda:
           type: url
           example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'URL-referentie naar de agenda van dit persoon.'
+          description: 'URL-referentie naar de agenda van deze persoon.'
         registratiedatum:
-          description: 'Het tijdstip waarop dit Persoon object is aangemaakt.'
+          description: 'Het tijdstip waarop dit Persoonsobject is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit Persoon object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Persoonsobject voor het laatst is gewijzigd.'
           type: string
           format: date-time
         taal:
@@ -4020,7 +3990,7 @@ components:
           maxLength: 17
           minLength: 2
           example: NL
-          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
+          description: 'De taal waarin de informatie van dit object is opgesteld. <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
         huwelijkspartner: {  }
         url:
           readOnly: true
@@ -4029,12 +3999,12 @@ components:
       description: Persoon
       properties:
         id:
-          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'Het identificatienummer van deze Persoon. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           type: integer
         identificatie:
           type: string
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
-          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreëerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           maxLength: 40
         bronOrganisatie:
           title: bronOrganisatie
@@ -4043,50 +4013,50 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Persoon behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe deze Persoon behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de geauthenticeerde applicatie en kan niet worden overschreven.'
         voornamen:
           type: string
           maxLength: 255
           minLength: 2
           example: John
-          description: 'De naam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+          description: 'De naam van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
         voorvoegselGeslachtsnaam:
           type: string
           maxLength: 255
           minLength: 2
           example: 'van der'
-          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.'
+          description: 'Voorvoegsel van de achternaam. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.'
         geslachtsnaam:
           type: string
           maxLength: 255
           minLength: 2
           example: Do
-          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.'
+          description: 'De achternaam van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.'
         emailadres:
           type: email
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.'
+          description: 'Het emailadres van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.'
         telefoonnummer:
           type: string
           maxLength: 255
           minLength: 10
           example: +31(0)6-12345678
-          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.'
+          description: 'Het telefoonnummer van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.'
         agenda:
           type: url
           example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'URL-referentie naar de agenda van dit persoon.'
+          description: 'URL-referentie naar de agenda van deze persoon.'
         registratiedatum:
-          description: 'Het tijdstip waarop dit Persoon object is aangemaakt.'
+          description: 'Het tijdstip waarop dit Persoonsobject is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit Persoon object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Persoonsobject voor het laatst is gewijzigd.'
           type: string
           format: date-time
         taal:
@@ -4094,62 +4064,62 @@ components:
           maxLength: 17
           minLength: 2
           example: NL
-          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
+          description: 'De taal waarin de informatie van dit object is opgesteld. <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
     Persoon-write:
       type: object
       description: Persoon
       properties:
         id:
-          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'Het identificatienummer van deze Persoon. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           type: integer
         identificatie:
           type: string
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
-          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreëerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
           maxLength: 40
         voornamen:
           type: string
           maxLength: 255
           minLength: 2
           example: John
-          description: 'De naam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
+          description: 'De naam van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>'
         voorvoegselGeslachtsnaam:
           type: string
           maxLength: 255
           minLength: 2
           example: 'van der'
-          description: 'Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.'
+          description: 'Voorvoegsel van de achternaam. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.'
         geslachtsnaam:
           type: string
           maxLength: 255
           minLength: 2
           example: Do
-          description: 'De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.'
+          description: 'De achternaam van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.'
         emailadres:
           type: email
           maxLength: 255
           minLength: 8
           example: john@do.nl
-          description: 'Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.'
+          description: 'Het emailadres van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.'
         telefoonnummer:
           type: string
           maxLength: 255
           minLength: 10
           example: +31(0)6-12345678
-          description: 'Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.'
+          description: 'Het telefoonnummer van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.'
         agenda:
           type: url
           example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'URL-referentie naar de agenda van dit persoon.'
+          description: 'URL-referentie naar de agenda van deze persoon.'
         taal:
           type: string
           maxLength: 17
           minLength: 2
           example: NL
-          description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
+          description: 'De taal waarin de informatie van dit object is opgesteld. <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
     Rol:
       type: object
       description: 'Rol van een PERSOON of AMBTENAAR op een huwelijk'
@@ -4163,7 +4133,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de geauthenticeerde applicatie en kan niet worden overschreven.'
         instemming:
           title: Contactpersoon
           type: url
@@ -4180,18 +4150,18 @@ components:
             - ambtenaar
           example: getuige
           default: getuige
-          description: 'Het rol'
+          description: 'De rol'
         status:
-          description: 'A representation for the status of this object'
+          description: 'Een representatie van de status van dit object.'
           type: string
         huwelijk:
-          description: 'Het Huwelijk waartoe deze partner behoort'
+          description: 'Het huwelijk waartoe deze partner behoort.'
           type: string
         rol:
-          description: 'De eventuele rol waar deze rol betrekking op heeft, bijvoorbeeld getuigen voor een partner'
+          description: 'De eventuele rol waar deze rol betrekking op heeft, bijvoorbeeld getuigen voor een partner.'
           type: string
         rollen:
-          description: 'Rollen die betrekking hebben op deze rol bijvoorbeel getuigen voor een partner'
+          description: 'Rollen die betrekking hebben op deze rol bijvoorbeel getuigen voor een partner.'
           type: array
           items:
             type: string
@@ -4202,29 +4172,29 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Houder van deze rol (Persoon of Ambtenaar)'
+          description: 'Houder van deze rol (B.v. persoon of ambtenaar).'
         registratiedatum:
-          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
+          description: 'Het tijdstip waarop dit Rol object is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Rol object voor het laatst is gewijzigd.'
           type: string
           format: date-time
         eigenaar:
-          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt.'
           type: string
     Soort:
       type: object
       description: Soort
       properties:
         id:
-          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
+          description: 'Het identificatienummer van deze Persoon. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           type: integer
         identificatie:
           type: string
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
-          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreëerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           maxLength: 40
         bronOrganisatie:
           title: bronOrganisatie
@@ -4233,7 +4203,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven.'
+          description: 'Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de geauthenticeerde applicatie en kan niet worden overschreven.'
         naam:
           description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>.'
           type: string
@@ -4250,12 +4220,12 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen.'
+          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verrekenen.'
         extraProducten:
           title: issues
           type: array
           example: '[]'
-          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.'
+          description: 'Additionele producten (zoals trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.'
           items:
             type: string
         locaties:
@@ -4284,11 +4254,11 @@ components:
           example: NL
           description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
         registratiedatum:
-          description: 'Het tijdstip waarop dit Soort object is aangemaakt.'
+          description: 'Het tijdstip waarop dit Soort huwelijk is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit Soort object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Soort huwelijk voor het laatst is gewijzigd.'
           type: string
           format: date-time
         contactPersoon:
@@ -4298,9 +4268,9 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'De contactpersoon voor het Soort object.'
+          description: 'De contactpersoon voor het Soort huwelijk.'
         eigenaar:
-          description: 'Met eigenaar wordt bijgehouden welke applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
+          description: 'Met eigenaar wordt bijgehouden welke applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheert en uitgeeft. De eigenaar kan dan ook worden gezien in de trant van autorisatie en configuratie, in plaats van als onderdeel van het datamodel.'
           type: string
         url:
           readOnly: true
@@ -4313,12 +4283,12 @@ components:
       description: Soort
       properties:
         id:
-          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
+          description: 'Het identificatienummer van deze Persoon. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           type: integer
         identificatie:
           type: string
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
-          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreëerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           maxLength: 40
         bronOrganisatie:
           title: bronOrganisatie
@@ -4327,7 +4297,7 @@ components:
           required: 'true'
           maxLength: 9
           minLength: 8
-          description: 'Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven.'
+          description: 'Het RSIN van de organisatie waartoe dit soort object behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de geauthenticeerde applicatie en kan niet worden overschreven.'
         naam:
           description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>.'
           type: string
@@ -4344,12 +4314,12 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen.'
+          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verrekenen.'
         extraProducten:
           title: issues
           type: array
           example: '[]'
-          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.'
+          description: 'Additionele producten (zoals trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.'
           items:
             type: string
         locaties:
@@ -4373,11 +4343,11 @@ components:
           example: NL
           description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
         registratiedatum:
-          description: 'Het tijdstip waarop dit Soort object is aangemaakt.'
+          description: 'Het tijdstip waarop dit Soort huwelijk is aangemaakt.'
           type: string
           format: date-time
         wijzigingsdatum:
-          description: 'Het tijdstip waarop dit Soort object voor het laatst is gewijzigd.'
+          description: 'Het tijdstip waarop dit Soort huwelijk voor het laatst is gewijzigd.'
           type: string
           format: date-time
         contactPersoon:
@@ -4387,9 +4357,9 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'De contactpersoon voor het Soort object.'
+          description: 'De contactpersoon voor het Soort huwelijk.'
         eigenaar:
-          description: 'Met eigenaar wordt bijgehouden welke applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
+          description: 'Met eigenaar wordt bijgehouden welke applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheert en uitgeeft. De eigenaar kan dan ook worden gezien in de trant van autorisatie en configuratie, in plaats van als onderdeel van het datamodel.'
           type: string
       required:
         - naam
@@ -4400,12 +4370,12 @@ components:
       description: Soort
       properties:
         id:
-          description: 'Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
+          description: 'Het identificatienummer van deze Persoon. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           type: integer
         identificatie:
           type: string
           example: 6a36c2c4-213e-4348-a467-dfa3a30f64aa
-          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
+          description: 'De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreëerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>.'
           maxLength: 40
         naam:
           description: 'De naam van deze huwelijks soort <br /><b>Schema:</b> <a href="https://schema.org/name">https://schema.org/name</a>.'
@@ -4423,12 +4393,12 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verekenen.'
+          description: 'Het primaire product dat wordt gebruikt om dit huwelijk te verrekenen.'
         extraProducten:
           title: issues
           type: array
           example: '[]'
-          description: 'Aditionele producten (zo als trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.'
+          description: 'Additionele producten (zoals trouwboekje) die voor dit soort huwelijk kunnen worden gekozen.'
           items:
             type: string
         locaties:
@@ -4458,7 +4428,7 @@ components:
           required: 'true'
           maxLength: 255
           format: uri
-          description: 'De contactpersoon voor het Soort object.'
+          description: 'De contactpersoon voor het Soort huwelijk.'
       required:
         - naam
         - samenvatting

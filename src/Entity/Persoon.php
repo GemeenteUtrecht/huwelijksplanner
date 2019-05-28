@@ -133,7 +133,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
 class Persoon implements StringableInterface
 {
 	/**
-	 * Het identificatie nummer van deze Persoon <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
+	 * Het identificatienummer van deze Persoon. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
 	 * 
 	 * @var int|null
 	 *
@@ -146,7 +146,7 @@ class Persoon implements StringableInterface
 	public $id;
 	
 	/**
-	 * De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreeerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
+	 * De unieke identificatie van dit object binnen de organisatie die dit object heeft gecreëerd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
 	 *
 	 * @var string
 	 * @ORM\Column(
@@ -164,7 +164,7 @@ class Persoon implements StringableInterface
 	 *         "openapi_context"={
 	 *             "type"="string",
 	 *             "example"="6a36c2c4-213e-4348-a467-dfa3a30f64aa",
-	 *             "description"="De unieke identificatie van dit object de organisatie die dit object heeft gecreeerd.",
+	 *             "description"="De unieke identificatie van dit object de organisatie die dit object heeft gecreëerd.",
 	 *             "maxLength"=40
 	 *         }
 	 *     }
@@ -174,7 +174,7 @@ class Persoon implements StringableInterface
 	public $identificatie;
 	
 	/**
-	 * Het RSIN van de organisatie waartoe deze Persoon behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven
+	 * Het RSIN van de organisatie waartoe deze Persoon behoort. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN wordt bepaald aan de hand van de geauthenticeerde applicatie en kan niet worden overschreven.
 	 *
 	 * @var integer
 	 * @ORM\Column(
@@ -184,8 +184,8 @@ class Persoon implements StringableInterface
 	 * @Assert\Length(
 	 *      min = 8,
 	 *      max = 9,
-	 *      minMessage = "Het RSIN moet ten minste {{ limit }} karakters lang zijn",
-	 *      maxMessage = "Het RSIN kan niet langer dan {{ limit }} karakters zijn"
+	 *      minMessage = "Het RSIN moet minimaal {{ limit }} karakters lang zijn",
+	 *      maxMessage = "Het RSIN mag maximaal {{ limit }} karakters zijn"
 	 * )
 	 * @Groups({"read"})
 	 * @ApiFilter(SearchFilter::class, strategy="exact")
@@ -206,7 +206,7 @@ class Persoon implements StringableInterface
 	public $bronOrganisatie;	
 	
 	/**
-	 * De naam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>
+	 * De naam van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>
 	 *
 	 * @var string
 	 * 
@@ -238,7 +238,7 @@ class Persoon implements StringableInterface
 	public $voornamen;
 	
 	/**
-	 * Voorvoegsel van de achternaam <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.
+	 * Voorvoegsel van de achternaam. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>.
 	 *
 	 * @var string
 	 *
@@ -270,7 +270,7 @@ class Persoon implements StringableInterface
 	public $voorvoegselGeslachtsnaam;
 	
 	/**
-	 * De achternaam van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.
+	 * De achternaam van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/familyName">https://schema.org/familyName</a>.
 	 *
 	 * @var string
 	 *
@@ -302,7 +302,7 @@ class Persoon implements StringableInterface
 	public $geslachtsnaam;	
 	
 	/**
-	 * Het emailadres van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.
+	 * Het emailadres van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/email">https://schema.org/email</a>.
 	 *
 	 * @var string
 	 *
@@ -338,7 +338,7 @@ class Persoon implements StringableInterface
 	public $emailadres;
 	
 	/**
-	 * Het telefoonnummer van deze persoon <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.
+	 * Het telefoonnummer van deze persoon. <br /><b>Schema:</b> <a href="https://schema.org/telephone">https://schema.org/telephone</a>.
 	 *
 	 * @var string
 	 *
@@ -365,7 +365,7 @@ class Persoon implements StringableInterface
 	public $telefoonnummer;
 	
 	/**
-	 * URL-referentie naar de agenda van dit persoon.
+	 * URL-referentie naar de agenda van deze persoon.
 	 *
 	 * @ORM\Column(
 	 *     type     = "string",
@@ -389,7 +389,7 @@ class Persoon implements StringableInterface
 	public $agenda;
 	
 	/**
-	 * Het tijdstip waarop dit Persoon object is aangemaakt.
+	 * Het tijdstip waarop dit Persoonsobject is aangemaakt.
 	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde."
 	 * @Gedmo\Timestampable(on="create")
@@ -402,7 +402,7 @@ class Persoon implements StringableInterface
 	public $registratiedatum;
 	
 	/**
-	 * Het tijdstip waarop dit Persoon object voor het laatst is gewijzigd.
+	 * Het tijdstip waarop dit Persoonsobject voor het laatst is gewijzigd.
 	 *
 	 * @var string Een "Y-m-d H:i:s" waarde bijvoorbeeld "2018-12-31 13:33:05" ofwel "Jaar-dag-maand uur:minuut:seconde."
 	 * @Gedmo\Timestampable(on="update")
@@ -416,7 +416,7 @@ class Persoon implements StringableInterface
 	public $wijzigingsdatum;
 		
 	/**
-	 * De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.
+	 * De taal waarin de informatie van dit object is opgesteld. <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.
 	 *
 	 * @var string Een Unicode language identifier, ofwel RFC 3066 taalcode.
 	 *
