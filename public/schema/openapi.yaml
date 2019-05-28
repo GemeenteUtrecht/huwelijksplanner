@@ -689,7 +689,7 @@ paths:
         404:
           description: 'Resource not found'
   '/huwelijk/{id}/removeDocument':
-    post:
+    delete:
       summary: 'Verwijder document.'
       description: 'Verwijder een eerder toegevoegd document.'
       consumes:
@@ -707,20 +707,15 @@ paths:
       tags:
         - Huwelijk
       operationId: remove_documentHuwelijkItem
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-        description: 'The new Huwelijk resource'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
   '/huwelijk/{id}/removeOfficial':
-    post:
+    delete:
       summary: 'Verwijder de trouwambtenaar.'
       description: 'Verwijder de eerder aangevraagde trouwambtenaar van dit huwelijk.'
       consumes:
@@ -738,20 +733,15 @@ paths:
       tags:
         - Huwelijk
       operationId: remove_officialHuwelijkItem
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-        description: 'The new Huwelijk resource'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
   '/huwelijk/{id}/removeProduct':
-    post:
+    delete:
       summary: 'Verwijder product.'
       description: 'Verwijder een eerder gekozen product.'
       consumes:
@@ -769,20 +759,15 @@ paths:
       tags:
         - Huwelijk
       operationId: remove_productHuwelijkItem
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-        description: 'The new Huwelijk resource'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
   '/huwelijk/{id}/removeWitness':
-    post:
+    delete:
       summary: 'Verwijder een getuige.'
       description: 'Verwijder een getuige van dit huwelijk.'
       consumes:
@@ -800,18 +785,13 @@ paths:
       tags:
         - Huwelijk
       operationId: remove_witnessHuwelijkItem
-      requestBody:
-        content:
-          application/ld+json:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-          text/html:
-            schema:
-              $ref: '#/components/schemas/Huwelijk-remove'
-        description: 'The new Huwelijk resource'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
   '/huwelijk/{id}/requestOfficial':
     post:
       summary: 'Vraag een trouwambtenaar aan.'
@@ -2482,6 +2462,180 @@ paths:
             schema:
               $ref: '#/components/schemas/Applicatie-applicatie:maken'
         description: 'The new Applicatie resource'
+  /rols:
+    get:
+      tags:
+        - Rol
+      operationId: getRolCollection
+      summary: 'Retrieves the collection of Rol resources.'
+      responses:
+        200:
+          description: 'Rol collection response'
+          content:
+            application/ld+json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rol'
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rol'
+            text/html:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Rol'
+      parameters:
+        -
+          name: bronOrganisatie
+          in: query
+          required: false
+          schema:
+            type: integer
+        -
+          name: 'bronOrganisatie[]'
+          in: query
+          required: false
+          schema:
+            type: array
+            items:
+              type: integer
+          style: form
+          explode: true
+        -
+          name: 'order[bronOrganisatie]'
+          in: query
+          required: false
+          schema:
+            type: string
+    post:
+      tags:
+        - Rol
+      operationId: postRolCollection
+      summary: 'Creates a Rol resource.'
+      responses:
+        201:
+          description: 'Rol resource created'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Rol'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rol'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Rol'
+          links:
+            GetRolItem:
+              parameters:
+                id: '$response.body#/id'
+              operationId: getRolItem
+              description: 'The `id` value returned in the response can be used as the `id` parameter in `GET /rols/{id}`.'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Rol'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rol'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Rol'
+        description: 'The new Rol resource'
+  '/rols/{id}':
+    get:
+      tags:
+        - Rol
+      operationId: getRolItem
+      summary: 'Retrieves a Rol resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Rol resource response'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Rol'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rol'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Rol'
+        404:
+          description: 'Resource not found'
+    delete:
+      tags:
+        - Rol
+      operationId: deleteRolItem
+      summary: 'Removes the Rol resource.'
+      responses:
+        204:
+          description: 'Rol resource deleted'
+        404:
+          description: 'Resource not found'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+    put:
+      tags:
+        - Rol
+      operationId: putRolItem
+      summary: 'Replaces the Rol resource.'
+      parameters:
+        -
+          name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Rol resource updated'
+          content:
+            application/ld+json:
+              schema:
+                $ref: '#/components/schemas/Rol'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Rol'
+            text/html:
+              schema:
+                $ref: '#/components/schemas/Rol'
+        400:
+          description: 'Invalid input'
+        404:
+          description: 'Resource not found'
+      requestBody:
+        content:
+          application/ld+json:
+            schema:
+              $ref: '#/components/schemas/Rol'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Rol'
+          text/html:
+            schema:
+              $ref: '#/components/schemas/Rol'
+        description: 'The updated Rol resource'
   /type:
     get:
       summary: 'Haalt een verzameling van huwelijkstypes op.'
@@ -2894,6 +3048,11 @@ components:
           type: array
           items:
             type: string
+        rollen:
+          description: 'Rollen op dit huwelijk, zo als partner, getuige en ambtenaar'
+          type: array
+          items:
+            type: string
         partners:
           description: 'De partners die in dit huwelijk treden'
           type: array
@@ -3244,6 +3403,11 @@ components:
           type: array
           items:
             type: string
+        rollen:
+          description: 'Rollen op dit huwelijk, zo als partner, getuige en ambtenaar'
+          type: array
+          items:
+            type: string
         partners:
           description: 'De partners die in dit huwelijk treden'
           type: array
@@ -3324,13 +3488,6 @@ components:
           type: string
       required:
         - tijd
-    Huwelijk-remove:
-      type: object
-      description: Huwelijk
-      properties:
-        removeId:
-          description: 'Het id van het object dat moet worden verwijderd <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>'
-          type: string
     Huwelijk-requestOfficial:
       type: object
       description: Huwelijk
@@ -3993,6 +4150,70 @@ components:
           minLength: 2
           example: NL
           description: 'De taal waarin de informatie van  dit object is opgesteld <br /><b>Schema:</b> <a href="https://www.ietf.org/rfc/rfc3066.txt">https://www.ietf.org/rfc/rfc3066.txt</a>.'
+    Rol:
+      type: object
+      description: Rol
+      properties:
+        id:
+          type: integer
+        bronOrganisatie:
+          title: bronOrganisatie
+          type: string
+          example: '123456789'
+          required: 'true'
+          maxLength: 9
+          minLength: 8
+          description: 'Het RSIN van de organisatie waartoe deze Ambtenaar behoord. Dit moet een geldig RSIN zijn van 9 nummers en voldoen aan https://nl.wikipedia.org/wiki/Burgerservicenummer#11-proef. <br> Het RSIN word bepaald aan de hand van de gauthenticeerde applicatie en kan niet worden overschreven'
+        instemming:
+          title: Contactpersoon
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: Instemming
+        soort:
+          type: string
+          enum:
+            - partner
+            - getuige
+            - ambtenaar
+          example: getuige
+          default: getuige
+          description: 'Het rol'
+        status:
+          description: 'A representation for the status of this object'
+          type: string
+        huwelijk:
+          description: 'Het Huwelijk waartoe deze partner behoort'
+          type: string
+        rol:
+          description: 'De eventuele rol waar deze rol betrekking op heeft, bijvoorbeeld getuigen voor een partner'
+          type: string
+        rollen:
+          description: 'Rollen die betrekking hebben op deze rol bijvoorbeel getuigen voor een partner'
+          type: array
+          items:
+            type: string
+        houder:
+          title: Houder
+          type: url
+          example: 'https://ref.tst.vng.cloud/zrc/api/v1/zaken/24524f1c-1c14-4801-9535-22007b8d1b65'
+          required: 'true'
+          maxLength: 255
+          format: uri
+          description: 'Houder van deze rol (Persoon of Ambtenaar)'
+        registratiedatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object is aangemaakt'
+          type: string
+          format: date-time
+        wijzigingsdatum:
+          description: 'Het tijdstip waarop dit Ambtenaren object voor het laatst is gewijzigd.'
+          type: string
+          format: date-time
+        eigenaar:
+          description: 'De eigenaar (applicatie) van dit object, wordt bepaald aan de hand van de geauthenticeerde applicatie die de ambtenaar heeft aangemaakt'
+          type: string
     Soort:
       type: object
       description: Soort
@@ -4081,9 +4302,6 @@ components:
         eigenaar:
           description: 'Met eigenaar wordt bijgehouden welke applicatie verantwoordelijk is voor het object, en daarvoor de rechten beheerd en uitgeeft. In die zin moet de eigenaar dan ook worden gezien in de trant van autorisatie en configuratie in plaats van als onderdeel van het datamodel.'
           type: string
-        huwelijkspartner: {  }
-        emailadres: {  }
-        telefoonnummer: {  }
         url:
           readOnly: true
       required:

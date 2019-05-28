@@ -18,7 +18,7 @@ use ActivityLogBundle\Entity\Interfaces\StringableInterface;
 
 use App\Entity\Token;
 
-/**
+/** 
  * Rol
  * 
  * Beschrijving
