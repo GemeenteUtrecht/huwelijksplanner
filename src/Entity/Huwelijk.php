@@ -1079,7 +1079,7 @@ class Huwelijk implements StringableInterface
 	public $telefoonnummer;
 	
 	/**
-	 * Het emailadres van de persoon die je wil uitnodigen. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>
+	 * De voornaam van een persoon. <br /><b>Schema:</b> <a href="https://schema.org/givenName">https://schema.org/givenName</a>
 	 *
 	 * @var string
 	 * @ApiProperty(
@@ -1124,14 +1124,7 @@ class Huwelijk implements StringableInterface
 	 */
 	public $partner;
 	
-	/**
-	 * Het id van het object dat moet worden verwijderd. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a>
-	 *
-	 * @var string
-	 * @Groups({"remove"})
-	 */
-	public $removeId;
-	
+		
 	/**
 	 * Een link naar het te uploaden document of een base64 representatie van dat document. <br /><b>Schema:</b> <a href="https://schema.org/identifier">https://schema.org/identifier</a> or <b>Schema:</b> <a href="https://schema.org/URL">https://schema.org/URL</a> 
 	 *

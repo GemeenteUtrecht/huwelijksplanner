@@ -72,7 +72,7 @@ parameters:
                 
                 Let er bij het meegeven van JWT tokens op, dat deze moet worden voorafgegaan door een Bearer en een spatie, onder de header Authorization. De volledig naam wordt daarmee: 'Authorization: Bearer [TOKEN]'.
 
-            version: 0.0.22 Alpha
+            version: 0.0.24 Alpha
             title: 'Trouwen API'
             termsOfService: 'http://www.zaakonline.nl/terms/'
             contact:
