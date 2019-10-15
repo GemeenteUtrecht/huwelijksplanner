@@ -11,7 +11,7 @@ Referentieimplementatie van de Trouwen Component (TC).
 
 Deze referentieimplementatie toont aan dat de API specificatie voor de Trouwen implementeerbaar is, en vormt een voorbeeld voor andere implementaties indien ergens twijfel bestaat.
 
-Deze component heeft ook een [testomgeving](http://trouwen.demo.zaakonline.nl/) waar leveranciers tegenaan kunnen testen.
+Deze component heeft ook een [testomgeving](https://utrecht.trouwplanner.online/) waar leveranciers tegenaan kunnen testen.
 
 ## Documentatie
 Om het voor andere partijen zo makkelijk mogenlijk te maken dit component bieden we zo veel mogenlijk informatie openbaar aan.
@@ -25,11 +25,11 @@ Om het voor andere partijen zo makkelijk mogenlijk te maken dit component bieden
 - [codebase](https://github.com/GemeenteUtrecht/trouwen)  op github.
 - [codebase](https://github.com/GemeenteUtrecht/trouwen/archive/master.zip)  als zip.
 - [docker container](https://cloud.docker.com/u/huwelijksplanner/repository/docker/huwelijksplanner/trouwen-component) op docker hub.
-- [online demo](http://trouwen.demo.zaakonline.nl/) op testomgeving zaakonline.
+- [online demo](https://utrecht.trouwplanner.online/) op testomgeving zaakonline.
 
 ## Licentie
 
-Copyright © Gemeente Utrecht 2019
+Copyright Â© Gemeente Utrecht 2019
 
 Gelicenseerd onder [EUPL](LICENCE.md)
 
